@@ -103,7 +103,6 @@ body {
 
 .logo-glow {
   color: var(--accent);
-  text-shadow: 0 0 2px var(--glow), 0 0 4px var(--glow);
 }
 
 body.dark .logo-glow {
@@ -112,15 +111,67 @@ body.dark .logo-glow {
 
 
 
+
 .nav-links {
-  display: flex;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: rgba(30, 30, 30, 0.95); /* semi-transparent */
+  backdrop-filter: blur(8px); /* frosted glass effect */
+  padding: 1.5rem; 
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  width: 220px;
   gap: 1rem;
+  text-align: left;
+
+  transform: translateY(-20px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  z-index: 1000;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
+/* show state */
+.nav-links.show {
+  display: flex;
+  transform: translateY(0) scale(1.05);
+  opacity: 1;
 }
+
+/* little settle back after overshoot */
+.nav-links.show {
+  animation: settleBounce 0.3s ease-out 0.45s forwards;
+}
+
+@keyframes settleBounce {
+  from { transform: translateY(0) scale(1.05); }
+  to   { transform: translateY(0) scale(1); }
+}
+
+/* add hover effect to links */
+.nav-links a {
+  color: var(--text);
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-links a:last-child {
+  border-bottom: none;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateX(5px);
+}
+
 
 .nav-actions {
   display: flex;
@@ -128,14 +179,20 @@ body.dark .logo-glow {
   gap: 0.5rem;
 }
 
+
+
+
 .hamburger {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   display: none;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
+
+
 
 .dark-toggle {
   font-size: 1.2rem;
@@ -168,19 +225,14 @@ body.dark .logo-glow {
   }
 }
 
-/*=================
-  Main Content
-=================*/
-.main-content {
-  text-align: center;
-  padding: 2rem;
-}
+
 
 /* ================
    Hero Section
 ================ */
 .hero {
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -188,21 +240,84 @@ body.dark .logo-glow {
   text-align: center;
   padding: 2rem;
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('imgs/fupreChesslogo.png') center/cover no-repeat;
+              url('imgs/fupreChesslogo.png') no-repeat center center;
+  background-size: cover;
   color: var(--text);
 }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--accent);
+/* Mobile (phones & small tablets) */
+@media (max-width: 768px) {
+  .hero {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+      url("imgs/fupreChesslogo.png") no-repeat center center;
+    background-size: contain;  /* prevent logo from cutting off */
+    background-color: #c5c7c8; /* fallback */
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: #f1f1f1;  /* softer white */
+  }
+
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0; /* softer gray */
+  }
+
+  .hero h1 span {
+    color: var(--accent); /* highlight important word */
+  }
 }
 
-.hero p {
-  max-width: 600px;
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-  color: var(--text);
+/* Desktop (large screens) */
+@media (min-width: 1024px) {
+  .hero {
+    text-align: left;
+    align-items: flex-start;
+    padding-left: 10%;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    color: var(--accent);
+    text-shadow: none;
+  }
+
+  .hero p {
+    max-width: 600px;
+    font-size: 1.2rem;
+    color: var(--text);
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  }
+}
+
+/* Dark overlay for readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* Ensure text stays above overlay */
+.hero * {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+/*=================
+  Main Content
+=================*/
+.main-content {
+  text-align: center;
+  padding: 2rem;
 }
 
 .btn {
@@ -213,12 +328,50 @@ body.dark .logo-glow {
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  opacity: 0;               /* hidden initially */
+  animation: fadeIn 0.8s ease forwards;
 }
 
+/* Desktop hover */
 .btn:hover {
   background: var(--glow);
   color: var(--text);
+  transform: translateY(-2px); /* subtle lift */
+}
+
+/* Mobile tap (active state) */
+.btn:active {
+  transform: scale(0.97);      /* press-in effect */
+  background: var(--glow);     /* matches hover look */
+  color: var(--text);
+}
+
+/* Bouncy attention animation */
+
+.bounce {
+  animation: fadeIn 0.8s ease forwards, bounce 2s infinite;
+   animation-delay: 1s;  /* wait 1 second before bouncing */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+  
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { 
+    transform: translateY(0);
+   }
+  40% {
+     transform: translateY(-6px);
+     }
+  60% {
+     transform: translateY(-3px);
+}
 }
 
 /* ================
@@ -374,6 +527,7 @@ body.dark .logo-glow {
   display: block;
   animation: none;
   background: none;
+  transition: transform 0.4s ease;
 }
 
 /* Keyframes for shimmer */
@@ -386,45 +540,22 @@ body.dark .logo-glow {
   }
 }
 
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-/* Hover zoom effect */
-.gallery-item:hover img {
-  transform: scale(1.08);
-}
-
-.hover-hint {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  font-size: 0.8rem;
-  padding: 4px 8px;
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.gallery-item:hover .hover-hint {
-  opacity: 1;
-}
-
-/* Always show hint faintly on mobile */
-@media (max-width: 768px) {
-  .hover-hint {
-    opacity: 0.6;       /* faint but visible */
-    background: rgba(0,0,0,0.5);
+/* Hover zoom effect (desktop only) */
+@media (min-width: 769px) {
+  .gallery-item:hover img {
+    transform: scale(1.08);
   }
 }
+
+
+/* Tap zoom effect (mobile) */
+@media (max-width: 768px) {
+  .gallery-item:active img,
+  .gallery-item:focus img {
+    transform: scale(1.05);   /* slightly smaller zoom than desktop */
+  }
+}
+
 
 
 /* ================

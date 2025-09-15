@@ -1,30 +1,80 @@
 // ==========================
 // Theme + Navbar Logic
 // ==========================
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const darkToggle = document.getElementById("dark-toggle");
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("nav-links");
+  const hamburger  = document.getElementById("hamburger");
+  const navLinks   = document.getElementById("nav-links");
 
-  // Apply saved theme on load
+  // --- Mobile menu toggle ---
+  function toggleMenu(forceOpen) {
+    if (!hamburger || !navLinks) return;
+
+    const shouldOpen =
+      typeof forceOpen === "boolean"
+        ? forceOpen
+        : !navLinks.classList.contains("show");
+
+    // Toggle menu visibility
+    navLinks.classList.toggle("show", shouldOpen);
+    hamburger.classList.toggle("active", shouldOpen);
+    hamburger.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+
+    // Animate + swap icon
+    hamburger.style.transition = "transform 0.3s ease";
+    hamburger.style.transform = "rotate(180deg)";
+
+    setTimeout(() => {
+      hamburger.textContent = shouldOpen ? "✖" : "☰";
+      hamburger.style.transform = "rotate(0deg)";
+    }, 150); // swap mid-spin
+  }
+
+  // A11y attributes
+  hamburger?.setAttribute("aria-controls", "nav-links");
+  hamburger?.setAttribute("aria-expanded", "false");
+
+  // Click to toggle
+  hamburger?.addEventListener("click", () => toggleMenu());
+
+  // Close when a nav link is clicked
+  navLinks?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) toggleMenu(false);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") toggleMenu(false);
+  });
+
+  // Close on click outside
+  document.addEventListener("click", (e) => {
+    if (!navLinks?.classList.contains("show")) return;
+    const inside = navLinks.contains(e.target) || hamburger?.contains(e.target);
+    if (!inside) toggleMenu(false);
+  });
+
+  // Reset menu when resizing to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) toggleMenu(false);
+  });
+
+  // --- Dark mode logic ---
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
   }
 
-  // Toggle dark mode
   darkToggle?.addEventListener("click", () => {
     document.body.classList.toggle("dark");
-
-    // Save preference in localStorage
     const isDark = document.body.classList.contains("dark");
     localStorage.setItem("theme", isDark ? "dark" : "light");
   });
-
-  // Toggle mobile menu (hamburger)
-  hamburger?.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
-  });
 });
+
+
+
 
 // ==========================
 // Chess Quotes Generator
