@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar | Fupre Chess Club</title>
+
+  
+  <!-- ICO for classic support -->
+<link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
+
+<!-- PNG for modern browsers -->
+<link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="/imgs/fupreChesslogo.png" alt="Fupre Chess Club Logo" class="logo" />
+      <span class="site-title">Fupre Chess Club</span>
+    </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="ratings.html">Ratings</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="matches.html">Matches</a>
+      <a href="rulebook.html">Rulebook</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="dark-toggle" class="dark-toggle">🌓</button>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ⏳ Countdown Timer -->
+  <section class="countdown-section">
+    <h2>⏳ Countdown to Next Tournament</h2>
+    <div class="countdown-container">
+      <div class="flip-box"><span id="days">00</span><label>Days</label></div>
+      <div class="flip-box"><span id="hours">00</span><label>Hours</label></div>
+      <div class="flip-box"><span id="minutes">00</span><label>Minutes</label></div>
+      <div class="flip-box"><span id="seconds">00</span><label>Seconds</label></div>
+    </div>
+
+
+
+      <!-- Tournament Live Banner (hidden by default) -->
+<div id="tournamentStatus" class="tourney-banner is-hidden" role="status" aria-live="polite">
+  <div class="tourney-left">
+    <span class="burst" aria-hidden="true">🎉</span>
+    <span class="icon" aria-hidden="true">🏆</span>
+  </div>
+  <div class="tourney-text">
+    <strong>Tournament is LIVE!</strong>
+    <small>Pairings are up—good luck to all players.</small>
+  </div>
+  <div class="tourney-right">
+    <span class="live-dot" aria-hidden="true"></span>
+  </div>
+  <button id="dismissBanner" class="tourney-close" aria-label="Dismiss banner">×</button>
+</div>
+
+
+
+  </section>
+
+  <!-- 📅 Events Calendar -->
+  <main class="main-content">
+    <h1>Event Calendar</h1>
+    <p>Stay up to date with our chess tournaments, meetings, and special events.</p>
+
+    <ul class="event-list">
+      <li class="event-box">
+        <strong>Sept 14, 2025:</strong> Semester Kickoff Blitz Tournament 🕒 3:00 PM
+      </li>
+      <li class="event-box">
+        <strong>Oct 5, 2025:</strong> Rapid Rating Games - Round 1 🕐 12:00 PM
+      </li>
+      <li class="event-box">
+        <strong>Oct 19, 2025:</strong> Team Chess Meetup ♟️
+      </li>
+    </ul>
+  </main>
+
+
+
+
+</body>
+</html>
