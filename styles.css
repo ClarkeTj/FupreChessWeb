@@ -188,7 +188,7 @@ body.dark .logo-glow {
   text-align: center;
   padding: 2rem;
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('/imgs/fupreChesslogo.png') center/cover no-repeat;
+              url('imgs/fupreChesslogo.png') center/cover no-repeat;
   color: var(--text);
 }
 
