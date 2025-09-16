@@ -131,7 +131,7 @@ let timerId; // global so it can be cleared later
 
 async function loadCountdown() {
   try {
-    const response = await fetch("countdown.json"); // fetch the config
+    const response = await fetch("countdown.json?nocache=" + Date.now()); // fetch the config
     const config = await response.json();
     const targetDateStr = config.targetDate;
     startCountdown(targetDateStr);
