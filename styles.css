@@ -72,8 +72,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background-color: #222;
+  background-color: var(--bg);
   color: white;
+  border-bottom: 4px solid var(--border);
 }
 
  .logo-container {
@@ -110,7 +111,7 @@ body.dark .logo-glow {
 }
 
 .nav-links {
-  display: none;
+  display: flex;
   flex-direction: column;
   position: absolute;
   top: 60px;
@@ -155,19 +156,13 @@ body.dark .logo-glow {
   padding: 0.75rem 1rem;
   text-decoration: none;
   border-radius: 8px;
-  transition: color 0.3s ease, transform 0.2s ease;
+  transition: color 0.3s ease, transform 0.2s ease, background 0.3s ease;
 }
 
 .nav-links a:last-child {
   border-bottom: none;
 }
 
-.nav-links a:hover,
-.nav-links a:focus {
-  background: var(--accent);
-  color: var(--bg);
-  transform: translateX(5px);
-}
 
 .nav-actions {
   display: flex;
@@ -180,11 +175,16 @@ body.dark .logo-glow {
   display: none;
   background: none;
   border: none;
-  color: white;
+  color: var(--accent);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
+.hamburger:hover,
+.hamburger:focus,
+.hamburger:active {
+  color: var(--glow);
+}
 
 
 .dark-toggle {
@@ -194,6 +194,11 @@ body.dark .logo-glow {
   cursor: pointer;
   color: white;
 }
+
+
+/* =================
+   MOBILE STYLE
+================= */
 
 @media (max-width: 768px) {
   .nav-links {
@@ -216,7 +221,90 @@ body.dark .logo-glow {
   .hamburger {
     display: block;
   }
+
+  .nav-links a:hover,
+.nav-links a:focus {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateX(5px);
 }
+
+  
+  /* Active (current page) → background highlight */
+  .nav-links a.active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .nav-links a:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+}
+/* =================
+   DESKTOP STYLE
+================= */
+
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex; 
+    position: static;   
+    flex-direction: row;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    width: auto;
+    gap: 1.5rem;
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Reset padding for underline style */
+
+  .nav-links a {
+    position: relative;
+    padding: 0;
+  }
+
+
+  /* Glowing underline effect */
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--glow);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    color: var(--accent);
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a:focus::after {
+    width: 100%; /* underline expands on hover */
+  }
+
+  .hamburger {
+    display: none; /* hide burger on desktop */
+  }
+
+  /* Active (current page) → underline always visible */
+  .nav-links a.active {
+    color: var(--accent);
+  }
+
+  .nav-links a.active::after {
+    width: 100%;
+  }
+
+}
+
 
 
 
@@ -674,6 +762,7 @@ body.dark .logo-glow {
   background-color: var(--bg-soft);
   margin-top: 2rem;
   border-top: 2px dashed var(--border);
+  color: var(--text);
 }
 
 .countdown-container {
@@ -682,6 +771,27 @@ body.dark .logo-glow {
   gap: 1rem;
   margin-top: 1rem;
   flex-wrap: wrap;
+}
+
+/* Event name/title */
+
+#event-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Local time subtitle */
+
+#local-time {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--glow);
+  opacity: 0.9;
 }
 
 .flip-box {

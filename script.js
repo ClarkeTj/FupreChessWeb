@@ -75,6 +75,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// ==========================
+// Highlight Active Nav Link
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname.split("/").pop(); // e.g. "calendar.html"
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  navLinks.forEach(link => {
+    const linkPath = link.getAttribute("href");
+    if (linkPath === currentPath || (linkPath === "index.html" && currentPath === "")) {
+      link.classList.add("active");
+    }
+  });
+});
+
+
 
 // ==========================
 // Chess Quotes Generator
@@ -134,7 +150,12 @@ async function loadCountdown() {
     const response = await fetch("countdown.json?nocache=" + Date.now()); // fetch the config
     const config = await response.json();
     const targetDateStr = config.targetDate;
+    const eventName = config.eventName || "Event";
+    document.getElementById("event-title").textContent = eventName;
+
     startCountdown(targetDateStr);
+    showLocalTime(targetDateStr);
+
   } catch (error) {
     console.error("Failed to load countdown config:", error);
   }
@@ -170,6 +191,26 @@ function startCountdown(targetDateStr) {
   // Run immediately, then every second
   updateCountdown();
   timerId = setInterval(updateCountdown, 1000);
+}
+
+
+  function showLocalTime(targetDateStr) {
+  const targetDate = new Date(targetDateStr);
+
+  // Format into local time string
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short"
+  };
+
+  const formatted = targetDate.toLocaleString([], options);
+  document.getElementById("local-time").textContent =
+    `Event starts at: ${formatted}`;
 }
 
 
