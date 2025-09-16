@@ -127,6 +127,19 @@ setInterval(generateQuote, 10000);
 // ==========================
 let timerId; // global so it can be cleared later
 
+// Countdown with external config
+
+async function loadCountdown() {
+  try {
+    const response = await fetch("countdown.json"); // fetch the config
+    const config = await response.json();
+    const targetDateStr = config.targetDate;
+    startCountdown(targetDateStr);
+  } catch (error) {
+    console.error("Failed to load countdown config:", error);
+  }
+}
+
 function startCountdown(targetDateStr) {
   const targetDate = new Date(targetDateStr).getTime();
 
@@ -158,6 +171,7 @@ function startCountdown(targetDateStr) {
   updateCountdown();
   timerId = setInterval(updateCountdown, 1000);
 }
+
 
 // ==========================
 // Tournament Banner Logic
@@ -206,7 +220,7 @@ function fireMiniConfetti(container) {
 // ==========================
 // Kick things off
 // ==========================
-startCountdown("2025-09-12 10:44:00");
+loadCountdown("2025-09-12 00:00:00");
 
 
 // Lightbox functionality with slideshow
