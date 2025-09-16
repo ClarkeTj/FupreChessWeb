@@ -220,7 +220,7 @@ function fireMiniConfetti(container) {
 // ==========================
 // Kick things off
 // ==========================
-loadCountdown("2025-09-12 00:00:00");
+loadCountdown();
 
 
 // Lightbox functionality with slideshow
