@@ -109,9 +109,6 @@ body.dark .logo-glow {
   text-shadow: 0 0 1px var(--glow), 0 0 1px var(--glow), 0 0 18px var(--glow);
 }
 
-
-
-
 .nav-links {
   display: none;
   flex-direction: column;
@@ -172,15 +169,11 @@ body.dark .logo-glow {
   transform: translateX(5px);
 }
 
-
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
-
-
 
 .hamburger {
   font-size: 1.8rem;
@@ -248,6 +241,8 @@ body.dark .logo-glow {
 /* Mobile (phones & small tablets) */
 @media (max-width: 768px) {
   .hero {
+    min-height: 70vh;
+    padding: 1rem;
     background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
       url("imgs/fupreChesslogo.png") no-repeat center center;
     background-size: contain;  /* prevent logo from cutting off */
@@ -263,7 +258,7 @@ body.dark .logo-glow {
 
   .hero p {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.4;
     margin-bottom: 1.5rem;
     color: #e0e0e0; /* softer gray */
   }
