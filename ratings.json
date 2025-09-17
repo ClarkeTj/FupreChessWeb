@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Destiny",
+    "department": "Chemical Engineering",
+    "level": 500,
+    "rapid": 2320,
+    "blitz": 2180,
+    "achievements": [
+      "🏆 FCC Champion",
+      "⚡ 3× Lightning Blitz Winner",
+      "⏱️ 2× Grand Rapid Winner"
+    ]
+  },
+  {
+    "name": "Draken",
+    "department": "Pertroleum Engineering",
+    "level": 100,
+    "rapid": 1380,
+    "blitz": 1490,
+    "achievements": [
+      "⭐ Rising Star"
+    ]
+  },
+  {
+    "name": "Alex",
+    "department": "Marine Engineering",
+    "level": 500,
+    "rapid": 2300,
+    "blitz": 2250,
+    "achievements": [
+      "🏆 2× FCC Champion",
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  },
+
+    {
+    "name": "Hasel",
+    "department": "Chemical Engineering",
+    "level": 200,
+    "rapid": 1700,
+    "blitz": 1580,
+    "achievements": [
+        
+      "⭐ Rising Star"
+    ]
+  },
+
+
+    {
+    "name": "Fortune",
+    "department": "Computer Science",
+    "level": 300,
+    "rapid": 1600,
+    "blitz": 1650,
+    "achievements": [
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  },
+
+
+    {
+    "name": "Jesse",
+    "department": "Cyber Security",
+    "level": 100,
+    "rapid": 1900,
+    "blitz": 1850,
+    "achievements": [
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  },
+
+    {
+    "name": "Martins",
+    "department": "Mechanical Engineering",
+    "level": 300,
+    "rapid": 2030,
+    "blitz": 2000,
+    "achievements": [
+        "⚡ 2× Lightning Blitz Winner",
+        "⏱️ 3× Grand Rapid Winner"
+    ]
+  },
+
+  {
+    "name": "Noah",
+    "department": "Marine Engineering",
+    "level": 500,
+    "rapid": 1790,
+    "blitz": 1800,
+    "achievements": [
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  },
+
+  {
+    "name": "TJ",
+    "department": "Computer Science",
+    "level": 300,
+    "rapid": 1650,
+    "blitz": 1700,
+    "achievements": [
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  },
+
+  
+  {
+    "name": "Chris",
+    "department": "Computer Science",
+    "level": 400,
+    "rapid": 1450,
+    "blitz": 1470,
+    "achievements": [
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  },
+
+  {
+    "name": "Godbless",
+    "department": "Mechanical Engineering",
+    "level": 500,
+    "rapid": 1830,
+    "blitz": 1800,
+    "achievements": [
+      "⏱️ 1× Grand Rapid Winner"
+    ]
+  }
+]

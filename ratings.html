@@ -21,6 +21,7 @@
 
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
+
 </head>
 <body>
   <header class="navbar">
@@ -43,34 +44,212 @@
   </header>
 
   <main class="main-content">
-    <h1>Player Ratings</h1>
-    <p>Here you’ll find the latest leaderboard and individual player ratings.</p>
+    <h1>Fupre Chess Club Ratings</h1>
 
-    <!-- ✅ CLEANED UP TABLE (dark mode responsive) -->
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Player</th>
-          <th>Rating</th>
-          <th>🔥 Best Streak</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Alex </td>
-          <td>2023</td>
-          <td>🔥 7</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Hasel</td>
-          <td>1984</td>
-          <td>4</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- General Ratings Table -->
+    <section>
+      <h2>📊 Player Ratings</h2>
+
+
+      <!-- Search Bar -->
+  <input 
+    type="text" 
+    id="search-player" 
+    placeholder="🔍 Search player by name..." 
+    style="margin-bottom: 1rem; padding: 0.5rem; width: 100%; max-width: 300px; border: 1px solid var(--border); border-radius: 5px;">
+
+    <div class="view-toggle">
+  <button id="toggle-view">Switch to Card View</button>
+</div>
+
+
+    <div class="table-container">
+
+    <table id="ratings-table" border="1">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Department</th>
+            <th>Level</th>
+            <th>Rapid</th>
+            <th>Blitz</th>
+            <th>Achievements</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+</div>
+    
+    <!-- Rapid Leaderboard -->
+    <section>
+      <h2>⏱️ Rapid Leaderboard</h2>
+      <table id="rapid-leaderboard" border="1">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Rapid</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Blitz Leaderboard -->
+    <section>
+      <h2>⚡ Blitz Leaderboard</h2>
+      <table id="blitz-leaderboard" border="1">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Blitz</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
   </main>
+
+<script>
+
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.getElementById("ratings-table");
+  const toggleBtn = document.getElementById("toggle-view");
+
+  // Load saved preference
+  const savedView = localStorage.getItem("ratingsView") || "table";
+  applyView(savedView);
+
+  toggleBtn.addEventListener("click", () => {
+    const newView = table.classList.contains("table-view") ? "card" : "table";
+    applyView(newView);
+    localStorage.setItem("ratingsView", newView); // save choice
+  });
+
+  function applyView(view) {
+    if (view === "card") {
+      table.classList.remove("table-view");
+      table.classList.add("card-view");
+      toggleBtn.textContent = "Switch to Table View";
+
+      toggleBtn.classList.remove("table-mode");
+      toggleBtn.classList.add("card-mode");
+
+    } else {
+      table.classList.remove("card-view");
+      table.classList.add("table-view");
+      toggleBtn.textContent = "Switch to Card View";
+
+      toggleBtn.classList.remove("card-mode");
+      toggleBtn.classList.add("table-mode");
+    }
+  }
+});
+
+
+ 
+// Global storage
+let allPlayers = [];
+
+// Load player ratings
+async function loadRatings() {
+  try {
+    const response = await fetch("ratings.json?nocache=" + Date.now());
+    allPlayers = await response.json();
+
+    renderRatings(allPlayers); // render all players initially
+    renderLeaderboards(allPlayers);
+
+  } catch (err) {
+    console.error("Failed to load ratings:", err);
+  }
+}
+
+// Highlight helper
+function highlightMatch(text, query) {
+  if (!query) return text; // no search
+  const regex = new RegExp(`(${query})`, "gi");
+  return text.replace(regex, "<mark>$1</mark>");
+}
+
+// Render Ratings Table (alphabetical, with highlight)
+function renderRatings(players, query = "") {
+  const tableBody = document.querySelector("#ratings-table tbody");
+  tableBody.innerHTML = "";
+
+  const alphabetical = [...players].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  alphabetical.forEach(player => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td data-label="Player">${highlightMatch(player.name, query)}</td>
+      <td data-label="Department">${player.department}</td>
+      <td data-label="Level">${player.level}</td>
+      <td data-label="Rapid">${player.rapid}</td>
+      <td data-label="Blitz">${player.blitz}</td>
+      <td data-label="Achievements">${highlightMatch(player.achievements.join("<br>"), query)}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+// Render Leaderboards
+function renderLeaderboards(players) {
+  // Rapid
+  const rapidSorted = [...players].sort((a, b) => b.rapid - a.rapid);
+  const rapidBody = document.querySelector("#rapid-leaderboard tbody");
+  rapidBody.innerHTML = "";
+  rapidSorted.forEach((player, i) => {
+    const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1;
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${medal}</td>
+      <td>${player.name}</td>
+      <td>${player.rapid}</td>
+    `;
+    rapidBody.appendChild(row);
+  });
+
+  // Blitz
+  const blitzSorted = [...players].sort((a, b) => b.blitz - a.blitz);
+  const blitzBody = document.querySelector("#blitz-leaderboard tbody");
+  blitzBody.innerHTML = "";
+  blitzSorted.forEach((player, i) => {
+    const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1;
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${medal}</td>
+      <td>${player.name}</td>
+      <td>${player.blitz}</td>
+    `;
+    blitzBody.appendChild(row);
+  });
+}
+
+// === Search Functionality ===
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("search-player");
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allPlayers.filter(player =>
+        player.name.toLowerCase().includes(query) ||
+        player.achievements.join(" ").toLowerCase().includes(query)
+      );
+      renderRatings(filtered, query); // pass query for highlight
+    });
+  }
+});
+
+// Init
+loadRatings();
+
+</script>
 </body>
 </html>
