@@ -32,7 +32,7 @@
     <nav class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="ratings.html">Ratings</a>
-      <a href="calendar.html">Calendar</a>
+      <a href="tournaments.html">Tournaments</a>
       <a href="matches.html">Matches</a>
       <a href="rulebook.html">Rulebook</a>
       <a href="contact.html">Contact</a>
@@ -69,8 +69,8 @@
         <thead>
           <tr>
             <th>Player</th>
-            <th>Department</th>
-            <th>Level</th>
+            <th>Dept</th>
+            <th>Lv</th>
             <th>Rapid</th>
             <th>Blitz</th>
             <th>Achievements</th>
@@ -111,14 +111,60 @@
         <tbody></tbody>
       </table>
     </section>
+
+<section class="achievements-info">
+  <h2>📖 Achievements Glossary</h2>
+  <ul>
+    <li>🏆 <strong>FCC Champion</strong> – Winner of the annual <em>Fupre Chess Club Championship</em>.</li>
+    <li>🏅 <strong>FCM Winner</strong> – Winner of the annual <em>Fupre Chess Masters</em>.</li>
+    <li>🥇 <strong>FCL Winner</strong> – Winner of the annual <em>Fupre Chess League</em>.</li>
+    <li>⏱️ <strong>Grand Rapid Winner</strong> – Champion of the montly <em>Rapid Tournament</em>.</li>
+    <li>⚡ <strong>Lightning Blitz Winner</strong> – First place in the weekly <em>Blitz Tournament</em>.</li>
+    <li>🌟 <strong>Rising Star</strong> – Award for newcomers and intermediate players showing strong performance.</li>
+  </ul>
+  <p class="note">
+    These achievements celebrate dedication, skill, and growth — keeping our chess community competitive and inspiring.
+  </p>
+</section>
+
+
+
   </main>
 
-<script>
 
-  
+  <script>
+
+    
+/* ---------- View toggle (table <-> card) ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const table = document.getElementById("ratings-table");
   const toggleBtn = document.getElementById("toggle-view");
+  const container = document.querySelector(".table-container");
+
+  function applyView(view) {
+    if (view === "card") {
+      table.classList.remove("table-view");
+      table.classList.add("card-view");
+      toggleBtn.textContent = "Switch to Table View";
+      toggleBtn.classList.remove("table-mode");
+      toggleBtn.classList.add("card-mode");
+
+      // disable horizontal scroll on the container while in card mode
+      container?.classList.add("card-mode");
+    } else {
+      table.classList.remove("card-view");
+      table.classList.add("table-view");
+      toggleBtn.textContent = "Switch to Card View";
+      toggleBtn.classList.remove("card-mode");
+      toggleBtn.classList.add("table-mode");
+
+      // restore horizontal scroll for table mode on small screens
+      container?.classList.remove("card-mode");
+    }
+
+    // Rebuild collapsibles for the new layout
+    setupCollapsibles();
+  }
 
   // Load saved preference
   const savedView = localStorage.getItem("ratingsView") || "table";
@@ -127,31 +173,13 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleBtn.addEventListener("click", () => {
     const newView = table.classList.contains("table-view") ? "card" : "table";
     applyView(newView);
-    localStorage.setItem("ratingsView", newView); // save choice
+    localStorage.setItem("ratingsView", newView);
   });
-
-  function applyView(view) {
-    if (view === "card") {
-      table.classList.remove("table-view");
-      table.classList.add("card-view");
-      toggleBtn.textContent = "Switch to Table View";
-
-      toggleBtn.classList.remove("table-mode");
-      toggleBtn.classList.add("card-mode");
-
-    } else {
-      table.classList.remove("card-view");
-      table.classList.add("table-view");
-      toggleBtn.textContent = "Switch to Card View";
-
-      toggleBtn.classList.remove("card-mode");
-      toggleBtn.classList.add("table-mode");
-    }
-  }
 });
 
 
- 
+/* ---------- Data + render ---------- */
+
 // Global storage
 let allPlayers = [];
 
@@ -161,8 +189,12 @@ async function loadRatings() {
     const response = await fetch("ratings.json?nocache=" + Date.now());
     allPlayers = await response.json();
 
-    renderRatings(allPlayers); // render all players initially
+    renderRatings(allPlayers);
     renderLeaderboards(allPlayers);
+    setupCollapsibles();
+
+    // ensure collapsibles are created AFTER rows exist
+    setupCollapsibles();
 
   } catch (err) {
     console.error("Failed to load ratings:", err);
@@ -171,7 +203,7 @@ async function loadRatings() {
 
 // Highlight helper
 function highlightMatch(text, query) {
-  if (!query) return text; // no search
+  if (!query) return text;
   const regex = new RegExp(`(${query})`, "gi");
   return text.replace(regex, "<mark>$1</mark>");
 }
@@ -181,19 +213,24 @@ function renderRatings(players, query = "") {
   const tableBody = document.querySelector("#ratings-table tbody");
   tableBody.innerHTML = "";
 
-  const alphabetical = [...players].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const alphabetical = [...players].sort((a, b) => a.name.localeCompare(b.name));
 
   alphabetical.forEach(player => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td data-label="Player">${highlightMatch(player.name, query)}</td>
-      <td data-label="Department">${player.department}</td>
-      <td data-label="Level">${player.level}</td>
+      <td data-label="Dept">${player.department}</td>
+      <td data-label="Lv">${player.level}</td>
       <td data-label="Rapid">${player.rapid}</td>
       <td data-label="Blitz">${player.blitz}</td>
-      <td data-label="Achievements">${highlightMatch(player.achievements.join("<br>"), query)}</td>
+<td data-label="Achievements">
+  ${
+    player.achievements.length > 0
+      ? highlightMatch(player.achievements.join("<br>"), query)
+      : "<span class='no-achievement'>🚀 No achievements yet</span>"
+  }
+</td>
+
     `;
     tableBody.appendChild(row);
   });
@@ -242,14 +279,115 @@ document.addEventListener("DOMContentLoaded", () => {
         player.name.toLowerCase().includes(query) ||
         player.achievements.join(" ").toLowerCase().includes(query)
       );
-      renderRatings(filtered, query); // pass query for highlight
+      renderRatings(filtered, query);
+      setupCollapsibles(); // tables changed -> rebuild collapsibles
     });
   }
 });
 
+
+
+/* -----------------------------
+   Collapsible tables (refactor)
+-------------------------------- */
+
+/** Call this AFTER rows are rendered/changed */
+function setupCollapsibles() {
+  // Remove existing buttons to avoid duplicates
+  document.querySelectorAll(".collapse-btn").forEach(btn => btn.remove());
+
+  // Reset any previous row styles/classes
+  ["ratings-table", "rapid-leaderboard", "blitz-leaderboard"].forEach(id => {
+    const tb = document.getElementById(id)?.querySelector("tbody");
+    if (!tb) return;
+    tb.querySelectorAll("tr").forEach(tr => {
+      tr.classList.remove("collapsible-row", "show");
+      tr.style.display = "";            // back to default
+    });
+  });
+
+  // Re-apply collapsibles
+  makeTableCollapsible("ratings-table");
+  makeTableCollapsible("rapid-leaderboard");
+  makeTableCollapsible("blitz-leaderboard");
+}
+
+/** Builds one collapsible table */
+function makeTableCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 8 : 10)) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+
+  const tbody = table.querySelector("tbody");
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  if (rows.length <= maxRows) return;       // nothing to collapse
+
+  // Hide extra rows initially (and mark as collapsible)
+  rows.slice(maxRows).forEach(row => {
+    row.classList.add("collapsible-row");
+    row.style.display = "none";             // ensure hidden on first paint
+  });
+
+  // Build the toggle button
+  const btn = document.createElement("button");
+  btn.className = "collapse-btn";
+  btn.innerHTML = `Show More <span class="chev">▼</span>`;
+
+  // Place it right under the table (inside same container)
+  table.insertAdjacentElement("afterend", btn);
+
+  let expanded = false;
+  btn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    rows.slice(maxRows).forEach(row => {
+      if (expanded) {
+        // table vs card view
+        row.style.display = table.classList.contains("card-view") ? "block" : "table-row";
+        // allow display to apply, then animate in
+        requestAnimationFrame(() => row.classList.add("show"));
+      } else {
+        row.classList.remove("show");
+        // wait for fade-out, then hide
+        setTimeout(() => (row.style.display = "none"), 260);
+      }
+    });
+
+    btn.classList.toggle("expanded", expanded);
+    btn.innerHTML = expanded ? `Show Less <span class="chev">▼</span>`
+                             : `Show More <span class="chev">▼</span>`;
+  });
+}
+
+
 // Init
 loadRatings();
 
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const achievements = document.querySelector(".achievements-info");
+  if (!achievements) return;
+
+  const io = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          achievements.classList.add("reveal");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  io.observe(achievements);
+});
+
+
+
 </script>
+
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendar | Fupre Chess Club</title>
+  <title>Tournaments | Fupre Chess Club</title>
 
   
   <!-- ICO for classic support -->
@@ -31,7 +31,7 @@
     <nav class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="ratings.html">Ratings</a>
-      <a href="calendar.html">Calendar</a>
+      <a href="tournaments.html">Tournaments</a>
       <a href="matches.html">Matches</a>
       <a href="rulebook.html">Rulebook</a>
       <a href="contact.html">Contact</a>
@@ -94,8 +94,47 @@
         <strong>Oct 19, 2025:</strong> Team Chess Meetup ♟️
       </li>
     </ul>
+
+
+<section class="tournaments-info">
+  <h2>📖 Tournament Overview</h2>
+  <ul>
+    <li>🏆 <strong>FCC Championship </strong> – The annual <em> Fupre Chess Club Championship</em>, our most prestigious event.</li>
+    <li>🏅 <strong>FCM </strong> – The annual <em> Fupre Chess Masters</em>, showcasing top-level talent.</li>
+    <li>🥇 <strong>FCL </strong> – The annual <em> Fupre Chess League</em>, a season-long competition for consistency and teamwork.</li>
+    <li>⏱️ <strong>Grand Rapid </strong> – A monthly <em> Rapid Tournament</em>, that tests speed and precision under time pressure.</li>
+    <li>⚡ <strong>Lightning Blitz </strong> – A weekly <em> Blitz Tournament</em>, for fast-paced, high-energy games.</li>
+  </ul>
+  <p class="note">
+    Together, these tournaments celebrate dedication, skill, and growth — keeping the Fupre Chess Club community engaged, competitive, and inspiring.
+  </p>
+</section>
+
+
+
+
   </main>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector(".tournaments-info");
+  if (!section) return;
+
+  const io = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          section.classList.add("reveal");   // triggers CSS animations
+          obs.unobserve(entry.target);       // run once
+        }
+      });
+    },
+    { threshold: 0.2 } // ~20% visible
+  );
+
+  io.observe(section);
+});
+</script>
 
 
 

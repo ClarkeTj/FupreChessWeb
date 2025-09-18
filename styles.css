@@ -828,6 +828,8 @@ body.dark .logo-glow {
   100% { transform: rotateX(0deg); opacity: 1; }
 }
 
+
+
 /*=================
   Tables (Ratings & Matches)
 =================*/
@@ -853,8 +855,8 @@ th {
 /* =================
    Ratings Tables
 ================= */
-#ratings-table, 
-#rapid-leaderboard, 
+#ratings-table,
+#rapid-leaderboard,
 #blitz-leaderboard {
   width: 100%;
   border-collapse: collapse;
@@ -863,122 +865,101 @@ th {
   font-size: 1rem;
 }
 
-#ratings-table {
-  min-width: 600px;
-}
+/* This min-width should NOT apply in card view */
+#ratings-table { min-width: 600px; }
 
-#ratings-table th, 
-#rapid-leaderboard th, 
+#ratings-table th,
+#rapid-leaderboard th,
 #blitz-leaderboard th {
   background: var(--accent);
   color: var(--bg);
   padding: 0.75rem;
   text-align: center;
   border-bottom: 2px solid var(--border);
-  
 }
 
-#ratings-table td, 
-#rapid-leaderboard td, 
+#ratings-table td,
+#rapid-leaderboard td,
 #blitz-leaderboard td {
   padding: 0.75rem;
   text-align: center;
   border-bottom: 2px solid var(--border);
 }
 
-
 /* Table container */
 .table-container {
   width: 100%;
-  overflow-x: auto;   /* allows horizontal scroll on mobile */
-  -webkit-overflow-scrolling: touch; /* smooth scroll */
+  overflow-x: auto;                 /* table view can scroll on mobile */
+  -webkit-overflow-scrolling: touch;
   margin-bottom: 1.5rem;
 }
 
-/* Card View */
-#ratings-table.card-view{
+/* When in card mode, disable the horizontal scroll on container */
+.table-container.card-mode {
+  overflow-x: visible;
+  padding: 0 0.5rem;                /* a little breathing room at edges */
+}
+
+/* =================
+   Card View
+================= */
+#ratings-table.card-view {
   display: block;
   width: 100%;
+  min-width: 0;                     /* override 600px when in card view */
+  margin: 0 auto;
 }
 #ratings-table.card-view thead {
   display: none;
 }
-
 #ratings-table.card-view tbody {
   display: block;
 }
-
 #ratings-table.card-view tr {
   display: block;
-  margin-bottom: 1rem;
+  width: 95%;
+  max-width: 520px;                 /* keeps a nice readable line-length */
+  margin: 0.75rem auto;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.75rem;
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
   background: var(--bg-soft);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
-
 #ratings-table.card-view td {
-  display: block;
-  text-align: left;
-  padding: 0.4rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  padding: 0.45rem 0;
   border: none;
+  text-align: left;
 }
 
+/* Labels (left) for every field */
 #ratings-table.card-view td::before {
   content: attr(data-label);
-  font-weight: bold;
-  display: inline-block;
-  width: 120px;
+  font-weight: 700;
   color: var(--accent);
 }
 
-/* Responsive font sizing */ 
+/* Special: "PLAYER | " separator */
+#ratings-table.card-view td[data-label="Player"]::before {
+  content: "PLAYER | ";
+}
+
+/* Make cards truly full width on small screens */
 @media (max-width: 768px) {
-   #ratings-table th,
-  #ratings-table td {
-    font-size: 0.85rem;
-    padding: 0.5rem;
-  }
-
-  #ratings-table {
-    min-width: 500px;
-  } 
+  #ratings-table.card-view tr { width: 100%; }
 }
 
-/* Table View */
-#ratings-table.table-view {
-  display: table;
-}
-#ratings-table.table-view thead {
-  display: table-header-group;
-}
-#ratings-table.table-view tbody {
-  display: table-row-group;
-}
-#ratings-table.table-view tr {
-  display: table-row;
-}
+/* Table View (explicitly restore table layout when not in card view) */
+#ratings-table.table-view { display: table; }
+#ratings-table.table-view thead { display: table-header-group; }
+#ratings-table.table-view tbody { display: table-row-group; }
+#ratings-table.table-view tr    { display: table-row; }
 #ratings-table.table-view td,
-#ratings-table.table-view th {
-  display: table-cell;
-}
-
-
-
-@media (max-width: 480px) {
-  #ratings-table th,
-  #ratings-table td {
-    font-size: 0.75rem;
-    padding: 0.4rem;
-  }
-
-  #ratings-table {
-    min-width: 400px;
-  }
-}
-
-
+#ratings-table.table-view th    { display: table-cell; }
 
 /* Player names */
 #ratings-table td:first-child,
@@ -987,7 +968,6 @@ th {
   font-weight: 600;
   color: var(--accent);
   text-align: center;
-  padding-left: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -1012,32 +992,31 @@ th {
   line-height: 1.4;
 }
 
-/* Highlight top 3 ranks */
+/* Light mode top3 tints */
 #rapid-leaderboard tbody tr:nth-child(1),
-#blitz-leaderboard tbody tr:nth-child(1) {
-  background: #ffd70033; /* Gold tint */
-}
-
+#blitz-leaderboard tbody tr:nth-child(1) { background: #ffd70033; }
 #rapid-leaderboard tbody tr:nth-child(2),
-#blitz-leaderboard tbody tr:nth-child(2) {
-  background: #c0c0c033; /* Silver tint */
-}
-
+#blitz-leaderboard tbody tr:nth-child(2) { background: #c0c0c033; }
 #rapid-leaderboard tbody tr:nth-child(3),
-#blitz-leaderboard tbody tr:nth-child(3) {
-  background: #cd7f3233; /* Bronze tint */
+#blitz-leaderboard tbody tr:nth-child(3) { background: #cd7f3233; }
+
+/* Dark mode – subtler bases + polished glow on the numbers */
+body.dark #rapid-leaderboard tbody tr:nth-child(1),
+body.dark #blitz-leaderboard tbody tr:nth-child(1) {
+  background: #332b00;             /* deep gold toned row */
 }
-
-
-#ratings-table tr:nth-child(even) {
-  background: var(--bg-soft);
+body.dark #rapid-leaderboard tbody tr:nth-child(2),
+body.dark #blitz-leaderboard tbody tr:nth-child(2) {
+  background: #2e2e2e;             /* deep silver toned row */
 }
-
-mark {
-  background: var(--accent);
-  color: var(--bg);
-  padding: 0 2px;
-  border-radius: 3px;
+body.dark #rapid-leaderboard tbody tr:nth-child(3),
+body.dark #blitz-leaderboard tbody tr:nth-child(3) {
+  background: #332015;             /* deep bronze toned row */
+}
+/* add subtle glow just to the last cell (numbers) so text remains readable */
+body.dark #rapid-leaderboard tbody tr:nth-child(-n+3) td:last-child,
+body.dark #blitz-leaderboard  tbody tr:nth-child(-n+3) td:last-child {
+  text-shadow: 0 0 6px rgba(0,207,255,0.65);
 }
 
 
@@ -1055,31 +1034,203 @@ mark {
   transition: all 0.3s ease;
   margin-bottom: 1rem;
 }
-
-/* Hover effect */
 #toggle-view:hover {
   background: var(--glow);
   color: var(--text);
   transform: scale(1.05);
 }
+#toggle-view.table-mode { background: var(--accent); color: var(--bg); }
+#toggle-view.card-mode  { background: var(--text); color: var(--bg); border: 2px solid var(--accent); }
 
-/* Active states */
-#toggle-view.table-mode {
+/* Collapsible toggle button */
+.collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin: .75rem auto 1.5rem;
+  padding: .55rem 1rem;
   background: var(--accent);
   color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform .15s ease, background .25s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.collapse-btn:hover {
+  background: var(--glow);
+  transform: translateY(-1px) scale(1.02);
 }
 
-#toggle-view.card-mode {
-  background: var(--text);
+.collapse-btn:active {
+  transform: translateY(0);
+}
+
+/* Little chevron that rotates */
+.collapse-btn .chev {
+  display: inline-block;
+  transition: transform .25s ease;
+}
+.collapse-btn.expanded .chev {
+  transform: rotate(180deg);
+}
+
+/* Smooth collapse/expand animation */
+.collapsible-row {
+  display: none;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  transform: translateY(-6px);
+}
+
+.collapsible-row.show {
+  display: table-row;
+  transform: translateY(0);
+  max-height: 200px;   /* adjust for row height */
+  opacity: 1;
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+/* When ratings table is in card view, show rows as blocks */
+#ratings-table.card-view .collapsible-row.show {
+  display: block;
+}
+
+
+/* === Achievements Info Box === */
+.achievements-info {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  overflow: hidden;
+}
+
+.achievements-info h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* List layout */
+.achievements-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achievements-info li {
+  margin: 0.8rem 0;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--text);
+
+  /* animation initial state */
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+/* Add checkmark before text */
+.achievements-info li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.achievements-info li strong {
+  color: var(--accent);
+}
+
+.achievements-info .note {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--text);
+
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+/* Reveal animations */
+.achievements-info.reveal li {
+  animation: fadeSlideIn 0.6s ease forwards;
+}
+
+.achievements-info.reveal li:nth-child(1) { animation-delay: 0.1s; }
+.achievements-info.reveal li:nth-child(2) { animation-delay: 0.2s; }
+.achievements-info.reveal li:nth-child(3) { animation-delay: 0.3s; }
+.achievements-info.reveal li:nth-child(4) { animation-delay: 0.4s; }
+.achievements-info.reveal li:nth-child(5) { animation-delay: 0.5s; }
+.achievements-info.reveal li:nth-child(6) { animation-delay: 0.6s; }
+/* extend nth-child if you add more */
+
+.achievements-info.reveal .note {
+  animation: fadeSlideIn 0.6s ease forwards;
+  animation-delay: 0.75s;
+}
+
+/* Keyframes */
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.no-achievement {
+  color: gray;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .achievements-info {
+    padding: 1rem 1.2rem;
+  }
+
+  .achievements-info h2 {
+    font-size: 1.2rem;
+  }
+
+  .achievements-info li {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+mark {
+  background: var(--accent);
   color: var(--bg);
-  border: 2px solid var(--accent);
+  padding: 0 2px;
+  border-radius: 3px;
 }
 
 
 
 
 /*=================
-  Calendar Boxes
+  Tournament Boxes
 =================*/
 
 .event-list{
@@ -1127,6 +1278,115 @@ mark {
   color: white;
 }
 
+/* Tournament Overview Card */
+.tournaments-info {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  overflow: hidden;
+}
+
+.tournaments-info h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* List layout + initial hidden state */
+.tournaments-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.tournaments-info li {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  word-spacing: 1px;           /* a touch more breathing room */
+  display: flex;
+  align-items: center;
+
+  /* hidden until section is revealed */
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+/* The footer note under the list */
+.tournaments-info .note {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 1.5rem;
+  line-height: 1.6;
+  font-style: italic;
+
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+/* Reveal animation only after section enters viewport */
+.tournaments-info.reveal li {
+  animation: fadeSlideIn 0.6s ease forwards;
+}
+
+/* Stagger the <li> items */
+.tournaments-info.reveal li:nth-child(1) { animation-delay: 0.10s; }
+.tournaments-info.reveal li:nth-child(2) { animation-delay: 0.20s; }
+.tournaments-info.reveal li:nth-child(3) { animation-delay: 0.30s; }
+.tournaments-info.reveal li:nth-child(4) { animation-delay: 0.40s; }
+.tournaments-info.reveal li:nth-child(5) { animation-delay: 0.50s; }
+/* add more nth-child rules if you add more items */
+
+.tournaments-info.reveal .note {
+  animation: fadeSlideIn 0.6s ease forwards;
+  animation-delay: 0.75s; /* appears after the list */
+}
+
+/* Keyframes */
+@keyframes fadeSlideIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dark mode */
+body.dark .tournaments-info {
+  background: #1e1e1e;
+  border-color: #333;
+  color: #ddd;
+}
+body.dark .tournaments-info h2 { color: #66c2ff; }
+body.dark .tournaments-info li strong { color: #fff; }
+body.dark .tournaments-info li em { color: #bbb; }
+body.dark .tournaments-info .note { color: #aaa; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tournaments-info li,
+  .tournaments-info .note {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .tournaments-info { padding: 1rem; }
+  .tournaments-info h2 { font-size: 1.3rem; }
+  .tournaments-info li { font-size: 0.95rem; }
+}
 
 
 

@@ -1,7 +1,7 @@
 [
   {
     "name": "Destiny",
-    "department": "Chemical Engineering",
+    "department": "Chemical Eng",
     "level": 500,
     "rapid": 2320,
     "blitz": 2180,
@@ -13,7 +13,7 @@
   },
   {
     "name": "Draken",
-    "department": "Pertroleum Engineering",
+    "department": "Pertroleum Eng",
     "level": 100,
     "rapid": 1380,
     "blitz": 1490,
@@ -23,7 +23,7 @@
   },
   {
     "name": "Alex",
-    "department": "Marine Engineering",
+    "department": "Marine Eng",
     "level": 500,
     "rapid": 2300,
     "blitz": 2250,
@@ -35,7 +35,7 @@
 
     {
     "name": "Hasel",
-    "department": "Chemical Engineering",
+    "department": "Chemical Eng",
     "level": 200,
     "rapid": 1700,
     "blitz": 1580,
@@ -48,7 +48,7 @@
 
     {
     "name": "Fortune",
-    "department": "Computer Science",
+    "department": "Comp Sci",
     "level": 300,
     "rapid": 1600,
     "blitz": 1650,
@@ -65,59 +65,129 @@
     "rapid": 1900,
     "blitz": 1850,
     "achievements": [
-      "⏱️ 1× Grand Rapid Winner"
+      "⏱️ 1× Grand Rapid Winner",
+      "🥇 1x NACOS Winner"
     ]
   },
 
     {
     "name": "Martins",
-    "department": "Mechanical Engineering",
+    "department": "Mech Eng",
     "level": 300,
     "rapid": 2030,
     "blitz": 2000,
     "achievements": [
+        "🥇 1x NSE Winner",
         "⚡ 2× Lightning Blitz Winner",
-        "⏱️ 3× Grand Rapid Winner"
+        "⏱️ 2× Grand Rapid Winner"
     ]
   },
 
   {
     "name": "Noah",
-    "department": "Marine Engineering",
+    "department": "Marine Eng",
     "level": 500,
     "rapid": 1790,
     "blitz": 1800,
     "achievements": [
-      "⏱️ 1× Grand Rapid Winner"
+            "🥇 1x FCL Winner"
     ]
   },
 
   {
     "name": "TJ",
-    "department": "Computer Science",
+    "department": "Comp Sci",
     "level": 300,
     "rapid": 1650,
     "blitz": 1700,
     "achievements": [
-      "⏱️ 1× Grand Rapid Winner"
+      "🥇 1x FCL Winner"
     ]
   },
 
   
   {
     "name": "Chris",
-    "department": "Computer Science",
+    "department": "Comp Sci",
     "level": 400,
     "rapid": 1450,
     "blitz": 1470,
-    "achievements": [
-      "⏱️ 1× Grand Rapid Winner"
-    ]
+    "achievements": []
+  },
+
+  
+  {
+    "name": "Nelson",
+    "department": "SLT",
+    "level": 200,
+    "rapid": 1430,
+    "blitz": 1400,
+    "achievements": []
+  },
+
+  
+  {
+    "name": "Prevail",
+    "department": "Mech Eng",
+    "level": 500,
+    "rapid": 1750,
+    "blitz": 1670,
+    "achievements": []
+  },
+
+  
+  {
+    "name": "Orukpe",
+    "department": "Elect Eng",
+    "level": 300,
+    "rapid": 1050,
+    "blitz": 1070,
+    "achievements": []
+  },
+
+  
+  {
+    "name": "Worship",
+    "department": "EMT",
+    "level": 300,
+    "rapid": 1624,
+    "blitz": 1700,
+    "achievements": []
+  },
+
+  
+  {
+    "name": "God's Power",
+    "department": "Chemistry",
+    "level": 300,
+    "rapid": 1382,
+    "blitz": 1396,
+    "achievements": []
+  },
+
+  
+  {
+    "name": "Jeffery",
+    "department": "Comp Sci",
+    "level": 200,
+    "rapid": 885,
+    "blitz": 515,
+    "achievements": []
+  },
+
+  
+  {
+    "name": "Vertex",
+    "department": "Comp Sci",
+    "level": 200,
+    "rapid": 800,
+    "blitz": 899,
+    "achievements": []
   },
 
   {
     "name": "Godbless",
-    "department": "Mechanical Engineering",
+    "department": "Mech Eng",
     "level": 500,
     "rapid": 1830,
     "blitz": 1800,
