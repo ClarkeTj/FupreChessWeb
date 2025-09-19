@@ -75,67 +75,344 @@
 </div>
 
 
+<main class="main-content">
+  <!-- 📅 Upcoming Events -->
+  <section class="events-section">
+    <h1>🏆 Upcoming Tournaments</h1>
+    <p class="intro">
+      Stay up to date with our chess tournaments, meetings, and special events.
+    </p>
 
+    <div class="event-list">
+      <article class="event-box">
+        <time datetime="2025-09-14">Sept 14, 2025</time>
+        <h3>Semester Kickoff Blitz Tournament</h3>
+        <p>🕒 3:00 PM | Fast-paced games to start the semester with energy.</p>
+      </article>
+
+      <article class="event-box">
+        <time datetime="2025-10-05">Oct 5, 2025</time>
+        <h3>Rapid Rating Games - Round 1</h3>
+        <p>🕐 12:00 PM | A new season of rapid tournaments begins.</p>
+      </article>
+
+      <article class="event-box">
+        <time datetime="2025-10-19">Oct 19, 2025</time>
+        <h3>Team Chess Meetup</h3>
+        <p>♟️ Fun team-based challenges and casual games.</p>
+      </article>
+    </div>
   </section>
 
-  <!-- 📅 Events Calendar -->
-  <main class="main-content">
-    <h1>Event Calendar</h1>
-    <p>Stay up to date with our chess tournaments, meetings, and special events.</p>
+  <!-- 📖 Tournament Overview -->
+  <section class="tournaments-info">
+    <h2>📖 Tournament Overview</h2>
+    <ul>
+      <li>🏆 <strong>FCC Championship</strong> – The annual <em>Fupre Chess Club Championship</em>, our most prestigious event.</li>
+      <li>🏅 <strong>FCM</strong> – The annual <em>Fupre Chess Masters</em>, showcasing top-level talent.</li>
+      <li>🥇 <strong>FCL</strong> – The annual <em>Fupre Chess League</em>, a season-long competition for consistency and teamwork.</li>
+      <li>⏱️ <strong>Grand Rapid</strong> – A monthly <em>Rapid Tournament</em> that tests speed and precision under time pressure.</li>
+      <li>⚡ <strong>Lightning Blitz</strong> – A weekly <em>Blitz Tournament</em>, for fast-paced, high-energy games.</li>
+    </ul>
+    <p class="note">
+      These tournaments celebrate dedication, skill, and growth — keeping the Fupre Chess Club community engaged, competitive, and inspiring.
+    </p>
+  </section>
 
-    <ul class="event-list">
-      <li class="event-box">
-        <strong>Sept 14, 2025:</strong> Semester Kickoff Blitz Tournament 🕒 3:00 PM
-      </li>
-      <li class="event-box">
-        <strong>Oct 5, 2025:</strong> Rapid Rating Games - Round 1 🕐 12:00 PM
-      </li>
-      <li class="event-box">
-        <strong>Oct 19, 2025:</strong> Team Chess Meetup ♟️
+
+<section class="calendar-2026">
+  <h2>📅 FUPRE Chess Club Tournament Calendar – 2026</h2>
+  <p class="intro">
+    A structured year of chess — from weekly blitz to annual championships.
+  </p>
+
+
+    <button id="calendar-toggle" class="toggle-btn table-mode">
+  Switch to Card View
+</button>
+
+
+  <div class="calendar-table">
+    <table id="calendar-table"  class="table-view" border="1">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Weekly Event</th>
+          <th>Monthly Event</th>
+          <th>Major Events & Casuals</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p class="note">*December Grand Rapid moved earlier to avoid holiday clashes.</p>
+  </div>
+</section>
+
+
+
+<!-- 🗓️ Tournament Calendar Notes -->
+<section class="calendar-notes">
+  <h2>🗓️ FUPRE Chess Club Tournament Calendar – 2026</h2>
+
+  <div class="calendar-box">
+    <h3>📍 General Notes</h3>
+    <ul>
+      <li><strong>FCC (Championship)</strong> → Held end of 1st semester.</li>
+      <li><strong>FCM (Masters)</strong> → Held before FCC to determine the challenger.</li>
+      <li><strong>FCL (League)</strong> → Runs throughout 2nd semester.</li>
+      <li><strong>Grand Rapid (Monthly)</strong> → Played every month except during FCC/FCM main matches.</li>
+      <li><strong>Lightning Blitz (Weekly)</strong> → Held every week, except during long major events.</li>
+      <li><strong>Casual & Training Meetups</strong> → Integrated flexibly between tournaments.</li>
+    </ul>
+  </div>
+
+  <div class="calendar-box">
+    <h3>🔹 First Semester (Jan – May 2026)</h3>
+    <p><strong>Weekly Lightning Blitz:</strong> Every Friday evening.<br>
+       <strong>Monthly Grand Rapid:</strong> Last Saturday of each month.</p>
+
+    <h4>🏆 Major Events</h4>
+    <ul>
+      <li><strong>March 2026 – FUPRE Chess Masters (FCM):</strong> 8 players, Candidates-style event (Double RR or Swiss), ~1 week. Purpose: Determines Challenger for FCC.</li>
+      <li><strong>April 2026 – FUPRE Chess Championship (FCC):</strong> 
+        <ul>
+          <li>Rapid Section → 10-game match at 30+30 (10 days).</li>
+          <li>Blitz Section → Swiss/Double RR, 3+2 time control (≤3 days).</li>
+          <li><em>Note:</em> In 2026, the Top 2 finishers of FCM will contest FCC. From 2027 onward, only the FCM winner challenges the reigning Champion.</li>
+        </ul>
       </li>
     </ul>
+  </div>
 
+  <div class="calendar-box">
+    <h3>🔹 Second Semester (Sept – Dec 2026)</h3>
+    <p><strong>Weekly Lightning Blitz:</strong> Every Friday evening.<br>
+       <strong>Monthly Grand Rapid:</strong> Last Saturday of each month.</p>
 
-<section class="tournaments-info">
-  <h2>📖 Tournament Overview</h2>
-  <ul>
-    <li>🏆 <strong>FCC Championship </strong> – The annual <em> Fupre Chess Club Championship</em>, our most prestigious event.</li>
-    <li>🏅 <strong>FCM </strong> – The annual <em> Fupre Chess Masters</em>, showcasing top-level talent.</li>
-    <li>🥇 <strong>FCL </strong> – The annual <em> Fupre Chess League</em>, a season-long competition for consistency and teamwork.</li>
-    <li>⏱️ <strong>Grand Rapid </strong> – A monthly <em> Rapid Tournament</em>, that tests speed and precision under time pressure.</li>
-    <li>⚡ <strong>Lightning Blitz </strong> – A weekly <em> Blitz Tournament</em>, for fast-paced, high-energy games.</li>
-  </ul>
-  <p class="note">
-    Together, these tournaments celebrate dedication, skill, and growth — keeping the Fupre Chess Club community engaged, competitive, and inspiring.
-  </p>
+    <h4>🏆 Major Event</h4>
+    <ul>
+      <li><strong>Sept – Dec 2026 – FUPRE Chess League (FCL):</strong> Round-robin league across semester weekends. Points accumulate, winner crowned at semester’s end.</li>
+    </ul>
+  </div>
+
+  <div class="calendar-box">
+    <h3>🔹 Casual & Training Activities</h3>
+    <ul>
+      <li><strong>Summer Break (June – Aug):</strong> Friendly matches, puzzle rush events, simuls by top players, strategy workshops.</li>
+      <li><strong>Monthly “Chess Café” Meetups:</strong> Informal analysis, fun blitz, and training sessions.</li>
+    </ul>
+  </div>
 </section>
 
 
 
 
-  </main>
+<!-- 📑 FCC 2026 Proposal -->
+<section class="fcc-proposal">
+  <h2>📑 FUPRE Chess Championship – 2026 (Inaugural Edition)</h2>
+  <p>
+    The first official edition of the <strong>FUPRE Chess Championship (FCC)</strong> — a landmark event to crown our 
+    Rapid and Blitz champions.
+  </p>
+
+  <div class="proposal-box">
+    <h2>🥇 Rapid Chess Championship</h2>
+    <ul>
+      <li><strong>Eligibility:</strong> Top 2 finishers of FCM 2026</li>
+      <li><strong>Format:</strong> 10 Rapid games (30+30) across 10 days</li>
+      <li><strong>Tiebreaks:</strong> 2-game Armageddon (10 mins vs 7 mins w/draw odds)</li>
+    </ul>
+    <h2>⚡ Blitz Chess Championship</h2>
+    <ul>
+      <li><strong>Eligibility:</strong> Open to all FUPRE players</li>
+      <li><strong>Format:</strong> Swiss or Double RR, 3+2 time control</li>
+      <li><strong>Duration:</strong> Up to 3 days</li>
+    </ul>
+    <p class="note">
+      From 2027 onward, only the <strong>FCM winner</strong> will challenge the reigning FCC Champion. 
+      The FCM becomes our <em>Candidates Tournament</em>, creating a clear path to the crown.
+    </p>
+  </div>
+</section>
+
+
+</main>
+
+
+
+
+  
 
 <script>
+
 document.addEventListener("DOMContentLoaded", () => {
-  const section = document.querySelector(".tournaments-info");
-  if (!section) return;
+  // Select all sections that should animate on scroll
+  const sections = document.querySelectorAll(".tournaments-info, .proposal-box");
+
+  if (!sections.length) return;
 
   const io = new IntersectionObserver(
-    (entries, obs) => {
+    (entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          section.classList.add("reveal");   // triggers CSS animations
-          obs.unobserve(entry.target);       // run once
+          entry.target.classList.add("reveal"); // add reveal class
+          observer.unobserve(entry.target);     // run once per section
         }
       });
     },
-    { threshold: 0.2 } // ~20% visible
+    { threshold: 0.2 } // trigger when 20% is visible
   );
 
-  io.observe(section);
+  sections.forEach(section => io.observe(section));
 });
-</script>
 
+
+
+async function loadCalendar() {
+  try {
+    const response = await fetch("calendar.json?nocache=" + Date.now());
+    const data = await response.json();
+
+    const tbody = document.querySelector("#calendar-table tbody");
+    tbody.innerHTML = "";
+
+    data.months.forEach(item => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td data-label="Month">${item.month}</td>
+        <td data-label="Weekly">${item.weekly}</td>
+        <td data-label="Monthly">${item.monthly}</td>
+        <td data-label="Major Events">${item.events}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    makeCalendarCollapsible("calendar-table"); // collapsible after load
+  } catch (err) {
+    console.error("Failed to load calendar:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.getElementById("calendar-table");
+  const toggleBtn = document.getElementById("calendar-toggle");
+
+  if (!table || !toggleBtn) return;
+
+  // Load saved preference (default = table view)
+  const savedView = localStorage.getItem("calendarView") || "table";
+  applyCalendarView(savedView);
+
+  toggleBtn.addEventListener("click", () => {
+    const newView = table.classList.contains("table-view") ? "card" : "table";
+    applyCalendarView(newView);
+    localStorage.setItem("calendarView", newView); // save choice
+  });
+function applyCalendarView(view) {
+  if (view === "card") {
+    table.classList.remove("table-view");
+    table.classList.add("card-view");
+    toggleBtn.textContent = "Switch to Table View";
+    toggleBtn.classList.remove("table-mode");
+    toggleBtn.classList.add("card-mode");
+  } else {
+    table.classList.remove("card-view");
+    table.classList.add("table-view");
+    toggleBtn.textContent = "Switch to Card View";
+    toggleBtn.classList.remove("card-mode");
+    toggleBtn.classList.add("table-mode");
+  }
+
+  // 🔑 Re-apply collapsible logic AFTER switching view
+  const tbody = table.querySelector("tbody");
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  // Reset all row styles
+  rows.forEach(r => {
+    r.classList.remove("show", "hidden");
+    r.style.display = view === "card" ? "block" : "table-row";
+  });
+
+  // Re-run collapsible with correct mode
+  makeCalendarCollapsible("calendar-table");
+}
+
+});
+
+
+
+function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 3 : 5)) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+
+  const tbody = table.querySelector("tbody");
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  if (rows.length <= maxRows) return;
+
+  // ✅ Apply calendar-row to all rows
+  rows.forEach(r => r.classList.add("calendar-row"));
+
+  // ✅ First set: visible immediately (no hidden class)
+  rows.slice(0, maxRows).forEach((row, i) => {
+    row.style.display = table.classList.contains("card-view") ? "block" : "table-row";
+    // stagger animation for initial visible rows
+    setTimeout(() => row.classList.add("show"), i * 100);
+  });
+
+  // ✅ Extra rows start hidden
+  rows.slice(maxRows).forEach(row => {
+    row.classList.add("hidden");
+    row.style.display = "none";
+  });
+
+  // Remove any old collapse btn before creating a new one
+  const oldBtn = table.parentElement.querySelector(".collapse-btn")
+  if (oldBtn) oldBtn.remove();
+
+  // Collapse button
+  const btn = document.createElement("button");
+  btn.className = "collapse-btn";
+  btn.innerHTML = `Show More <span class="chev">▼</span>`;
+  table.insertAdjacentElement("afterend", btn);
+
+  let expanded = false;
+  btn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    rows.slice(maxRows).forEach((row, i) => {
+      if (expanded) {
+        row.classList.remove("hidden");
+        row.style.display = table.classList.contains("card-view") ? "block" : "table-row";
+
+        // staggered fade-in
+        setTimeout(() => {
+          row.classList.add("show");
+          row.classList.remove("glow"); // reset glow
+          void row.offsetWidth;         // reflow
+          row.classList.add("glow");    // trigger glow
+        }, i * 120);
+
+      } else {
+        // staggered fade-out
+        setTimeout(() => {
+          row.classList.remove("show");
+          setTimeout(() => {
+            row.style.display = "none";
+            row.classList.add("hidden");
+          }, 400);
+        }, i * 120);
+      }
+    });
+
+    btn.innerHTML = expanded
+      ? `Show Less <span class="chev">▲</span>`
+      : `Show More <span class="chev">▼</span>`;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadCalendar);
+
+</script>
 
 
 </body>

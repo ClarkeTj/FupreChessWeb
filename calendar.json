@@ -1,0 +1,77 @@
+{
+  "year": 2026,
+  "months": [
+    {
+      "month": "January",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (31st)",
+      "events": "Training meetups resume after holidays"
+    },
+    {
+      "month": "February",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (28th)",
+      "events": "Strategy workshops"
+    },
+    {
+      "month": "March",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (28th)",
+      "events": "FCM – 8 players Candidates (~1 week). Puzzle Rush mini-event"
+    },
+    {
+      "month": "April",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "–",
+      "events": "FCC – Rapid (10 days) + Blitz (≤3 days). Closing ceremony."
+    },
+    {
+      "month": "May",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (30th)",
+      "events": "Fun blitz simuls before exams"
+    },
+    {
+      "month": "June",
+      "weekly": "–",
+      "monthly": "Grand Rapid (27th)",
+      "events": "Summer casuals: simuls, analysis, meetups"
+    },
+    {
+      "month": "July",
+      "weekly": "–",
+      "monthly": "Grand Rapid (25th)",
+      "events": "Summer training camp"
+    },
+    {
+      "month": "August",
+      "weekly": "–",
+      "monthly": "Grand Rapid (29th)",
+      "events": "End-of-break friendlies"
+    },
+    {
+      "month": "September",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (26th)",
+      "events": "FCL begins – semester-long league. Opening ceremony"
+    },
+    {
+      "month": "October",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (31st)",
+      "events": "FCL ongoing + training"
+    },
+    {
+      "month": "November",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (28th)",
+      "events": "FCL ongoing + puzzle rush & simuls"
+    },
+    {
+      "month": "December",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (19th)*",
+      "events": "FCL concludes → League Champion crowned. End-of-year awards party"
+    }
+  ]
+}

@@ -65,22 +65,24 @@
 
     <div class="table-container">
 
-    <table id="ratings-table" border="1">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Dept</th>
-            <th>Lv</th>
-            <th>Rapid</th>
-            <th>Blitz</th>
-            <th>Achievements</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+          <table id="ratings-table" border="1">
+                <thead>
+                  <tr>
+                    <th>Player</th>
+                    <th>Dept</th>
+                    <th>Lv</th>
+                    <th>Rapid</th>
+                    <th>Blitz</th>
+                    <th>Achievements</th>
+                </tr>
+              </thead>
+            <tbody></tbody>
+        </table>
+    
+    </div>
+
     </section>
 
-</div>
     
     <!-- Rapid Leaderboard -->
     <section>
@@ -115,11 +117,11 @@
 <section class="achievements-info">
   <h2>📖 Achievements Glossary</h2>
   <ul>
-    <li>🏆 <strong>FCC Champion</strong> – Winner of the annual <em>Fupre Chess Club Championship</em>.</li>
-    <li>🏅 <strong>FCM Winner</strong> – Winner of the annual <em>Fupre Chess Masters</em>.</li>
-    <li>🥇 <strong>FCL Winner</strong> – Winner of the annual <em>Fupre Chess League</em>.</li>
-    <li>⏱️ <strong>Grand Rapid Winner</strong> – Champion of the montly <em>Rapid Tournament</em>.</li>
-    <li>⚡ <strong>Lightning Blitz Winner</strong> – First place in the weekly <em>Blitz Tournament</em>.</li>
+    <li>🏆 <strong>FCC Champion</strong> – Winner of the annual <em>Fupre Chess Club Championship.</em></li>
+    <li>🏅 <strong>FCM Winner</strong> – Winner of the annual <em>Fupre Chess Masters.</em></li>
+    <li>🥇 <strong>FCL Winner</strong> – Winner of the annual <em>Fupre Chess League.</em></li>
+    <li>⏱️ <strong>Grand Rapid Winner</strong> – Champion of the montly <em>Rapid Tournament.</em></li>
+    <li>⚡ <strong>Lightning Blitz Winner</strong> – First place in the weekly <em>Blitz Tournament.</em></li>
     <li>🌟 <strong>Rising Star</strong> – Award for newcomers and intermediate players showing strong performance.</li>
   </ul>
   <p class="note">
@@ -287,8 +289,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 /* -----------------------------
-   Collapsible tables (refactor)
+   Collapsible tables 
 -------------------------------- */
 
 /** Call this AFTER rows are rendered/changed */
@@ -312,49 +315,51 @@ function setupCollapsibles() {
   makeTableCollapsible("blitz-leaderboard");
 }
 
-/** Builds one collapsible table */
-function makeTableCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 8 : 10)) {
+/** Builds one collapsible table with stagger + glow */
+function makeTableCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 10 : 10)) {
   const table = document.getElementById(tableId);
   if (!table) return;
 
   const tbody = table.querySelector("tbody");
   const rows = Array.from(tbody.querySelectorAll("tr"));
-  if (rows.length <= maxRows) return;       // nothing to collapse
+  if (rows.length <= maxRows) return; // nothing to collapse
 
-  // Hide extra rows initially (and mark as collapsible)
+  // Hide extra rows initially
   rows.slice(maxRows).forEach(row => {
-    row.classList.add("collapsible-row");
-    row.style.display = "none";             // ensure hidden on first paint
+    row.classList.add("hidden"); // CSS handles hidden state
   });
 
-  // Build the toggle button
+  // Create button
   const btn = document.createElement("button");
   btn.className = "collapse-btn";
   btn.innerHTML = `Show More <span class="chev">▼</span>`;
-
-  // Place it right under the table (inside same container)
   table.insertAdjacentElement("afterend", btn);
 
   let expanded = false;
   btn.addEventListener("click", () => {
     expanded = !expanded;
 
-    rows.slice(maxRows).forEach(row => {
+    rows.slice(maxRows).forEach((row, i) => {
       if (expanded) {
-        // table vs card view
-        row.style.display = table.classList.contains("card-view") ? "block" : "table-row";
-        // allow display to apply, then animate in
-        requestAnimationFrame(() => row.classList.add("show"));
+        // prepare row
+        row.classList.remove("hidden");
+
+        setTimeout(() => {
+          row.classList.add("show", "glow");
+          // reset glow to allow retrigger
+          setTimeout(() => row.classList.remove("glow"), 1200);
+        }, i * 120); // stagger
       } else {
-        row.classList.remove("show");
-        // wait for fade-out, then hide
-        setTimeout(() => (row.style.display = "none"), 260);
+        setTimeout(() => {
+          row.classList.remove("show", "glow");
+          setTimeout(() => row.classList.add("hidden"), 400);
+        }, i * 120); // stagger fade-out
       }
     });
 
-    btn.classList.toggle("expanded", expanded);
-    btn.innerHTML = expanded ? `Show Less <span class="chev">▼</span>`
-                             : `Show More <span class="chev">▼</span>`;
+    btn.innerHTML = expanded
+      ? `Show Less <span class="chev">▲</span>`
+      : `Show More <span class="chev">▼</span>`;
   });
 }
 
@@ -385,6 +390,64 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+function initTableHints() {
+  if (window.innerWidth > 768) return; // Only on mobile
+
+  const containers = document.querySelectorAll(".table-container");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const container = entry.target;
+
+      if (entry.isIntersecting && !container.classList.contains("hint-active")) {
+        container.classList.add("hint-active");
+
+        // Reuse or create the hint element
+        let hint = container.querySelector(".table-scroll-hint");
+        if (!hint) {
+          hint = document.createElement("div");
+          hint.className = "table-scroll-hint";
+          hint.textContent = "Swipe to see more ➡️";
+          container.style.position = "relative";
+          container.appendChild(hint);
+        }
+
+        // Animate in
+        hint.classList.add("show");
+
+        // Hide after 4s
+        setTimeout(() => hint.classList.remove("show"), 4000);
+
+        // Hide instantly if user scrolls horizontally
+        container.addEventListener("scroll", () => {
+          hint.classList.remove("show");
+        });
+      }
+
+      if (!entry.isIntersecting) {
+        container.classList.remove("hint-active");
+      }
+    });
+  }, { threshold: 0.3 });
+
+  containers.forEach(c => observer.observe(c));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTableHints();
+
+  const toggleBtn = document.getElementById("toggle-view");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      setTimeout(() => {
+        if (!document.querySelector(".table-container")?.classList.contains("card-mode")) {
+          initTableHints();
+        }
+      }, 200);
+    });
+  }
+});
 
 </script>
 

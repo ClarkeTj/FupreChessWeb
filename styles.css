@@ -852,6 +852,7 @@ th {
   color: white;
 }
 
+
 /* =================
    Ratings Tables
 ================= */
@@ -892,6 +893,7 @@ th {
   overflow-x: auto;                 /* table view can scroll on mobile */
   -webkit-overflow-scrolling: touch;
   margin-bottom: 1.5rem;
+  position: relative;
 }
 
 /* When in card mode, disable the horizontal scroll on container */
@@ -899,6 +901,47 @@ th {
   overflow-x: visible;
   padding: 0 0.5rem;                /* a little breathing room at edges */
 }
+
+@media (min-width:769px){
+  .table-scroll-hint{
+    opacity: 0;
+  }
+}
+
+/*Swipe Hint overlay for mobile table */
+
+@media(max-width:768px){
+
+.table-scroll-hint {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 0.8rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.table-scroll-hint.show {
+  opacity: 1;
+  transform: translateX(0);
+  animation: pulseHint 1.5s ease-in-out infinite;
+}
+
+/* Pulse animation */
+@keyframes pulseHint {
+  0%   { transform: translateX(0) scale(1); opacity: 1; }
+  50%  { transform: translateX(0) scale(1.08); opacity: 0.9; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+}
+
 
 /* =================
    Card View
@@ -943,10 +986,10 @@ th {
   color: var(--accent);
 }
 
-/* Special: "PLAYER | " separator */
+/* Special: "PLAYER | " separator 
 #ratings-table.card-view td[data-label="Player"]::before {
   content: "PLAYER | ";
-}
+}*/
 
 /* Make cards truly full width on small screens */
 @media (max-width: 768px) {
@@ -1099,6 +1142,40 @@ body.dark #blitz-leaderboard  tbody tr:nth-child(-n+3) td:last-child {
 #ratings-table.card-view .collapsible-row.show {
   display: block;
 }
+
+
+/* Hidden rows */
+#ratings-table tbody tr.hidden,
+#rapid-leaderboard tbody tr.hidden,
+#blitz-leaderboard tbody tr.hidden {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Visible rows */
+#ratings-table tbody tr.show,
+#rapid-leaderboard tbody tr.show,
+#blitz-leaderboard tbody tr.show {
+  display: table-row;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease, background-color 1s ease;
+}
+
+/* Glow effect */
+#ratings-table tbody tr.glow,
+#rapid-leaderboard tbody tr.glow,
+#blitz-leaderboard tbody tr.glow {
+  background-color: var(--glow);
+  animation: fadeGlow 1.5s ease forwards;
+}
+
+@keyframes fadeGlow {
+  from { background-color:var(--glow); }
+  to   { background-color: transparent; }
+}
+
 
 
 /* === Achievements Info Box === */
@@ -1278,36 +1355,226 @@ mark {
   color: white;
 }
 
+
+
+
+/* Calendar Notes Section */
+.calendar-notes {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--bg-soft, #fafafa);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text, #333);
+}
+
+.calendar-notes h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.calendar-box {
+  margin-bottom: 1.8rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg, #fff);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.calendar-box h3, .calendar-box h4 {
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.calendar-box ul {
+  padding-left: 1.2rem;
+}
+
+
+.calendar-box li {
+  list-style: none;
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+
+body.dark .calendar-notes {
+  background: #1e1e1e;
+  color: #ddd;
+}
+body.dark .calendar-box {
+  background: #2a2a2a;
+  border-color: #444;
+}
+body.dark .calendar-box h3,
+body.dark .calendar-box h4 {
+  color: #66c2ff;
+}
+
+
+/* 📱 Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .calendar-notes {
+    padding: 1rem;
+  }
+
+  .calendar-notes h2 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .calendar-box {
+    padding: 0.9rem 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .calendar-box h3,
+  .calendar-box h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .calendar-box ul {
+    padding-left: 1rem;   /* tighter indentation */
+  }
+
+  .calendar-box li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding-left: 0.3rem; /* keep bullets visible but compact */
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-notes h2 {
+    font-size: 1.15rem;
+  }
+
+  .calendar-box {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .calendar-box li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+
+
+/* Default Table View */
+#calendar-table.table-view {
+  display: table;
+  width: 100%;
+}
+#calendar-table.table-view thead { display: table-header-group; }
+#calendar-table.table-view tbody { display: table-row-group; }
+#calendar-table.table-view tr { display: table-row; }
+#calendar-table.table-view td, 
+#calendar-table.table-view th { display: table-cell; }
+
+/* Card View */
+#calendar-table.card-view {
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+}
+#calendar-table.card-view thead { display: none; }
+#calendar-table.card-view tbody { display: block; }
+#calendar-table.card-view tr {
+  display: block;
+  margin: 0.8rem auto;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#calendar-table.card-view td {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border: none;
+}
+#calendar-table.card-view td::before {
+  content: attr(data-label);
+  font-weight: bold;
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.toggle-btn:hover {
+  background: var(--glow);
+}
+.toggle-btn.card-mode {
+  background: var(--text);
+  color: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+
+
 /* Tournament Overview Card */
-.tournaments-info {
+.tournaments-info,
+.proposal-box {
   max-width: 900px;
   margin: 2rem auto;
   padding: 1.5rem 2rem;
-  background: #fff;
+  background: var(--bg);
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  color: var(--text);
   overflow: hidden;
 }
 
-.tournaments-info h2 {
+.tournaments-info h2,
+.proposal-box h2 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem 0 1rem;
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--accent);
 }
 
 /* List layout + initial hidden state */
-.tournaments-info ul {
+.tournaments-info ul,
+.proposal-box ul {
   list-style: none;
   padding: 0;
   margin: 0 0 1rem;
 }
 
-.tournaments-info li {
+.proposal-box li, 
+.proposal-box .note {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  word-spacing: 1px;
+  color: var(--text);
+}
+
+.tournaments-info li,
+.proposal-box li {
   margin: 0.8rem 0;
   font-size: 1rem;
   line-height: 1.6;
@@ -1323,7 +1590,8 @@ mark {
 }
 
 /* The footer note under the list */
-.tournaments-info .note {
+.tournaments-info .note, 
+.proposal-box .note {
   text-align: center;
   font-size: 0.95rem;
   color: #555;
@@ -1337,7 +1605,8 @@ mark {
 }
 
 /* Reveal animation only after section enters viewport */
-.tournaments-info.reveal li {
+.tournaments-info.reveal li,
+.proposal-box.reveal li {
   animation: fadeSlideIn 0.6s ease forwards;
 }
 
@@ -1347,11 +1616,25 @@ mark {
 .tournaments-info.reveal li:nth-child(3) { animation-delay: 0.30s; }
 .tournaments-info.reveal li:nth-child(4) { animation-delay: 0.40s; }
 .tournaments-info.reveal li:nth-child(5) { animation-delay: 0.50s; }
+
+
+
+.proposal-box.reveal li:nth-child(1) { animation-delay: 0.10s; }
+.proposal-box.reveal li:nth-child(2) { animation-delay: 0.20s; }
+.proposal-box.reveal li:nth-child(3) { animation-delay: 0.30s; }
+.proposal-box.reveal li:nth-child(4) { animation-delay: 0.40s; }
+.proposal-box.reveal li:nth-child(5) { animation-delay: 0.50s; }
+.proposal-box.reveal li:nth-child(6) { animation-delay: 0.60s; }
+
+
 /* add more nth-child rules if you add more items */
 
-.tournaments-info.reveal .note {
+
+
+.tournaments-info.reveal .note,
+.proposal-box.reveal .note {
   animation: fadeSlideIn 0.6s ease forwards;
-  animation-delay: 0.75s; /* appears after the list */
+  animation-delay: 0.8s; /* appears after the list */
 }
 
 /* Keyframes */
@@ -1382,11 +1665,111 @@ body.dark .tournaments-info .note { color: #aaa; }
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .tournaments-info { padding: 1rem; }
-  .tournaments-info h2 { font-size: 1.3rem; }
-  .tournaments-info li { font-size: 0.95rem; }
+@media (max-width: 768px) {
+  .tournaments-info, .proposal-box { padding: 1rem; }
+  .tournaments-info h2, .proposal-box h2 { font-size: 1.3rem; }
 }
+
+
+
+/* === Mobile Readability Fixes === */
+@media (max-width: 768px) {
+  .achievements-info li,
+  .tournaments-info li,
+  .proposal-box li {
+    display: block;          /* stack text instead of flex row */
+    padding: 0.6rem 0.4rem;  /* breathing space */
+    font-size: 0.9rem;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  /* indent the text so emoji + bold stands out */
+  .achievements-info li strong,
+  .tournaments-info li strong,
+  .proposal-box li strong {
+    display: inline-block;
+    margin-bottom: 0.3rem;
+  }
+
+  .achievements-info .note,
+  .tournaments-info .note,
+  .proposal-box .note {
+    padding: 1rem 0.5rem;
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+/* Fade-in animation for hidden calendar rows */
+/* Base hidden state */
+.calendar-row {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background-color 1s ease;
+  display: none; /* hidden until revealed */
+}
+
+/* Visible (fade + slide in) */
+.calendar-row.show {
+  display: table-row; /* table view default */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* In card view, rows should act as blocks */
+#calendar-table.card-view .calendar-row.show {
+  display: block;
+  margin: 0.8rem 0;
+  padding: 1rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: var(--bg-alt, #222);
+}
+
+/* Glow highlight (fades away automatically) */
+.calendar-row.glow {
+  background-color: var(--glow);
+  animation: fadeGlow 1.5s ease forwards;
+}
+
+
+/* Card view styling for calendar */
+#calendar-table.card-view tbody tr {
+  display: block;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: var(--bg-alt, #222);
+}
+
+#calendar-table.card-view td {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border: none !important;
+}
+
+#calendar-table.card-view td::before {
+  content: attr(data-label);
+  font-weight: 600;
+  color: var(--accent, #66c2ff);
+  margin-right: 0.8rem;
+}
+
+
+
+
+@keyframes fadeGlow {
+  from { background-color: var(--glow); }
+  to   { background-color: transparent; }
+}
+
+
+
 
 
 
