@@ -340,8 +340,7 @@ function applyCalendarView(view) {
 });
 
 
-
-function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 3 : 5)) {
+function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 3 : 6)) {
   const table = document.getElementById(tableId);
   if (!table) return;
 
@@ -349,24 +348,23 @@ function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 
   const rows = Array.from(tbody.querySelectorAll("tr"));
   if (rows.length <= maxRows) return;
 
-  // ✅ Apply calendar-row to all rows
+  // ✅ Apply calendar-row class to all rows
   rows.forEach(r => r.classList.add("calendar-row"));
 
-  // ✅ First set: visible immediately (no hidden class)
+  // ✅ First visible rows (with stagger-in on load)
   rows.slice(0, maxRows).forEach((row, i) => {
     row.style.display = table.classList.contains("card-view") ? "block" : "table-row";
-    // stagger animation for initial visible rows
     setTimeout(() => row.classList.add("show"), i * 100);
   });
 
-  // ✅ Extra rows start hidden
+  // ✅ Hide the rest
   rows.slice(maxRows).forEach(row => {
     row.classList.add("hidden");
     row.style.display = "none";
   });
 
-  // Remove any old collapse btn before creating a new one
-  const oldBtn = table.parentElement.querySelector(".collapse-btn")
+  // Remove old collapse button
+  const oldBtn = table.parentElement.querySelector(".collapse-btn");
   if (oldBtn) oldBtn.remove();
 
   // Collapse button
@@ -381,26 +379,32 @@ function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 
 
     rows.slice(maxRows).forEach((row, i) => {
       if (expanded) {
-        row.classList.remove("hidden");
+        // reset style before animating
         row.style.display = table.classList.contains("card-view") ? "block" : "table-row";
+        row.classList.remove("show", "glow");
+        row.style.opacity = 0;
+        row.style.transform = "translateY(15px)";
 
-        // staggered fade-in
+        // staggered reveal
         setTimeout(() => {
           row.classList.add("show");
-          row.classList.remove("glow"); // reset glow
-          void row.offsetWidth;         // reflow
-          row.classList.add("glow");    // trigger glow
-        }, i * 120);
+          row.style.opacity = "";
+          row.style.transform = "";
+
+          // glow effect re-trigger
+          void row.offsetWidth;
+          row.classList.add("glow");
+        }, i * 150);
 
       } else {
-        // staggered fade-out
+        // staggered hide
         setTimeout(() => {
           row.classList.remove("show");
           setTimeout(() => {
             row.style.display = "none";
             row.classList.add("hidden");
           }, 400);
-        }, i * 120);
+        }, i * 150);
       }
     });
 
@@ -411,6 +415,70 @@ function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 
 }
 
 document.addEventListener("DOMContentLoaded", loadCalendar);
+
+
+
+
+
+
+function initTableHints() {
+  if (window.innerWidth > 768) return; // Only on mobile
+
+  const containers = document.querySelectorAll(".calendar-table");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const container = entry.target;
+
+      if (entry.isIntersecting && !container.classList.contains("hint-active")) {
+        container.classList.add("hint-active");
+
+        // Reuse or create the hint element
+        let hint = container.querySelector(".table-scroll-hint");
+        if (!hint) {
+          hint = document.createElement("div");
+          hint.className = "table-scroll-hint";
+          hint.textContent = "Swipe to see more ➡️";
+          container.style.position = "relative";
+          container.appendChild(hint);
+        }
+
+        // Animate in
+        hint.classList.add("show");
+
+        // Hide after 4s
+        setTimeout(() => hint.classList.remove("show"), 4000);
+
+        // Hide instantly if user scrolls horizontally
+        container.addEventListener("scroll", () => {
+          hint.classList.remove("show");
+        });
+      }
+
+      if (!entry.isIntersecting) {
+        container.classList.remove("hint-active");
+      }
+    });
+  }, { threshold: 0.3 });
+
+  containers.forEach(c => observer.observe(c));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTableHints();
+
+  const toggleBtn = document.getElementById("toggle-view");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      setTimeout(() => {
+        if (!document.querySelector(".calendar-table")?.classList.contains("card-mode")) {
+          initTableHints();
+        }
+      }, 200);
+    });
+  }
+});
+
 
 </script>
 
