@@ -133,7 +133,6 @@
 
   </main>
 
-  I like the wa
 
   <script>
 
@@ -317,7 +316,7 @@ function setupCollapsibles() {
 }
 
 /** Builds one collapsible table with stagger + glow */
-function makeTableCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 10 : 10)) {
+function makeTableCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 10 : 8)) {
   const table = document.getElementById(tableId);
   if (!table) return;
 

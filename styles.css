@@ -1236,14 +1236,14 @@ body.dark #blitz-leaderboard  tbody tr:nth-child(-n+3) td:last-child {
   will-change: opacity, transform;
 }
 
-/* Add checkmark before text */
+/* Add checkmark before text 
 .achievements-info li::before {
   content: "✔";
   position: absolute;
   left: 0;
   color: var(--accent);
   font-weight: bold;
-}
+}*/
 
 .achievements-info li strong {
   color: var(--accent);
@@ -1371,165 +1371,6 @@ mark {
 
 
 
-
-/* Calendar Notes Section */
-.calendar-notes {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: var(--bg-soft, #fafafa);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  font-family: 'Poppins', sans-serif;
-  color: var(--text, #333);
-}
-
-.calendar-notes h2 {
-  text-align: center;
-  font-size: 1.6rem;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-}
-
-.calendar-box {
-  margin-bottom: 1.8rem;
-  padding: 1rem 1.2rem;
-  background: var(--bg, #fff);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.calendar-box h3, .calendar-box h4 {
-  color: var(--accent);
-  margin-bottom: 0.8rem;
-}
-
-.calendar-box ul {
-  padding-left: 1.2rem;
-}
-
-
-.calendar-box li {
-  list-style: none;
-  margin: 0.5rem 0;
-  line-height: 1.6;
-}
-
-
-body.dark .calendar-notes {
-  background: #1e1e1e;
-  color: #ddd;
-}
-body.dark .calendar-box {
-  background: #2a2a2a;
-  border-color: #444;
-}
-body.dark .calendar-box h3,
-body.dark .calendar-box h4 {
-  color: #66c2ff;
-}
-
-
-/* 📱 Mobile Responsive Styles */
-@media (max-width: 768px) {
-  .calendar-notes {
-    padding: 1rem;
-  }
-
-  .calendar-notes h2 {
-    font-size: 1.3rem;
-    line-height: 1.4;
-  }
-
-  .calendar-box {
-    padding: 0.9rem 1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .calendar-box h3,
-  .calendar-box h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .calendar-box ul {
-    padding-left: 1rem;   /* tighter indentation */
-  }
-
-  .calendar-box li {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    padding-left: 0.3rem; /* keep bullets visible but compact */
-  }
-}
-
-@media (max-width: 480px) {
-  .calendar-notes h2 {
-    font-size: 1.15rem;
-  }
-
-  .calendar-box {
-    padding: 0.8rem 0.9rem;
-  }
-
-  .calendar-box li {
-    font-size: 0.9rem;
-    line-height: 1.6;
-  }
-}
-
-
-
-/* Default Table View */
-#calendar-table.table-view {
-  display: table;
-  width: 100%;
-}
-#calendar-table.table-view thead { display: table-header-group; }
-#calendar-table.table-view tbody { display: table-row-group; }
-#calendar-table.table-view tr { display: table-row; }
-#calendar-table.table-view td, 
-#calendar-table.table-view th { display: table-cell; }
-
-/* Card View */
-#calendar-table.card-view {
-  display: block;
-  width: 100%;
-  border-collapse: collapse;
-  border: none;
-}
-#calendar-table.card-view thead { display: none; }
-
-#calendar-table.card-view tbody { 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  width: 100%;
-
-}
-
-
-#calendar-table.card-view tr {
-  display: block;
-  margin: 0.8rem auto;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-soft);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-#calendar-table.card-view td {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.4rem 0;
-  border: none;
-}
-#calendar-table.card-view td::before {
-  content: attr(data-label);
-  font-weight: bold;
-  color: var(--accent);
-  margin-right: 0.5rem;
-}
 
 /* Toggle Button */
 .toggle-btn {
@@ -1725,42 +1566,60 @@ body.dark .tournaments-info .note { color: #aaa; }
   }
 }
 
+
 /* =================
    Calendar Tables
 ================= */
 
-/* Wrap the calendar in a scrollable container like ratings */
-.calendar-table {
+.calendar-wrapper {
   width: 100%;
-  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin: 1rem 0;
-  margin-bottom: 1.5rem;
+  margin: 1rem 0 1.5rem;
   position: relative;
 }
-.calendar-table.card-mode {
-  overflow-x: visible;
+
+
+.calendar-wrapper.table-mode {
+  overflow-x: auto;         
 }
 
-/* Default Table View */
+
+.calendar-wrapper.card-mode {
+  overflow-x: hidden;            /* disable scroll for card view */
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+/* ----- Table View ----- */
 #calendar-table.table-view {
   display: table;
   width: 100%;
-  min-width: 600px;  /* prevents squashing */
+  min-width: 600px;               /* forces scroll on mobile */
+  border-collapse: collapse;
   background: var(--bg-soft);
 }
 #calendar-table.table-view thead { display: table-header-group; }
 #calendar-table.table-view tbody { display: table-row-group; }
-#calendar-table.table-view tr { display: table-row; }
-#calendar-table.table-view td, 
-#calendar-table.table-view th { display: table-cell; }
+#calendar-table.table-view tr    { display: table-row; }
+#calendar-table.table-view td,
+#calendar-table.table-view th    { display: table-cell; padding: 1rem; border: 1px solid var(--border); }
+#calendar-table.table-view th {
+  background: var(--accent);
+  color: var(--bg);
+  text-align: center;
+  font-weight: 600;
+}
 
-/* Card View */
+/* ----- Card View ----- */
 #calendar-table.card-view {
   display: block;
   width: 100%;
-  min-width: 0;
+  min-width: unset;
+
   border: none;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
 }
 #calendar-table.card-view thead { display: none; }
 #calendar-table.card-view tbody {
@@ -1768,7 +1627,9 @@ body.dark .tournaments-info .note { color: #aaa; }
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
   width: 100%;
+  margin: 0 auto;
   padding: 0.5rem;
+  box-sizing: border-box;
 }
 #calendar-table.card-view tr {
   display: block;
@@ -1799,23 +1660,20 @@ body.dark .tournaments-info .note { color: #aaa; }
   content: attr(data-label);
   font-weight: 700;
   color: var(--accent);
+  margin-right: 0.5rem;
 }
-
-
 
 /* Glow highlight (fades away automatically) */
 .calendar-row.glow {
   background-color: var(--glow);
   animation: fadeGlow 1.5s ease forwards;
 }
-
-
 @keyframes fadeGlow {
   from { background-color: var(--glow); }
   to   { background-color: var(--bg-soft); }
 }
 
-/* Mobile Responsiveness */
+/* ----- Mobile Adjustments ----- */
 @media (max-width: 768px) {
   #calendar-table.card-view tr { width: 100%; }
   #calendar-table.card-view td {
@@ -1824,14 +1682,15 @@ body.dark .tournaments-info .note { color: #aaa; }
     align-items: flex-start;
     padding: 0.35rem 0;
   }
-  #calendar-table.card-view td::before {
-    margin-bottom: 0.2rem;
-  }
+  #calendar-table.card-view td::before { margin-bottom: 0.2rem; }
+}
+@media (max-width: 480px) {
+  #calendar-table.card-view td { font-size: 0.85rem; }
 }
 
-/* Swipe Hint for Calendar Table */
+/* Swipe Hint (only for table-view) */
 @media(max-width:768px){
-  .calendar-scroll-hint {
+  .table-scroll-hint {
     position: absolute;
     bottom: 5px;
     right: 10px;
@@ -1844,7 +1703,11 @@ body.dark .tournaments-info .note { color: #aaa; }
     opacity: 0;
     transition: opacity 0.5s ease;
   }
-  .calendar-scroll-hint.show { opacity: 1; }
+  .calendar-wrapper.table-mode .table-scroll-hint.show { 
+    opacity: 1; 
+  }
+
+
 }
 
 /* =================
@@ -1889,7 +1752,7 @@ body.dark .tournaments-info .note { color: #aaa; }
   line-height: 1.6;
 }
 
-/* Mobile */
+/* ----- Mobile ----- */
 @media (max-width: 768px) {
   .calendar-notes { padding: 1rem; }
   .calendar-notes h2 { font-size: 1.3rem; }
