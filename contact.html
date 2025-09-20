@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Fupre Chess Club</title>
 
-  
+
+    
   <!-- ICO for classic support -->
 <link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
 
@@ -19,13 +20,22 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
+
+
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("ercG3jhBRfq9jRzhb"); // ⚡ Replace with your EmailJS Public Key
+  })();
+</script>
+
 </head>
 <body>
   <header class="navbar">
     <div class="logo-container">
-      <img src="imgs/fupreChesslogo.png" alt="Fupre Chess League Logo" class="logo" />
+      <img src="imgs/fupreChesslogo.png" alt="Fupre Chess Club Logo" class="logo" />
       <span class="site-title">Fupre Chess Club</span>
     </div>
     <nav class="nav-links" id="nav-links">
@@ -34,7 +44,7 @@
       <a href="tournaments.html">Tournaments</a>
       <a href="matches.html">Matches</a>
       <a href="rulebook.html">Rulebook</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="active">Contact</a>
     </nav>
     <div class="nav-actions">
       <button id="dark-toggle" class="dark-toggle">🌓</button>
@@ -42,19 +52,184 @@
     </div>
   </header>
 
-  <main class="main-content">
-    <h1>Contact Us</h1>
-    <p>Have a question, suggestion, or concern? Reach out to us below.</p>
+  <main class="contact-page">
+    <h2>Contact Us</h2>
+    <p class="club-quote">♟️ “Every move counts — let’s connect and grow together.”</p>
 
-    <form style="max-width: 600px; margin: 2rem auto; display: flex; flex-direction: column; gap: 1rem;">
-      <input type="text" placeholder="Your Name" required style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc;">
-      <input type="email" placeholder="Your Email" required style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc;">
-      <textarea rows="5" placeholder="Your Message" required style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc;"></textarea>
-      <button type="submit" style="padding: 0.75rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
+    <div class="contact-grid">
+      <!-- Contact Info Cards -->
+      <div class="contact-card">📞 <strong>Phone:</strong> +234 810 000 1111</div>
+      <div class="contact-card">✉️ <strong>Email:</strong> fuprechessclub@gmail.com</div>
+      <div class="contact-card">📍 <strong>Location:</strong> FUPRE Campus, Delta State</div>
+    </div>
+
+    <!-- Contact Form -->
+    <form id="contactForm" class="contact-form">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+
+
+      <button type="submit" id="sendBtn">
+        <span class="btn-text">Send Message</span>
+        <span class="spinner" style="display:none;"></span>
+      </button>
     </form>
+
+    
+      <p id="formFeedback" class="feedback"></p>
+
+    <!-- Map -->
+    <div class="map-container">
+      <iframe 
+        src="https://maps.google.com/maps?q=Federal%20University%20of%20Petroleum%20Resources%20Effurun&z=16&output=embed" 
+        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"   referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <!-- Socials + Quick Join -->
+    <div class="socials">
+      <!-- <a href="
+https://chat.whatsapp.com/48ZsqGDi1e8LCOyEpaTyOW?mode=ems_copy_h_t" target=_blank class="social-icon">💬 WhatsApp</a> -->
+      <a href="#" class="social-icon">▶️ YouTube</a>
+      <a href="#" class="social-icon">🎵 TikTok</a>
+      <button class="join-btn" onclick="window.open('https://chat.whatsapp.com/48ZsqGDi1e8LCOyEpaTyOW?mode=ems_copy_h_t' ,'_blank')">Join Club WhatsApp Group</button>
+    </div>
+
+    <!-- Club Captains -->
+    <h3>Meet Our Captains</h3>
+    <div class="captains">
+      <div class="captain-card">
+        <img src="imgs/fupreChesslogo.png" alt="Club Captain">
+        <h4>Agbakoba Alexander</h4>
+        <p>Marine Engineering • 500L</p>
+      </div>
+      <div class="captain-card">
+        <img src="imgs/fupreChesslogo.png" alt="Assistant Captain">
+        <h4>Clarke Tejiri</h4>
+        <p>Computer Science • 300L</p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-item">
+        <button class="faq-question">How do I join the club? <span>+</span></button>
+        <div class="faq-answer">Fill the registration form at any of our events or contact us directly.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do I need prior chess experience? <span>+</span></button>
+        <div class="faq-answer">No, all skill levels are welcome!</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">When do we meet? <span>+</span></button>
+        <div class="faq-answer">Weekly training sessions and monthly tournaments on campus.</div>
+      </div>
+    </section>
   </main>
+
+
+
+
+
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form     = document.getElementById("contactForm");
+  const feedback = document.getElementById("formFeedback");
+  const sendBtn  = document.getElementById("sendBtn");
+  const btnText  = sendBtn.querySelector(".btn-text");
+  const spinner  = sendBtn.querySelector(".spinner");
+
+  // ✅ Set your EmailJS IDs here
+  const SERVICE_ID             = "service_cmzxm2m";
+  const CONTACT_TEMPLATE_ID    = "template_y5ung5c";
+  const AUTOREPLY_TEMPLATE_ID  = ""; // e.g. "template_autoreply" (leave empty to skip)
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Clear previous feedback color
+    feedback.style.color = "";
+    feedback.textContent = "";
+
+    const name    = document.getElementById("name").value.trim();
+    const email   = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    // Basic validation
+    if (!name) {
+      feedback.textContent = "⚠️ Oops, please enter your name.";
+      feedback.style.color = "orange";
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      feedback.textContent = "⚠️ Oops, please enter a valid email.";
+      feedback.style.color = "orange";
+      return;
+    }
+    if (!message) {
+      feedback.textContent = "⚠️ Please enter a message.";
+      feedback.style.color = "orange";
+      return;
+    }
+
+    // Disable button + show spinner
+    sendBtn.disabled = true;
+    sendBtn.setAttribute("aria-busy", "true");
+    btnText.textContent = "Sending...";
+    spinner.style.display = "inline-block";
+
+    const params = {
+      from_name:   name,
+      from_email:  email,
+      message:     message,
+    };
+
+    try {
+      // Send main message to club inbox
+      await emailjs.send(SERVICE_ID, CONTACT_TEMPLATE_ID, params);
+
+      // Optional: Auto-reply to user (only runs if you set an ID)
+      if (AUTOREPLY_TEMPLATE_ID) {
+        await emailjs.send(SERVICE_ID, AUTOREPLY_TEMPLATE_ID, {
+          to_name:  name,
+          to_email: email
+        });
+      }
+
+      feedback.textContent = "✅ Message sent! We'll get back to you soon.";
+      feedback.style.color = "limegreen";
+      form.reset();
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      feedback.textContent = "❌ Oops, something went wrong. Try again later.";
+      feedback.style.color = "red";
+    } finally {
+      // ✅ Always reset button + spinner
+      sendBtn.disabled = false;
+      sendBtn.removeAttribute("aria-busy");
+      btnText.textContent = "Send Message";
+      spinner.style.display = "none";
+    }
+  });
+
+  // FAQ accordion (unchanged)
+  document.querySelectorAll(".faq-question").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const item = btn.parentElement;
+      item.classList.toggle("active");
+      btn.querySelector("span").textContent = item.classList.contains("active") ? "−" : "+";
+    });
+  });
+});
+</script>
+
+
 </body>
 </html>
+
 
 
 
