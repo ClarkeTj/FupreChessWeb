@@ -1,0 +1,49 @@
+{
+  "highlights": [
+    {
+      "type": "image",
+      "src": "imgs/fupreChesslogo.png",
+      "title": "FCC Rapid Final – Trophy Moment",
+      "date": "2025-07-28",
+      "category": "photos",
+      "Month": "July",
+      "year": "2025"
+    },
+    {
+      "type": "video",
+      "src": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "title": "Lightning Blitz Highlights",
+      "date": "2025-07-18",
+      "category": "videos",
+      "Month": "July",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "imgs/chess pic.jpg",
+      "title": "Grand Rapid – Podium Finishers",
+      "date": "2025-05-30",
+      "category": "photos",
+      "Month": "May",
+      "year": "2025"
+    },
+    {
+      "type": "video",
+      "src": "https://youtu.be/5qap5aO4i9A",
+      "title": "League (FCL) Kickoff Ceremony",
+      "date": "2024-09-26",
+      "category": "videos",
+      "Month": "September",
+      "year": "2024"
+    },
+    {
+      "type": "image",
+      "src": "imgs/chess pic2.jpg",
+      "title": "Club Training Meetup",
+      "date": "2024-03-10",
+      "category": "photos",
+      "Month": "March",
+      "year": "2024"
+    }
+  ]
+}

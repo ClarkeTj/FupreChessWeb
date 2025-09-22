@@ -1,0 +1,25 @@
+{
+  "systems": [
+    {
+      "id": "swiss",
+      "name": "Swiss System",
+      "minRounds": 3,
+      "maxRounds": 9,
+      "rules": {
+        "avoidRematches": true,
+        "sortByRating": true,
+        "pairHighVsLow": true,
+        "colorBalance": true
+      }
+    },
+    {
+      "id": "roundrobin",
+      "name": "Round Robin",
+      "roundsPerPlayer": "N-1",
+      "rules": {
+        "everyonePlaysEveryone": true,
+        "colorBalance": true
+      }
+    }
+  ]
+}

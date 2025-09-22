@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Highlights | Fupre Chess Club</title>
+
+
+  <!-- ICO for classic support -->
+<link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
+
+<!-- PNG for modern browsers -->
+<link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="styles.css"/>
+
+  <script defer src="script.js"></script>
+  <script defer src="highlights.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="imgs/fupreChesslogo.png" alt="Fupre Chess Club Logo" class="logo"/>
+      <span class="site-title">Fupre Chess Club</span>
+    </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="highlights.html">Highlights</a>
+      <a href="ratings.html">Ratings</a>
+      <a href="matches.html">Matches</a>
+     <a href="tournaments.html">Tournaments</a>
+     <a href="pairings.html">Pairings</a>
+      <a href="rulebook.html">Rulebook</a>
+      <a href="contact.html">Contact</a>
+
+    </nav>
+    <div class="nav-actions">
+      <button id="dark-toggle" class="dark-toggle">🌓</button>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <main class="highlights-main">
+    <!-- Featured (auto from most recent) -->
+    <section id="featured" class="featured" aria-label="Featured highlight"></section>
+
+    <!-- Toolbar -->
+    <section class="toolbar" aria-label="Filters and slideshow">
+      <div class="filters" role="tablist" aria-label="Highlights filters">
+        <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-btn" data-filter="photos" role="tab">Photos</button>
+        <button class="filter-btn" data-filter="videos" role="tab">Videos</button>
+        <!-- <button class="filter-btn" data-filter="month:July" role="tab">Month</button> -->
+        <button class="filter-btn" data-filter="year:2025" role="tab">2025</button>
+        <button class="filter-btn" data-filter="year:2024" role="tab">2024</button>
+      </div>
+      <button id="slideshowBtn" class="slideshow-btn" aria-label="Play slideshow">▶ Play Slideshow</button>
+    </section>
+
+    <!-- Masonry/Grid -->
+    <section id="grid" class="masonry" aria-live="polite"></section>
+  </main>
+
+  <!-- Lightbox / Viewer -->
+  <div id="lightbox2" class="lightbox2" aria-modal="true" role="dialog" aria-label="Media viewer" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Close viewer">×</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <div class="lb-stage" id="lbStage" tabindex="0"></div>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+  </div>
+
+  <!-- (Optional) Footer -->
+</body>
+</html>

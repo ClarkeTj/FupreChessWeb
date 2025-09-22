@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <title>Fupre Chess Club — Pairings & Standings</title>
+
+  
+  <!-- ICO for classic support -->
+<link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
+
+<!-- PNG for modern browsers -->
+<link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="styles.css" /> 
+  <link rel="stylesheet" href="pairings.css" />
+  <script defer src="script.js"></script>
+
+</head>
+
+<body class="pairings-page">  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="imgs/fupreChesslogo.png" alt="Fupre Chess League Logo" class="logo" />
+
+      <div class="site-title">
+  <span class="logo-main">Fupre</span>
+  <span class="logo-glow">Chess Club</span>
+</div>
+
+    </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="highlights.html">Highlights</a>
+      <a href="ratings.html">Ratings</a>
+      <a href="matches.html">Matches</a>
+     <a href="tournaments.html">Tournaments</a>
+     <a href="pairings.html">Pairings</a>
+      <a href="rulebook.html">Rulebook</a>
+      <a href="contact.html">Contact</a>
+
+    </nav>
+    <div class="nav-actions">
+      <button id="dark-toggle" class="dark-toggle">🌓</button>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+
+  <main class="container">
+    <section id="active-tournaments" aria-labelledby="active-title">
+      <h2 id="active-title">Active Tournaments</h2>
+      <div id="active-grid" class="card-grid" role="list"></div>
+    </section>
+
+    <section id="completed-tournaments" aria-labelledby="completed-title">
+      <h2 id="completed-title">Completed Tournaments</h2>
+      <div id="completed-grid" class="card-grid" role="list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <!-- <small>
+      Data is loaded from JSON files in this repository. Update
+      <code>active_tournaments.json</code> and <code>past_tournaments.json</code> to reflect new
+      results. Pairing rules are in <code>pairings.json</code>.
+    </small> -->
+  </footer>
+
+  <script src="pairings.js" defer></script>
+</body>
+</html>

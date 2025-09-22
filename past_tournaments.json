@@ -1,0 +1,34 @@
+{
+  "completedTournaments": [
+    {
+      "id": "rapid2024",
+      "name": "Rapid Tournament 2024",
+      "finalStandings": [
+        { "name": "Hasel", "points": 5 },
+        { "name": "Alex", "points": 3 },
+        { "name": "Destiny", "points": 2.5 },
+        { "name": "TJ", "points": 1.5 },
+        { "name": "Martins", "points": 1.5 },
+        { "name": "Noah", "points": 1.5 },
+        { "name": "Jesse", "points": 1.5 },
+        { "name": "Fortune", "points": 1.5 },
+        { "name": "Chris", "points": 1.5 }
+      ]
+    },
+    {
+      "id": "rapid2024",
+      "name": "Rapid Tournament 2024",
+      "finalStandings": [
+        { "name": "Hasel", "points": 5 },
+        { "name": "Alex", "points": 3 },
+        { "name": "Destiny", "points": 2.5 },
+        { "name": "TJ", "points": 1.5 },
+        { "name": "Martins", "points": 1.5 },
+        { "name": "Noah", "points": 1.5 },
+        { "name": "Jesse", "points": 1.5 },
+        { "name": "Fortune", "points": 1.5 },
+        { "name": "Chris", "points": 1.5 }
+      ]
+    }
+  ]
+}

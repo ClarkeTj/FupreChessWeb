@@ -6,41 +6,40 @@
   <title>Fupre Chess Club</title>
 
   <!-- ICO for classic support -->
-<link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
-
-<!-- PNG for modern browsers -->
-<link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
-
+  <link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
+  <!-- PNG for modern browsers -->
+  <link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
 </head>
+
 <body>
   <!-- Sticky Navbar -->
   <header class="navbar">
     <div class="logo-container">
       <img src="imgs/fupreChesslogo.png" alt="Fupre Chess League Logo" class="logo" />
-
       <div class="site-title">
-  <span class="logo-main">Fupre</span>
-  <span class="logo-glow">Chess Club</span>
-</div>
-
+        <span class="logo-main">Fupre</span>
+        <span class="logo-glow">Chess Club</span>
+      </div>
     </div>
+
     <nav class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
+      <a href="highlights.html">Highlights</a>
       <a href="ratings.html">Ratings</a>
-      <a href="tournaments.html">Tournaments</a>
       <a href="matches.html">Matches</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="pairings.html">Pairings</a>
       <a href="rulebook.html">Rulebook</a>
       <a href="contact.html">Contact</a>
     </nav>
+
     <div class="nav-actions">
       <button id="dark-toggle" class="dark-toggle">🌓</button>
       <button class="hamburger" id="hamburger">&#9776;</button>
@@ -48,15 +47,14 @@
   </header>
 
   <main class="main-content">
-
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
       <h1>Welcome to <span>Fupre Chess Club</span></h1>
       <p style="color: white;">Sharpen your mind, compete with the best, and be part of our growing chess community.</p>
       <a href="#events" class="btn bounce">See Upcoming Events</a>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section class="about">
       <h2>About Us</h2>
       <p>
@@ -64,35 +62,34 @@
         We host regular tournaments, training sessions, and social games to promote the love of chess.
       </p>
     </section>
-    <!-- Events Section -->
+
+    <!-- Events -->
     <section class="events" id="events">
       <h2>Upcoming Events</h2>
       <div class="cards">
         <div class="card">
-          <h3>Club Tournament</h3>
+          <h3>Lightning Blitz</h3>
           <p>Date: September 20, 2025</p>
-          <a href="#" class="btn">Register</a>
+          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Register</a>
         </div>
         <div class="card">
           <h3>Training Session</h3>
           <p>Date: October 5, 2025</p>
-          <a href="#" class="btn">Learn More</a>
+          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Sign Up</a>
         </div>
         <div class="card">
-          <h3>Friendly Match</h3>
+          <h3>Grand Rapid</h3>
           <p>Date: November 1, 2025</p>
-          <a href="#" class="btn">Join</a>
+          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Sign Up</a>
         </div>
       </div>
     </section>
 
-
-
-    
-    <!-- Countdown to Next Tournament -->
+    <!-- Countdown -->
     <section class="countdown-section">
       <h2>⏳ Countdown to Next Tournament</h2>
       <h3 id="event-title"></h3>
+
       <div class="countdown-container">
         <div class="flip-box"><span id="days">00</span><label>Days</label></div>
         <div class="flip-box"><span id="hours">00</span><label>Hours</label></div>
@@ -100,9 +97,7 @@
         <div class="flip-box"><span id="seconds">00</span><label>Seconds</label></div>
       </div>
 
-      
       <p id="local-time"></p>
-
 
       <!-- Tournament Live Banner -->
       <div id="tournamentStatus" class="tourney-banner is-hidden" role="status" aria-live="polite">
@@ -119,14 +114,9 @@
         </div>
         <button id="dismissBanner" class="tourney-close" aria-label="Dismiss banner">×</button>
       </div>
-      
-      <p id="local-time"></p>
     </section>
 
-
-
-
-    <!-- Chess Quote of the Day -->
+    <!-- Chess Quote -->
     <section class="quote-section">
       <h2>♟️ Chess Quote of the Day</h2>
       <blockquote id="quote-box" class="quote-box">
@@ -134,39 +124,33 @@
         <span id="quote-author" class="quote-author">– Emanuel Lasker</span>
       </blockquote>
 
-      <button onclick="generateQuote()" class="quote-btn">New Quote</button>
+      <button id="next-quote" class="quote-btn" type="button">New Quote</button>
       <audio id="move-sound" src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3" preload="auto"></audio>
     </section>
-
   </main>
 
+  <!-- Gallery -->
+  <section class="gallery">
+    <h2>📸 Club Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="imgs/chess pic.jpg" alt="Tournament 1 " loading="lazy"></div>
+      <div class="gallery-item"><img src="imgs/chesspic2.jpg" alt="Training Session" loading="lazy"></div>
+      <div class="gallery-item"><img src="imgs/chesspic3.jpg" alt="Friendly Match" loading="lazy"></div>
+      <div class="gallery-item"><img src="imgs/chesspic4.jpg" alt="Club Members" loading="lazy"></div>
+      <div class="gallery-item"><img src="imgs/chesspic5.jpg" alt="Chess Boards" loading="lazy"></div>
+      <div class="gallery-item"><img src="imgs/fupreChesslogo.png" alt="Winners Ceremony" loading="lazy"></div>
+    </div>
+  </section>
 
-  <!-- Gallery Section -->
-<section class="gallery">
-  <h2>📸 Club Gallery</h2>
-  <div class="gallery-grid">
-    <div class="gallery-item"><img src="imgs/chess pic.jpg" alt="Tournament 1 " loading="lazy"></div>
-    <div class="gallery-item"><img src="imgs/chesspic2.jpg" alt="Training Session" loading="lazy"></div>
-    <div class="gallery-item"><img src="imgs/chesspic3.jpg" alt="Friendly Match" loading="lazy"></div>
-    <div class="gallery-item"><img src="imgs/chesspic4.jpg" alt="Club Members" loading="lazy"></div>
-    <div class="gallery-item"><img src="imgs/chesspic5.jpg" alt="Chess Boards" loading="lazy"></div>
-    <div class="gallery-item"><img src="imgs/fupreChesslogo.png" alt="Winners Ceremony" loading="lazy"></div>
-  </div>
-</section>
-
-
-<!-- Lightbox (hidden by default) -->
-<div id="lightbox" class="lightbox">
-  <span class="close-btn">&times;</span>
-  <span class="prev-btn">&#10094;</span>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded view">
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-btn">&times;</span>
+    <span class="prev-btn">&#10094;</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded view">
     <span class="next-btn">&#10095;</span>
-</div>
+  </div>
 
-
-
-
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-about">
@@ -176,26 +160,25 @@
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
+          <li><a href="highlights.html">Highlights</a></li>
           <li><a href="ratings.html">Ratings</a></li>
-          <li><a href="tournaments.html">Tournaments</a></li>
           <li><a href="matches.html">Matches</a></li>
-          <li><a href="rulebook.html">Rulebook</a></li>
+          <li><a href="tournaments.html">Tournaments</a></li>
         </ul>
       </div>
       <div class="footer-contact">
         <h4>Contact Us</h4>
         <p>Email: <a href="mailto:fuprechessclub@gmail.com">fuprechessclub@gmail.com</a></p>
         <p>Phone: +234 800 000 0000</p>
-        <div class="social-icons">
-          <a href="#"><img src="imgs/facebook-icon.png" alt="Facebook"></a>
-          <a href="#"><img src="imgs/twitter-icon.png" alt="Twitter"></a>
-          <a href="#"><img src="imgs/instagram-icon.png" alt="Instagram"></a>
+        <div class="socials">
+          <a href="https://chat.whatsapp.com/48ZsqGDi1e8LCOyEpaTyOW?mode=ems_copy_h_t" target=_blank class="social-icon">💬 WhatsApp</a>
+          <a href="#" class="social-icon">▶️ YouTube</a>
+          <a href="#" class="social-icon">🎵 TikTok</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-        <p class="footer-note">&copy; Chess move sound courtesy of Chess.com</p>
-
+      <p class="footer-note">&copy; Chess move sound courtesy of Chess.com</p>
       <p>&copy; 2025 Fupre Chess Club. All rights reserved.</p>
     </div>
   </footer>
