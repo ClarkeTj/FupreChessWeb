@@ -12,13 +12,13 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Merriweather:wght@700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script defer src="assets/js/script.js"></script>
 </head>
 <body>
   <header class="navbar">
     <div class="logo-container">
-      <img src="imgs/fupreChesslogo.png" alt="Fupre Chess Club Logo" class="logo" />
+      <img src="assets/imgs/fupreChesslogo.png" alt="Fupre Chess Club Logo" class="logo" />
       <span class="site-title">Fupre Chess Club</span>
     </div>
     <nav class="nav-links" id="nav-links">
@@ -42,40 +42,6 @@
     <p>Review the Fupre Chess Club official rules and conduct guidelines.</p>
     <div id="rulesGrid" class="rules-grid"></div>
   </main>
-
-  <script>
-  async function loadRules() {
-    const res = await fetch("rulebook.json");
-    const data = await res.json();
-    const grid = document.getElementById("rulesGrid");
-
-    data.rules.forEach(cat => {
-      const card = document.createElement("div");
-      card.className = "rule-card";
-      card.style.borderTop = `4px solid ${cat.color}`;
-
-      card.innerHTML = `
-        <div class="rule-header">
-          <span>${cat.icon} ${cat.category}</span>
-          <span class="toggle">+</span>
-        </div>
-        <div class="rule-items">
-          <ol>
-            ${cat.items.map(item => `<li>${item}</li>`).join("")}
-          </ol>
-        </div>
-      `;
-
-      card.querySelector(".rule-header").addEventListener("click", () => {
-        card.classList.toggle("active");
-        card.querySelector(".toggle").textContent =
-          card.classList.contains("active") ? "−" : "+";
-      });
-
-      grid.appendChild(card);
-    });
-  }
-  document.addEventListener("DOMContentLoaded", loadRules);
-  </script>
+<script src="assets/js/rulebook.js"></script>
 </body>
 </html>

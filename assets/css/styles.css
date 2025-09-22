@@ -319,7 +319,7 @@ body.dark .logo-glow {
   text-align: center;
   padding: 2rem;
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('imgs/fupreChesslogo.png') no-repeat center center;
+              url('../imgs/fupreChesslogo.png') no-repeat center center;
   background-size: cover;
   color: var(--text);
 }
@@ -330,7 +330,7 @@ body.dark .logo-glow {
     min-height: 70vh;
     padding: 1rem;
     background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-      url("imgs/fupreChesslogo.png") no-repeat center center;
+      url("../imgs/fupreChesslogo.png") no-repeat center center;
     background-size: contain;  /* prevent logo from cutting off */
     background-color: #c5c7c8; /* fallback */
   }
@@ -1447,7 +1447,7 @@ mark {
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.3px;
-  word-spacing: 1px;           /* a touch more breathing room */
+  word-spacing: 1px;          
   display: flex;
   align-items: center;
 
@@ -1546,7 +1546,7 @@ body.dark .tournaments-info .note { color: #aaa; }
   .tournaments-info li,
   .proposal-box li {
     display: block;          /* stack text instead of flex row */
-    padding: 0.6rem 0.4rem;  /* breathing space */
+    padding: 0.6rem 0.4rem; 
     font-size: 0.9rem;
     line-height: 1.7;
     text-align: left;
@@ -2289,7 +2289,6 @@ body.dark .tournaments-info .note { color: #aaa; }
   max-width: 1000px;
   margin: 2rem auto;
   text-align: center;
-  background-image: url('imgs/chessboard-pattern.png'); /* subtle watermark */
   background-size: cover;
   background-blend-mode: overlay;
   padding: 1rem;

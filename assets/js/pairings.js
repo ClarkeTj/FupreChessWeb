@@ -298,7 +298,7 @@ function renderHistoricalRounds(tournament, cardBody) {
 /* ---------- Suggested Next Round ---------- */
 function renderSuggestedNextRound(tournament, systemRules, cardBody) {
   const sysId = tournament.pairingSystemId;
-  cardBody.appendChild(el('div', 'round-header', `Suggested Round ${(tournament.rounds?.length || 0) + 1} Pairings`));
+  cardBody.appendChild(el('div', 'round-header', `Next Round ${(tournament.rounds?.length || 0) + 1} Pairings`));
 
   let pairs = [];
   if (sysId === 'roundrobin') {
@@ -437,9 +437,9 @@ function renderCompletedTournamentCard(t) {
 
   try {
     const [activeData, pastData, systemsData] = await Promise.all([
-      loadJSON('active_tournaments.json'),
-      loadJSON('past_tournaments.json'),
-      loadJSON('pairings.json'),
+      loadJSON('data/active_tournaments.json'),
+      loadJSON('data/past_tournaments.json'),
+      loadJSON('data/pairings.json'),
     ]);
 
     const pairingSystems = systemsData?.systems || [];

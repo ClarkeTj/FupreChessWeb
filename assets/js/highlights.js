@@ -41,7 +41,7 @@
 
   async function loadData(){
     try{
-      const res = await fetch('highlights.json?nocache=' + Date.now());
+      const res = await fetch('data/highlights.json?nocache=' + Date.now());
       const data = await res.json();
       allItems = (data.highlights || []).map((it, i) => ({
         ...it,

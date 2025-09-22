@@ -2,7 +2,7 @@
   "highlights": [
     {
       "type": "image",
-      "src": "imgs/fupreChesslogo.png",
+      "src": "assets/imgs/fupreChesslogo.png",
       "title": "FCC Rapid Final – Trophy Moment",
       "date": "2025-07-28",
       "category": "photos",
@@ -20,7 +20,25 @@
     },
     {
       "type": "image",
-      "src": "imgs/chess pic.jpg",
+      "src": "assets/imgs/chesspic3.jpg",
+      "title": "Grand Rapid – Podium Finishers",
+      "date": "2025-05-30",
+      "category": "photos",
+      "Month": "May",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/chesspic3.jpg",
+      "title": "Grand Rapid – Podium Finishers",
+      "date": "2025-05-30",
+      "category": "photos",
+      "Month": "May",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/chesspic3.jpg",
       "title": "Grand Rapid – Podium Finishers",
       "date": "2025-05-30",
       "category": "photos",
@@ -38,7 +56,7 @@
     },
     {
       "type": "image",
-      "src": "imgs/chess pic2.jpg",
+      "src": "assets/imgs/chesspic2.jpg",
       "title": "Club Training Meetup",
       "date": "2024-03-10",
       "category": "photos",

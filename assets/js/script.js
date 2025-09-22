@@ -1,8 +1,5 @@
 /* =========================================
-   Fupre Chess Club — Site Script (Hardened)
-   - Quotes: no repeat last 3, timer resets on click
-   - Global shim for legacy onclick="generateQuote()"
-   - All widgets init only if their DOM exists
+   Fupre Chess Club — Site Script 
 ========================================= */
 
 /* ---------- Global shim (legacy HTML) ---------- */
@@ -73,14 +70,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ---------- Quotes (no-repeat last 3) ---------- */
+
+/* ------------------------------
+   Quotes 
+------------------------------ */
 (function initQuotes() {
   const quoteBox = document.getElementById("quote-box");
-  if (!quoteBox) return;
+  if (!quoteBox) return; // this page has no quotes
 
-  // Accept either the explicit id or existing .quote-btn
+  // Allow either #next-quote OR an existing .quote-btn
   const nextBtn = document.querySelector("#next-quote, .quote-btn");
   const moveSound = document.getElementById("move-sound");
+
+  // Gate audio until the user interacts with the page at least once
+  let userInteracted = false;
+  ["click", "keydown", "touchstart"].forEach(ev => {
+    document.addEventListener(ev, () => {
+      userInteracted = true;
+      // if you started with muted audio, you can unmute here if desired:
+      // if (moveSound) moveSound.muted = false;
+    }, { once: true });
+  });
 
   const QUOTES = [
     { text: "When you see a good move, look for a better one.", author: "Emanuel Lasker" },
@@ -100,66 +110,99 @@ document.addEventListener("DOMContentLoaded", () => {
     { text: "The Chess speaks for itself.", author: "Hans Niemann" },
     { text: "Every chess master was once a beginner.", author: "Irving Chernev" },
     { text: "The blunders are all there on the board, waiting to be made.", author: "Savielly Tartakower" },
-    { text: "Play the opening like a book, the middlegame like a magician, and the endgame like a machine.", author: "Rudolf Spielmann" },
+    { text: "Play the opening like a book, the middlegame like a magician, and the endgame like a machine.", author: "Rudolf Spielmann" }
   ];
 
   const INTERVAL_MS = 10000;
   const RECENT_N = 3;
-  let recent = [];
+  let recent = [];      // last N indices
   let timerId = null;
 
   function playMove() {
-    try { moveSound?.play?.(); } catch (_) {}
+    // Only attempt sound after a user gesture, and swallow any promise rejection
+    if (!userInteracted || !moveSound || !moveSound.play) return;
+    const p = moveSound.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
   }
 
   function pickIndex() {
     if (QUOTES.length <= RECENT_N) {
+      // Not enough unique quotes: only avoid immediate last one
       const last = recent[recent.length - 1];
       let i;
-      do { i = Math.floor(Math.random() * QUOTES.length); } while (QUOTES.length > 1 && i === last);
+      do { i = Math.floor(Math.random() * QUOTES.length); }
+      while (QUOTES.length > 1 && i === last);
       return i;
     }
     let i, guard = 0;
-    do { i = Math.floor(Math.random() * QUOTES.length); guard++; }
-    while (recent.includes(i) && guard < 50);
+    do {
+      i = Math.floor(Math.random() * QUOTES.length);
+      guard++;
+    } while (recent.includes(i) && guard < 50);
     return i;
   }
 
-  function render(i) {
-    const q = QUOTES[i];
+  function render(index, { withSound = false } = {}) {
+    const q = QUOTES[index];
     if (!q) return;
 
-    playMove();
+    if (withSound) playMove();
+
+    // restart fade
     quoteBox.classList.remove("fade");
-    void quoteBox.offsetWidth;
+    void quoteBox.offsetWidth; // force reflow
     quoteBox.classList.add("fade");
+
     quoteBox.innerHTML = `“${q.text}”<br><span class="quote-author">– ${q.author}</span>`;
 
-    recent.push(i);
+    recent.push(index);
     if (recent.length > RECENT_N) recent.shift();
   }
 
-  function nextQuote() { render(pickIndex()); }
-  function stopRotation() { if (timerId) { clearInterval(timerId); timerId = null; } }
-  function startRotation() { stopRotation(); timerId = setInterval(nextQuote, INTERVAL_MS); }
-  function resetRotation() { startRotation(); }
+  function nextQuote({ manual = false } = {}) {
+    // only play sound when the user triggers the change
+    render(pickIndex(), { withSound: manual });
+  }
 
-  // Expose a safe hook for the global shim
-  window.__quotesNext = function () { nextQuote(); resetRotation(); };
+  function startRotation() {
+    stopRotation();
+    timerId = setInterval(() => nextQuote({ manual: false }), INTERVAL_MS);
+  }
+  function stopRotation() {
+    if (timerId) { clearInterval(timerId); timerId = null; }
+  }
+  function resetRotation() {
+    startRotation(); // clears then restarts to full 10s
+  }
 
-  // first paint + loop
-  nextQuote();
+  // initial quote (silent) + start loop
+  nextQuote({ manual: false });
   startRotation();
 
+  // manual next (button) + reset timer
   nextBtn?.addEventListener("click", (e) => {
     e.preventDefault();
-    window.__quotesNext();
+    userInteracted = true;
+    nextQuote({ manual: true });
+    resetRotation();
   });
 
+  // If your HTML still has onclick="generateQuote()", expose a safe shim
+  window.generateQuote = function () {
+    userInteracted = true;
+    nextQuote({ manual: true });
+    resetRotation();
+  };
+
+  // pause when tab hidden, resume fresh interval when visible
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopRotation(); else resetRotation();
+    if (document.hidden) stopRotation();
+    else resetRotation();
   });
 })();
+
+
+
 
 /* ---------- Countdown (only if DOM exists) ---------- */
 let countdownTimerId;
@@ -176,7 +219,7 @@ function countdownDomReady() {
 async function loadCountdown() {
   if (!countdownDomReady()) return;
   try {
-    const res = await fetch("countdown.json?nocache=" + Date.now());
+    const res = await fetch("data/countdown.json?nocache=" + Date.now());
     const cfg = await res.json();
 
     const titleEl = document.getElementById("event-title");
