@@ -277,3 +277,8 @@
   .pairings-page .badge { font-size: .7rem; padding: .2rem .45rem; }
   .pairings-page .toggle-btn { padding: .45rem .6rem; border-radius: 8px; }
 }
+
+
+.pairings-page .nav-links a{
+  text-decoration: none;
+}

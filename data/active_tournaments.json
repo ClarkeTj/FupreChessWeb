@@ -6,7 +6,7 @@
       "timeControl": "5+0",
       "pairingSystemId": "swiss",
       "players": [
-        { "id": 1, "name": "TJ", "rating": 1700, "wins": 1, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 1, "name": "ClarkeTJ", "rating": 1700, "wins": 1, "losses": 0, "draws": 0, "points": 0 },
         { "id": 2, "name": "Chris", "rating": 1600, "wins": 0, "losses": 0, "draws": 3, "points": 0 },
         { "id": 3, "name": "Godbless", "rating": 1650, "wins": 2, "losses": 0, "draws": 0, "points": 0 },
         { "id": 4, "name": "Hasel", "rating": 1500, "wins": 2, "losses": 0, "draws": 0, "points": 0 },
@@ -61,10 +61,13 @@
       "timeControl": "10+0",
       "pairingSystemId": "roundrobin",
       "players": [
-        { "id": 11, "name": "Karo", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 12, "name": "Daniel", "rating": 1550, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Joy", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 14, "name": "Emeka", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
+        { "id": 11, "name": "Alex", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 12, "name": "Destiny", "rating": 1550, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 13, "name": "Martins", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 13, "name": "Jesse", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 13, "name": "Hasel", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 13, "name": "Godbless", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 14, "name": "ClarkeTJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
       ],
       "rounds": []
     },
@@ -80,7 +83,7 @@
         { "id": 13, "name": "Jesse", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
         { "id": 13, "name": "Hasel", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
         { "id": 13, "name": "Godbless", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 14, "name": "TJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
+        { "id": 14, "name": "ClarkeTJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
       ],
       "rounds": []
     },
@@ -97,7 +100,7 @@
         { "id": 13, "name": "Jesse", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
         { "id": 13, "name": "Hasel", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
         { "id": 13, "name": "Godbless", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 14, "name": "TJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
+        { "id": 14, "name": "ClarkeTJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
       ],
       "rounds": []
     }

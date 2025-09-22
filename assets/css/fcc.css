@@ -1,0 +1,325 @@
+/* fcc.css — All rules scoped with .fcc-* to avoid clashes
+   Inherits the site's theme tokens from styles.css:
+   :root/.dark provide --bg, --text, --accent, --glow, --bg-soft, --border  */
+
+/* ---------- Page Theme Mapping (inherits global light/dark) ---------- */
+.fcc-wrapper{
+  --fcc-bg:     var(--bg);
+  --fcc-text:   var(--text);
+  --fcc-accent: var(--accent);
+  --fcc-glow:   var(--glow);
+  --fcc-card:   var(--bg-soft);
+  --fcc-border: var(--border);
+  --fcc-head:   color-mix(in srgb, var(--bg) 92%, var(--text) 8%);
+  color: var(--fcc-text);
+}
+
+/* Kill page-wide horizontal scroll on this page */
+html, body.fcc{width:100%;max-width:100%;overflow-x:hidden;}
+/* Keep site chrome sized correctly (no clipping of hamburger/menu) */
+body.fcc header,
+body.fcc footer{max-width:100%;}
+/* ✅ Hamburger/menu fix: never clip the slide-out panel on FCC page */
+body.fcc .navbar,
+body.fcc .nav-links{overflow:visible !important;}
+body.fcc .navbar{z-index:9999;}
+
+/* Wrapper */
+.fcc-wrapper{
+  max-width:1200px;
+  width:min(100%,1200px);
+  margin:0 auto;
+  padding:24px 16px 64px;
+  overflow-x:hidden;
+  box-sizing:border-box;
+}
+.fcc-wrapper *, .fcc-wrapper *::before, .fcc-wrapper *::after{box-sizing:border-box;}
+
+/* ---------- Layout & typography ---------- */
+.fcc-header{margin-bottom:8px;}
+.fcc-title{
+  font-size:clamp(1.3rem,1.05rem + 1.35vw,2.05rem);
+  font-weight:800; letter-spacing:.2px; color:var(--fcc-text);
+}
+.fcc-subtitle{opacity:.8;margin-top:4px;}
+
+/* ---------- Section generic ---------- */
+.fcc-section-title{
+  font-size:clamp(1.05rem,.9rem + .95vw,1.5rem);
+  margin:24px 0 12px; font-weight:700; color:var(--fcc-text);
+}
+.fcc-section-note{opacity:.85;margin-bottom:12px;}
+
+/* ---------- 1) Championship Match Banner ---------- */
+.fcc-banner{margin-top:12px;}
+.fcc-banner-grid{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:16px; align-items:center;
+}
+.fcc-banner-card{
+  background:var(--fcc-card);
+  border:1px solid var(--fcc-border);
+  border-radius:16px; padding:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  text-align:center; color:var(--fcc-text);
+}
+.fcc-banner-photo{
+  width:108px;height:108px;aspect-ratio:1/1;
+  object-fit:cover;border-radius:50%;
+  display:inline-block;border:3px solid var(--fcc-accent);
+}
+.fcc-banner-name{margin-top:10px;font-weight:700;}
+.fcc-banner-role{opacity:.8;font-size:.95rem;}
+.fcc-banner-center{text-align:center;}
+.fcc-banner-vs{
+  font-size:clamp(1.1rem,.95rem + .95vw,1.65rem);
+  font-weight:800;letter-spacing:.3px;color:var(--fcc-text);
+}
+.fcc-banner-vs span{color:var(--fcc-accent);}
+.fcc-banner-meta{margin-top:6px;opacity:.85;}
+
+/* ---------- 2) Participants grid (8 slots) ---------- */
+.fcc-participants{max-width:100%;overflow-x:hidden;}
+
+.fcc-player-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:14px;
+  margin-top:10px;
+  justify-items:stretch;
+  align-items:stretch;
+  padding-inline:2px; /* tiny cushion prevents half-pixel overflow */
+}
+.fcc-player-card{
+  background:var(--fcc-card);
+  border:1px solid var(--fcc-border);
+  border-radius:14px;padding:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;
+  outline:2px solid transparent;
+  transition:transform .12s ease, outline-color .12s ease;
+  color:var(--fcc-text);
+  width:100%;
+  min-width:0;
+}
+.fcc-player-card:focus-visible{outline-color:var(--fcc-accent);}
+.fcc-player-card:hover{transform:translateY(-2px);}
+.fcc-player-photo{
+  width:56px;height:56px;aspect-ratio:1/1;
+  border-radius:50%;object-fit:cover;border:2px solid var(--fcc-accent);
+}
+.fcc-player-info{min-width:0;}
+.fcc-player-name{font-weight:700;line-height:1.15;}
+.fcc-badge{
+  display:inline-block;margin-top:4px;font-size:.8rem;padding:4px 8px;border-radius:999px;
+  background:color-mix(in srgb,var(--fcc-accent) 12%,transparent);
+  color:var(--fcc-accent);
+  border:1px solid color-mix(in srgb,var(--fcc-accent) 35%,transparent);
+  max-width:100%;
+  white-space:normal;
+  word-break:break-word;
+}
+.fcc-badge-gold{
+  background:color-mix(in srgb,#eab308 12%,transparent);
+  border-color:color-mix(in srgb,#eab308 35%,transparent);
+  color:#eab308;
+}
+.fcc-player-empty .fcc-player-photo{opacity:.7;filter:grayscale(100%);}
+
+/* ---------- 3) Tour section ---------- */
+.fcc-tour-desc{opacity:.9;margin-bottom:8px;}
+.fcc-tour-dates{font-weight:600;margin-bottom:12px;}
+.fcc-controls{
+  display:grid;grid-template-columns:1fr auto auto auto;
+  gap:10px;align-items:end;margin-bottom:12px;
+}
+.fcc-search,.fcc-sort,.fcc-collapse-btn{
+  width:100%;height:40px;border-radius:10px;
+  border:1px solid var(--fcc-border);background:var(--fcc-card);
+  color:var(--fcc-text);padding:0 12px;
+}
+.fcc-search::placeholder{color:color-mix(in srgb,var(--fcc-text) 55%,transparent);}
+.fcc-collapse-btn{cursor:pointer;font-weight:700;border:1px solid var(--fcc-accent);}
+.fcc-collapse-btn[aria-expanded="true"]{background:color-mix(in srgb,var(--fcc-accent) 12%,var(--fcc-card));}
+
+/* Responsive table (CSS grid) */
+.fcc-table{
+  background:var(--fcc-card);border:1px solid var(--fcc-border);
+  border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.06);
+  overflow:hidden;color:var(--fcc-text);max-width:100%;
+}
+.fcc-row{
+  display:grid;grid-template-columns:56px 1.2fr .7fr .7fr 1fr 1fr;
+  gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--fcc-border);
+}
+.fcc-row--head{position:sticky;top:0;background:var(--fcc-head,rgba(0,0,0,.04));font-weight:700;border-top:none;z-index:1;}
+.fcc-cell{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.fcc-player-cell{display:grid;grid-template-columns:36px 1fr;gap:8px;align-items:center;}
+.fcc-player-ava{
+  width:36px;height:36px;aspect-ratio:1/1;border-radius:50%;object-fit:cover;border:2px solid var(--fcc-accent);
+}
+.fcc-status{font-size:.85rem;padding:4px 8px;border-radius:999px;text-align:center;justify-self:start;}
+.fcc-status--q{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.3);}
+.fcc-status--c{background:rgba(234,179,8,.12);color:#eab308;border:1px solid rgba(234,179,8,.35);}
+.fcc-status--n{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.35);}
+
+/* ---------- 4) Qualification cards (summary) ---------- */
+.fcc-qual-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.fcc-qual-card{
+  background:var(--fcc-card);border:1px solid var(--fcc-border);
+  border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,.06);
+  color:var(--fcc-text); text-align:center;
+}
+.fcc-qual-head{font-weight:800;margin-bottom:6px;}
+.fcc-qual-note{text-align:center;margin-top:10px;opacity:.9;}
+
+/* ---------- Footer ---------- */
+.fcc-footer{margin-top:24px;padding-top:16px;border-top:1px solid var(--fcc-border);text-align:center;}
+.fcc-footer-text{opacity:.85;}
+
+/* ---------- Qualification Write-up ---------- */
+.fcc-panel{
+  background:var(--fcc-card);border:1px solid var(--fcc-border);
+  border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.06);color:var(--fcc-text);
+}
+.fcc-qual-header{display:flex;gap:12px;align-items:center;margin-bottom:10px;}
+.fcc-emoji{
+  width:44px;height:44px;display:grid;place-items:center;font-size:24px;border-radius:12px;
+  background:color-mix(in srgb,var(--fcc-accent) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--fcc-accent) 35%,transparent);
+}
+.fcc-kicker{opacity:.9;margin-top:2px;}
+.fcc-qual-block{margin-top:14px;}
+.fcc-qual-h3{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;
+  font-size:clamp(.95rem,.9rem + .3vw,1.1rem);font-weight:800;margin:0 0 6px;text-align:center;
+}
+.fcc-chip{
+  display:inline-block;min-width:22px;height:22px;padding:0 8px;border-radius:999px;
+  background:color-mix(in srgb,var(--fcc-accent) 14%,transparent);
+  border:1px solid color-mix(in srgb,var(--fcc-accent) 40%,transparent);
+  color:var(--fcc-accent);font-weight:700;font-size:.78rem;line-height:20px;text-align:center;
+}
+.fcc-chip-ghost{background:transparent;border-color:color-mix(in srgb,var(--fcc-accent) 35%,transparent);color:color-mix(in srgb,var(--fcc-accent) 85%,var(--fcc-text));}
+.fcc-minihead{font-weight:700;margin:8px 0 6px;opacity:.95;text-align:center;}
+.fcc-list{margin:0 0 6px 0;padding:0;list-style:none;}
+.fcc-list li{position:relative;padding-left:22px;margin:6px 0;}
+.fcc-list li::before{content:"✓";position:absolute;left:0;top:.1rem;font-weight:900;color:#22c55e;}
+.fcc-score-list{list-style:none;padding:0;margin:6px 0 10px;text-align:center;}
+.fcc-score-list li{margin:6px 0;}
+.fcc-tag{
+  display:inline-block;margin-right:8px;padding:3px 8px;border-radius:999px;font-size:.78rem;font-weight:700;
+  background:color-mix(in srgb,var(--fcc-accent) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--fcc-accent) 35%,transparent);
+  color:var(--fcc-accent);
+}
+
+/* Callout */
+.fcc-callout{
+  margin-top:14px;padding:12px 14px;border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--fcc-accent) 35%,transparent);
+  background:color-mix(in srgb,var(--fcc-accent) 10%,var(--fcc-card));
+}
+.fcc-callout-title{margin:0 0 6px;font-weight:800;text-align:center;}
+
+/* Final breakdown cards */
+.fcc-breakdown{margin-top:14px;display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));}
+.fcc-break-card{
+  background:var(--fcc-card);border:1px solid var(--fcc-border);
+  border-radius:12px;padding:12px;text-align:center;display:grid;place-items:center;gap:4px;
+}
+.fcc-count{font-weight:900;font-size:1.7rem;line-height:1;color:var(--fcc-accent);text-shadow:0 0 10px color-mix(in srgb,var(--fcc-accent) 35%,transparent);}
+.fcc-label{opacity:.9;margin-top:2px;font-weight:600;font-size:.95rem;}
+
+/* Generic responsive images (but NOT avatars/banners) */
+.fcc-wrapper img:not(.fcc-player-photo):not(.fcc-player-ava):not(.fcc-banner-photo){max-width:100%;height:auto;}
+
+/* ---------- Responsiveness ---------- */
+@media (max-width:1024px){
+  .fcc-player-grid{grid-template-columns:repeat(2,1fr);}
+  .fcc-qual-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media (max-width:768px){
+  .fcc-banner-grid{grid-template-columns:1fr;}
+  .fcc-controls{grid-template-columns:1fr 1fr;grid-auto-rows:40px;}
+  .fcc-collapse-btn{grid-column:1/-1;}
+  /* Give more room to the name column */
+  .fcc-row{grid-template-columns:40px 1.45fr .6fr .6fr .9fr .9fr;}
+  .fcc-section-title{font-size:1.02rem;}
+  .fcc-banner-vs{font-size:1.18rem;}
+  /* Cushion grid to avoid shadow overflow */
+  .fcc-player-grid{padding-inline:2px;}
+}
+
+@media (max-width:520px){
+  .fcc-wrapper{padding:16px 12px 48px;}
+
+  /* Participants: FORCE single column and center */
+  .fcc-player-grid{
+    grid-template-columns:1fr !important;
+    gap:10px;
+    padding-inline:0;
+    margin-inline:auto;
+  }
+  .fcc-player-card{
+    grid-template-columns:48px 1fr;
+    padding:12px;
+    border-radius:12px;
+    margin-inline:auto;
+    width:100%;
+  }
+  .fcc-player-photo{width:48px;height:48px;}
+  .fcc-player-name{font-size:.93rem;}
+  .fcc-badge{font-size:.72rem;padding:3px 7px;}
+
+  /* Table compact */
+  .fcc-row{
+    font-size:.86rem;padding:8px 10px;
+    grid-template-columns:32px 1.75fr .55fr .55fr .82fr .82fr;
+  }
+  .fcc-row--head{font-size:.9rem;}
+  .fcc-player-ava{width:28px;height:28px;}
+
+  /* Allow player names to wrap fully on phones */
+  .fcc-player-cell .fcc-player-label{white-space:normal;overflow:visible;text-overflow:clip;word-break:break-word;}
+
+  /* Controls stack */
+  .fcc-controls{grid-template-columns:1fr;}
+
+  /* Banner */
+  .fcc-banner-photo{width:88px;height:88px;}
+  .fcc-banner-vs{font-size:1.02rem;}
+
+  /* Qualification summary cards smaller text */
+  .fcc-qual-head{font-size:1rem;}
+  .fcc-qual-card{padding:12px;}
+  .fcc-qual-note{font-size:.95rem;}
+
+  /* Write-up compact + smaller badges/tags */
+  .fcc-panel{padding:14px;}
+  .fcc-qual-h3{font-size:.98rem;}
+  .fcc-chip{min-width:20px;height:20px;line-height:18px;font-size:.7rem;padding:0 6px;}
+  .fcc-tag{font-size:.74rem;padding:2px 7px;}
+
+  /* Final breakdown tighter */
+  .fcc-breakdown{grid-template-columns:repeat(2,1fr);}
+  .fcc-count{font-size:1.35rem;}
+  .fcc-label{font-size:.86rem;}
+}
+
+@media (max-width:400px){
+  .fcc-row{
+    font-size:.82rem;
+    grid-template-columns:28px 1.85fr .5fr .5fr .78fr .78fr;
+  }
+  .fcc-player-ava{width:24px;height:24px;}
+  .fcc-title{font-size:1.15rem;}
+  .fcc-section-title{font-size:.98rem;}
+  .fcc-count{font-size:1.25rem;}
+  .fcc-label{font-size:.82rem;}
+  .fcc-breakdown{grid-template-columns:1fr;}
+}
+
+/* Safety: ensure sections never push the viewport */
+.fcc-banner,.fcc-participants,.fcc-tour,.fcc-qual,.fcc-qual-writeup,.fcc-footer{max-width:100%;overflow-x:hidden;}

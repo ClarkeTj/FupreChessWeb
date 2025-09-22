@@ -1,0 +1,133 @@
+{
+  "tourName": "Fupre Chess Tour",
+  "startDate": "2026-02-01",
+  "endDate": "2026-03-15",
+  "players": [
+    {
+      "id": 1,
+      "name": "Godbless",
+      "photo": "images/players/godbless.png",
+      "points": 52,
+      "eventsPlayed": 7,
+      "bestFinish": "1st (Grand Rapid)",
+      "status": "Qualified"
+    },
+    {
+      "id": 2,
+      "name": "Alex",
+      "photo": "images/players/alex.png",
+      "points": 49,
+      "eventsPlayed": 6,
+      "bestFinish": "1st (Open Rapid)",
+      "status": "Qualified"
+    },
+    {
+      "id": 3,
+      "name": "ClarkeTJ",
+      "photo": "images/players/tj.png",
+      "points": 46,
+      "eventsPlayed": 6,
+      "bestFinish": "2nd (Grand Rapid)",
+      "status": "Qualified"
+    },
+    {
+      "id": 4,
+      "name": "Hasel",
+      "photo": "images/players/hasel.png",
+      "points": 42,
+      "eventsPlayed": 6,
+      "bestFinish": "2nd (Open Rapid)",
+      "status": "In Contention"
+    },
+    {
+      "id": 5,
+      "name": "Destiny",
+      "photo": "images/players/destiny.png",
+      "points": 39,
+      "eventsPlayed": 5,
+      "bestFinish": "3rd (Grand Rapid)",
+      "status": "In Contention"
+    },
+    {
+      "id": 6,
+      "name": "Chris",
+      "photo": "images/players/chris.png",
+      "points": 37,
+      "eventsPlayed": 5,
+      "bestFinish": "3rd (Open Rapid)",
+      "status": "In Contention"
+    },
+    {
+      "id": 7,
+      "name": "Fortune",
+      "photo": "images/players/fortune.png",
+      "points": 34,
+      "eventsPlayed": 5,
+      "bestFinish": "4th (Grand Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 8,
+      "name": "Jesse",
+      "photo": "images/placeholder.png",
+      "points": 31,
+      "eventsPlayed": 4,
+      "bestFinish": "Top 8 (Open Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 9,
+      "name": "Noah",
+      "photo": "images/placeholder.png",
+      "points": 29,
+      "eventsPlayed": 4,
+      "bestFinish": "Top 8 (Grand Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 10,
+      "name": "Martins",
+      "photo": "images/placeholder.png",
+      "points": 27,
+      "eventsPlayed": 4,
+      "bestFinish": "Top 10 (Open Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 11,
+      "name": "Prevail",
+      "photo": "images/placeholder.png",
+      "points": 22,
+      "eventsPlayed": 3,
+      "bestFinish": "Top 12 (Open Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 12,
+      "name": "Nelson",
+      "photo": "images/placeholder.png",
+      "points": 18,
+      "eventsPlayed": 2,
+      "bestFinish": "Top 16 (Open Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 13,
+      "name": "Draken.",
+      "photo": "images/placeholder.png",
+      "points": 15,
+      "eventsPlayed": 2,
+      "bestFinish": "Top 16 (Open Rapid)",
+      "status": "Not Qualified"
+    },
+    {
+      "id": 14,
+      "name": "Jeffery",
+      "photo": "images/placeholder.png",
+      "points": 12,
+      "eventsPlayed": 2,
+      "bestFinish": "Top 20 (Open Rapid)",
+      "status": "Not Qualified"
+    }
+  ]
+}

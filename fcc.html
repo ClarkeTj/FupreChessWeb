@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fupre Chess Championship Cycle | Fupre Chess Club</title>
+
+
+  <!-- ICO for classic support -->
+  <link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
+  <!-- PNG for modern browsers -->
+  <link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <link rel="stylesheet" href="assets/css/fcc.css" />
+
+
+  <script defer src="assets/js/script.js"></script>
+
+  <script defer src="assets/js/fcc.js"></script>
+</head>
+<body class="fcc">
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="assets/imgs/fupreChesslogo.png" alt="Fupre Chess League Logo" class="logo" />
+      <div class="site-title">
+        <span class="logo-main">Fupre</span>
+        <span class="logo-glow">Chess Club</span>
+      </div>
+    </div>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="highlights.html">Highlights</a>
+      <a href="fcc.html">FCC</a>
+      <a href="ratings.html">Ratings</a>
+      <a href="matches.html">Matches</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="pairings.html">Pairings</a>
+      <a href="rulebook.html">Rulebook</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="dark-toggle" class="dark-toggle">🌓</button>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+
+  <main class="fcc-wrapper" aria-labelledby="fcc-page-title">
+    <header class="fcc-header">
+      <h1 id="fcc-page-title" class="fcc-title">Fupre Chess Championship Cycle</h1>
+      <p class="fcc-subtitle">Road to the Fupre Chess Championship Match</p>
+    </header>
+
+    <!-- 1) Championship Match Banner -->
+    <section class="fcc-banner" aria-labelledby="fcc-banner-title">
+      <h2 id="fcc-banner-title" class="fcc-section-title">Fupre Chess Championship Match</h2>
+
+      <div class="fcc-banner-grid" role="region" aria-label="Champion vs Challenger">
+        <!-- Champion -->
+        <article class="fcc-banner-card" aria-label="Champion">
+          <img class="fcc-banner-photo" src="images/champion.png" alt="Current FCC Champion"/>
+          <h3 class="fcc-banner-name">ClarkeTJ</h3>
+          <p class="fcc-banner-role">FCC Champion</p>
+        </article>
+
+        <!-- Center title/info -->
+        <div class="fcc-banner-center">
+          <div class="fcc-banner-vs">Champion <span>vs</span> Challenger</div>
+          <div class="fcc-banner-meta">Dates: <strong>TBA</strong> • Venue: <strong>TBA</strong></div>
+        </div>
+
+        <!-- Challenger -->
+        <article class="fcc-banner-card" aria-label="Challenger">
+          <!-- If challenger undecided, keep silhouette + TBD text -->
+          <img class="fcc-banner-photo" src="images/silhouette.png" alt="Challenger TBD"/>
+          <h3 class="fcc-banner-name">Challenger</h3>
+          <p class="fcc-banner-role">TBD — (via Grand Swiss / Tour / RR / Rating)</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2) FCM Participants (8 slots) -->
+    <section class="fcc-participants" aria-labelledby="fcc-participants-title">
+      <h2 id="fcc-participants-title" class="fcc-section-title">Fupre Championship Match (FCM) Participants</h2>
+      <p class="fcc-section-note">These 8 players earn slots via the qualification paths below.</p>
+
+      <div class="fcc-player-grid">
+        <!-- Example filled slots -->
+        <article class="fcc-player-card" tabindex="0">
+          <img src="images/players/godbless.png" alt="Godbless" class="fcc-player-photo"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Alex</h3>
+            <span class="fcc-badge fcc-badge-gold">Defending Champion</span>
+          </div>
+        </article>
+
+        <article class="fcc-player-card" tabindex="0">
+          <img src="images/players/alex.png" alt="Alex" class="fcc-player-photo"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Destiny</h3>
+            <span class="fcc-badge">Qualified via Grand Swiss</span>
+          </div>
+        </article>
+
+        <article class="fcc-player-card" tabindex="0">
+          <img src="images/players/tj.png" alt="TJ" class="fcc-player-photo"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Martins</h3>
+            <span class="fcc-badge">Qualified via Tour</span>
+          </div>
+        </article>
+
+        <article class="fcc-player-card" tabindex="0">
+          <img src="images/players/hasel.png" alt="Hasel" class="fcc-player-photo"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Hasel</h3>
+            <span class="fcc-badge">Qualified via TJ Round Robin</span>
+          </div>
+        </article>
+
+        <!-- Example empty/placeholder slots -->
+        <article class="fcc-player-card fcc-player-empty" tabindex="0">
+          <img src="images/silhouette.png" alt="" class="fcc-player-photo" aria-hidden="true"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Slot Open</h3>
+            <span class="fcc-badge">Qualification: Tour</span>
+          </div>
+        </article>
+
+        <article class="fcc-player-card fcc-player-empty" tabindex="0">
+          <img src="images/silhouette.png" alt="" class="fcc-player-photo" aria-hidden="true"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Slot Open</h3>
+            <span class="fcc-badge">Qualification: Grand Swiss</span>
+          </div>
+        </article>
+
+        <article class="fcc-player-card fcc-player-empty" tabindex="0">
+          <img src="images/silhouette.png" alt="" class="fcc-player-photo" aria-hidden="true"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Slot Open</h3>
+            <span class="fcc-badge">Qualification: TJ Round Robin</span>
+          </div>
+        </article>
+
+        <article class="fcc-player-card fcc-player-empty" tabindex="0">
+          <img src="images/silhouette.png" alt="" class="fcc-player-photo" aria-hidden="true"/>
+          <div class="fcc-player-info">
+            <h3 class="fcc-player-name">Slot Open</h3>
+            <span class="fcc-badge">Qualification: Rating Spot</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3) Fupre Chess Tour -->
+    <section class="fcc-tour" aria-labelledby="fcc-tour-title">
+      <h2 id="fcc-tour-title" class="fcc-section-title">Fupre Chess Tour</h2>
+      <p class="fcc-tour-desc">
+        Runs each semester: starts when the semester begins and ends one week before the FCM.
+        Leaderboard below determines three (3) direct qualifiers.
+      </p>
+      <div class="fcc-tour-dates" id="fcc-tour-dates" aria-live="polite">
+        <!-- Populated by JS from tour.json -->
+      </div>
+
+      <!-- Controls -->
+      <div class="fcc-controls">
+        <label class="fcc-search-label" for="fcc-search">Search Player</label>
+        <input id="fcc-search" class="fcc-search" type="search" placeholder="Type a name…" aria-label="Search by player name"/>
+
+        <label class="fcc-sort-label" for="fcc-sort">Sort</label>
+        <select id="fcc-sort" class="fcc-sort" aria-label="Sort standings">
+          <option value="points">Points (desc)</option>
+          <option value="rank">Rank (asc)</option>
+        </select>
+
+        <button id="fcc-collapse-btn" class="fcc-collapse-btn" aria-expanded="false" aria-controls="fcc-collapsible">
+          Show Standings
+        </button>
+      </div>
+
+      <!-- Collapsible container -->
+      <div id="fcc-collapsible" class="fcc-collapsible" hidden>
+        <!-- Responsive grid table rendered by JS -->
+        <div class="fcc-table" role="table" aria-label="Tour Standings">
+          <!-- Header -->
+          <div class="fcc-row fcc-row--head" role="row">
+            <div class="fcc-cell" role="columnheader">#</div>
+            <div class="fcc-cell" role="columnheader">Player</div>
+            <div class="fcc-cell" role="columnheader">Points</div>
+            <div class="fcc-cell" role="columnheader">Events</div>
+            <div class="fcc-cell" role="columnheader">Best Finish</div>
+            <div class="fcc-cell" role="columnheader">Status</div>
+          </div>
+          <!-- Body goes here -->
+          <div id="fcc-table-body" class="fcc-tbody" role="rowgroup"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) Qualification Paths Summary -->
+    <section class="fcc-qual" aria-labelledby="fcc-qual-title">
+      <h2 id="fcc-qual-title" class="fcc-section-title">Qualification Paths</h2>
+      <div class="fcc-qual-grid">
+        <article class="fcc-qual-card">
+          <h3 class="fcc-qual-head">Rating Spot (1)</h3>
+          <p class="fcc-qual-text">
+            Must play ≥ <strong>40</strong> rated rapid games (vs players ≥ <strong>1500</strong>)
+            and at least one <strong>Grand Rapid</strong>. If ineligible or declines, the spot
+            passes to the next eligible player.
+          </p>
+        </article>
+        <article class="fcc-qual-card">
+          <h3 class="fcc-qual-head">Fupre Chess Tour (3)</h3>
+          <p class="fcc-qual-text">Top <strong>3</strong> on the semester Tour leaderboard qualify directly.</p>
+        </article>
+        <article class="fcc-qual-card">
+          <h3 class="fcc-qual-head">Grand Swiss (2)</h3>
+          <p class="fcc-qual-text">Top <strong>2</strong> finishers of the Grand Swiss qualify.</p>
+        </article>
+        <article class="fcc-qual-card">
+          <h3 class="fcc-qual-head">TJ Round Robin (2)</h3>
+          <p class="fcc-qual-text">Top <strong>2</strong> finishers of the open 7-round Round Robin qualify.</p>
+        </article>
+      </div>
+      <p class="fcc-qual-note">
+        If a player qualifies via multiple paths, their extra slot passes to the next eligible player from that path.
+      </p>
+    </section>
+
+
+
+        <!-- Qualification System Write-up -->
+    <section class="fcc-qual-writeup" aria-labelledby="fcc-qual-system-title">
+      <div class="fcc-panel">
+        <header class="fcc-qual-header">
+          <div class="fcc-emoji" aria-hidden="true">🎟️</div>
+          <div>
+            <h2 id="fcc-qual-system-title" class="fcc-section-title">Qualification System for FUPRE Chess Masters (FCM)</h2>
+            <p class="fcc-kicker">The FUPRE Chess Masters will feature <strong>8 players</strong>, selected through <strong>4 qualification paths</strong>.</p>
+          </div>
+        </header>
+
+        <!-- Path 1 -->
+        <article class="fcc-qual-block">
+          <h3 class="fcc-qual-h3">
+            <span class="fcc-chip">1</span> Rating Spot <span class="fcc-chip fcc-chip-ghost">1 Player</span>
+          </h3>
+          <p>Awarded to the highest-rated player in FUPRE Rapid ratings.</p>
+
+          <p class="fcc-minihead">Strict Eligibility Requirements:</p>
+          <ul class="fcc-list">
+            <li>Must have participated in at least one <strong>Grand Rapid</strong> event during the qualification period.</li>
+            <li>Must have played a minimum of <strong>40 rated rapid games</strong>.</li>
+            <li>Of those games, the <strong>majority</strong> must be against opponents rated <strong>1500 Elo</strong> or higher.</li>
+            <li>If the top-rated player is ineligible or declines, the spot passes to the next highest-rated eligible player.</li>
+          </ul>
+        </article>
+
+        <!-- Path 2 -->
+        <article class="fcc-qual-block">
+          <h3 class="fcc-qual-h3">
+            <span class="fcc-chip">2</span> FUPRE Chess Tour <span class="fcc-chip fcc-chip-ghost">3 Players</span>
+          </h3>
+          <p><strong>Timeline:</strong> Runs each semester from the opening week to one week before FCM.</p>
+
+          <p class="fcc-minihead">Scoring System:</p>
+          <ul class="fcc-score-list">
+            <li><span class="fcc-tag">Lightning Blitz</span> 1st: 5 • 2nd: 4 • 3rd: 3 • 4th: 2 • 5th–10th: 1</li>
+            <li><span class="fcc-tag">Grand Rapid</span> 1st: 15 • 2nd: 12 • 3rd: 10 • 4th: 8 • 5th: 6 • 6th: 5 • 7th: 4 • 8th: 3 • 9th: 2 • 10th: 1</li>
+            <li><span class="fcc-tag">Other Major FUPRE Events</span> 1st: 25 • 2nd: 20 • 3rd: 15 • 4th: 12 • 5th: 10 • 6th: 8 • 7th: 6 • 8th: 4 • 9th: 2 • 10th: 1</li>
+          </ul>
+          <p><strong>Qualification:</strong> The <strong>Top 3</strong> players on the Tour leaderboard earn spots in FCM.</p>
+        </article>
+
+        <!-- Path 3 -->
+        <article class="fcc-qual-block">
+          <h3 class="fcc-qual-h3">
+            <span class="fcc-chip">3</span> Grand Swiss <span class="fcc-chip fcc-chip-ghost">2 Players</span>
+          </h3>
+          <p><strong>Format:</strong> Open Swiss-system tournament (7–9 rounds, depending on number of participants).</p>
+          <p><strong>Qualification:</strong> The <strong>Top 2</strong> finishers qualify for FCM.</p>
+        </article>
+
+        <!-- Path 4 -->
+        <article class="fcc-qual-block">
+          <h3 class="fcc-qual-h3">
+            <span class="fcc-chip">4</span> ClarkeTJ Classic <span class="fcc-chip fcc-chip-ghost">2 Players</span>
+          </h3>
+          <p><strong>Format:</strong> Open 7-Round Round Robin Tournament.</p>
+          <p><strong>Qualification:</strong> The <strong>Top 2</strong> finishers qualify for FCM.</p>
+        </article>
+
+        <!-- Overlap Clarification -->
+        <aside class="fcc-callout" role="note" aria-label="Overlap Clarification">
+          <h4 class="fcc-callout-title">🔄 Overlap Clarification</h4>
+          <p>A player cannot qualify via multiple paths.</p>
+          <p>If a player already holds a qualification spot (e.g., via Rating Spot) and places in the Tour, Grand Swiss, or ClarkeTJ Classic, the spot passes to the next eligible player in that event/standings. This ensures <strong>8 unique participants</strong> for FCM.</p>
+        </aside>
+
+        <!-- Final Breakdown -->
+        <div class="fcc-breakdown">
+          <div class="fcc-break-card">
+            <div class="fcc-count">1</div>
+            <div class="fcc-label">Rating Spot</div>
+          </div>
+          <div class="fcc-break-card">
+            <div class="fcc-count">3</div>
+            <div class="fcc-label">FUPRE Chess Tour</div>
+          </div>
+          <div class="fcc-break-card">
+            <div class="fcc-count">2</div>
+            <div class="fcc-label">Grand Swiss</div>
+          </div>
+          <div class="fcc-break-card">
+            <div class="fcc-count">2</div>
+            <div class="fcc-label">ClarkeTJ Classic</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5) Footer (keep consistent with global footer — this section is scoped and won’t clash) -->
+    <footer class="fcc-footer" role="contentinfo">
+      <p class="fcc-footer-text">© <span id="fcc-year"></span> Fupre Chess Club • Championship Cycle</p>
+    </footer>
+  </main>
+</body>
+</html>

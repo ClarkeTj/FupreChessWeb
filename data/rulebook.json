@@ -5,8 +5,9 @@
       "icon": "🎓",
       "color": "#2196f3",
       "items": [
-        "Only registered students of FUPRE can join the club.",
+        "Only registered students of FUPRE can join the club. (Non-fuprites can also join the club by admin approval.)",
         "Players must complete registration before participating in official events."
+      
       ]
     },
     {
@@ -16,7 +17,8 @@
       "items": [
         "Club tournaments follow FIDE guidelines unless stated otherwise.",
         "Players must arrive 10 minutes before the round starts.",
-        "Pairings will be done using the Swiss system unless otherwise specified."
+        "Pairings will be done using the Swiss system unless otherwise specified.",
+        "Non-fuprites may participate in open events, except FCC & FCM."
       ]
     },
     {
@@ -25,8 +27,7 @@
       "color": "#4caf50",
       "items": [
         "Standard games use 15+10 (15 minutes with 10s increment).",
-        "Blitz events use 5+3.",
-        "Bullet games (optional events) use 2+1."
+        "Blitz events use 3+2."
       ]
     },
     {
@@ -35,7 +36,6 @@
       "color": "#f44336",
       "items": [
         "Engine assistance is strictly prohibited.",
-        "Multiple accounts or impersonation is not allowed.",
         "Unsportsmanlike behavior may lead to disqualification."
       ]
     },
@@ -46,7 +46,8 @@
       "items": [
         "Win = 1 point",
         "Draw = 0.5 point",
-        "Loss = 0 points"
+        "Loss = 0 points",
+        "Scoring systems may vary for specific tournaments."
       ]
     },
     {
@@ -55,7 +56,7 @@
       "color": "#009688",
       "items": [
         "Ratings are updated after every approved match.",
-        "Provisional ratings are shown for players with <10 games."
+        "New players start with a provisional rating of 1200."
       ]
     },
     {
@@ -74,8 +75,11 @@
       "color": "#e91e63",
       "items": [
         "The FCC is the club’s most prestigious annual event.",
-        "Only top 16 players by rating/qualification are eligible.",
-        "Games are classical format (90+30).",
+        "Winner of FCM goes on to challenge the FCC champion.(Rapid Championship)",
+        "Open to all fupre chess players.(Blitz Championship)",
+        "Games are Rapid format (30+30).(Rapid Championship)",
+        "Games are Blitz format (3+2).(Blitz Championship)",
+        "Tie-breaks decided by 2 game Armegedon.",
         "Winner holds the FCC title for one year."
       ]
     },
@@ -84,9 +88,9 @@
       "icon": "🏅",
       "color": "#3f51b5",
       "items": [
-        "The FCM is an invitational event featuring the top 8 players.",
-        "Round-robin format will be used.",
-        "Time control: Rapid 25+10.",
+        "The FCM is an event featuring 8 players.",
+        "Douoble Round-robin format will be used.",
+        "Time control: Rapid 15+30.",
         "Tie-breaks decided by Blitz playoffs."
       ]
     },
@@ -95,8 +99,7 @@
       "icon": "🥇",
       "color": "#ff5722",
       "items": [
-        "The FCL is a team-based season-long competition.",
-        "Each team consists of 4 boards with at least 1 new member.",
+        "The FCL is a season-long competition.",
         "Matches are played weekly over 2 months.",
         "Points: Match win = 3 pts, Draw = 1 pt, Loss = 0 pts."
       ]

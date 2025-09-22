@@ -60,14 +60,15 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+
 /*=================
   Navbar
 =================*/
 .navbar {
   position: sticky;
-  top: 0;      
+  top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1000;            /* sits above page content */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,79 +78,42 @@ body {
   border-bottom: 4px solid var(--border);
 }
 
- .logo-container {
-  display: flex;
-  align-items: center;
-}
+.logo-container { display: flex; align-items: center; }
+.logo { height: 40px; margin-right: 10px; }
 
-.logo {
-  height: 40px;
-  margin-right: 10px;
-}
-
-
-/* Logo Styling */
+/* Logo */
 .site-title {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 1.4rem; /* adjust as needed */
+  display: flex; flex-direction: column; line-height: 1.1;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;
 }
+.logo-main { color: var(--text); }
+.logo-glow { color: var(--accent); }
+body.dark .logo-glow { text-shadow: 0 0 1px var(--glow), 0 0 1px var(--glow), 0 0 18px var(--glow); }
 
-.logo-main {
-  color: var(--text);
-}
-
-.logo-glow {
-  color: var(--accent);
-}
-
-body.dark .logo-glow {
-  text-shadow: 0 0 1px var(--glow), 0 0 1px var(--glow), 0 0 18px var(--glow);
-}
-
+/* Base dropdown (desktop overrides below) */
 .nav-links {
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 60px;
-  left: 0;
-  right: 0;
-  background: rgba(30, 30, 30, 0.95); /* semi-transparent */
-  backdrop-filter: blur(8px); /* frosted glass effect */
-  padding: 1.5rem; 
+  left: 0; right: 0;
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
   border-radius: 0 0 12px 12px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
   width: 220px;
   gap: 1rem;
   text-align: left;
-
   transform: translateY(-20px) scale(0.98);
   opacity: 0;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-  z-index: 1000;
+  z-index: 1200;
 }
+.nav-links.show { display: flex; transform: translateY(0) scale(1.05); opacity: 1; }
+.nav-links.show { animation: settleBounce 0.3s ease-out 0.45s forwards; }
+@keyframes settleBounce { from { transform: translateY(0) scale(1.05); } to { transform: translateY(0) scale(1); } }
 
-/* show state */
-.nav-links.show {
-  display: flex;
-  transform: translateY(0) scale(1.05);
-  opacity: 1;
-}
-
-/* little settle back after overshoot */
-.nav-links.show {
-  animation: settleBounce 0.3s ease-out 0.45s forwards;
-}
-
-@keyframes settleBounce {
-  from { transform: translateY(0) scale(1.05); }
-  to   { transform: translateY(0) scale(1); }
-}
-
-/* add hover effect to links */
 .nav-links a {
   color: var(--text);
   font-weight: 500;
@@ -158,97 +122,65 @@ body.dark .logo-glow {
   border-radius: 8px;
   transition: color 0.3s ease, transform 0.2s ease, background 0.3s ease;
 }
+.nav-links a:last-child { border-bottom: none; }
 
-.nav-links a:last-child {
-  border-bottom: none;
-}
-
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
+.nav-actions { display: flex; align-items: center; gap: 0.5rem; }
 .hamburger {
-  font-size: 1.8rem;
-  display: none;
-  background: none;
-  border: none;
-  color: var(--accent);
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  font-size: 1.8rem; display: none; background: none; border: none;
+  color: var(--accent); cursor: pointer; transition: transform 0.3s ease;
 }
-
-.hamburger:hover,
-.hamburger:focus,
-.hamburger:active {
-  color: var(--glow);
-}
-
-
-.dark-toggle {
-  font-size: 1.2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: white;
-}
-
+.hamburger:hover, .hamburger:focus, .hamburger:active { color: var(--glow); }
+.dark-toggle { font-size: 1.2rem; background: none; border: none; cursor: pointer; color: white; }
 
 /* =================
    MOBILE STYLE
+   — smaller links + fixed, scrollable panel
 ================= */
-
 @media (max-width: 768px) {
+  .navbar { --navH: 56px; }  /* tweak if your header is taller */
+
   .nav-links {
     display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    left: 0;
-    max-width: 100%;
+    position: fixed;                /* ← keeps panel from pushing content */
+    top: var(--navH, 56px);
+    left: 8px;
+    right: 8px;
+    width: 12rem;
+    max-height: calc(100vh - var(--navH, 56px) - 16px);  /* full viewport */
+    overflow: auto;                 /* ← scroll INSIDE the panel if needed */
+    overscroll-behavior: contain;
+    padding: 0.75rem;               /* tighter padding */
+    gap: 0.5rem;                    /* tighter spacing */
+    border-radius: 12px;
     background-color: var(--bg-soft);
-    padding: 1rem;
-    border-radius: 5px;
+    transform-origin: top center;
+    z-index: 1200;
+  }
+  .nav-links.show { display: flex; }
+
+  .nav-links a {
+    padding: 0.6rem 0.75rem;        /* smaller tap targets but still comfy */
+    font-size: 0.95rem;             /* smaller text so more links fit */
+    line-height: 1.1;
   }
 
-  .nav-links.show {
-    display: flex;
-  }
-
-  .hamburger {
-    display: block;
-  }
+  .hamburger { display: block; font-size: 1.6rem; }
+  .nav-actions { gap: 0.35rem; }
 
   .nav-links a:hover,
-.nav-links a:focus {
-  background: var(--accent);
-  color: var(--bg);
-  transform: translateX(5px);
+  .nav-links a:focus { background: var(--accent); color: var(--bg); transform: translateX(5px); }
+
+  /* Active (current page) */
+  .nav-links a.active { background: var(--accent); color: var(--bg); }
 }
 
-  
-  /* Active (current page) → background highlight */
-  .nav-links a.active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  .nav-links a:hover {
-    background: var(--accent);
-    color: var(--bg);
-  }
-}
 /* =================
    DESKTOP STYLE
 ================= */
-
 @media (min-width: 769px) {
   .nav-links {
-    display: flex; 
-    position: static;   
+    display: flex;
+    position: static;
     flex-direction: row;
     background: none;
     padding: 0;
@@ -258,51 +190,17 @@ body.dark .logo-glow {
     transform: none;
     opacity: 1;
   }
-
-  /* Reset padding for underline style */
-
-  .nav-links a {
-    position: relative;
-    padding: 0;
-  }
-
-
-  /* Glowing underline effect */
+  .nav-links a { position: relative; padding: 0; }
   .nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0%;
-    height: 2px;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--glow);
+    content: ""; position: absolute; left: 0; bottom: -4px;
+    width: 0%; height: 2px; background: var(--accent); box-shadow: 0 0 8px var(--glow);
     transition: width 0.3s ease;
   }
-
-  .nav-links a:hover,
-  .nav-links a:focus {
-    color: var(--accent);
-  }
-
-  .nav-links a:hover::after,
-  .nav-links a:focus::after {
-    width: 100%; /* underline expands on hover */
-  }
-
-  .hamburger {
-    display: none; /* hide burger on desktop */
-  }
-
-  /* Active (current page) → underline always visible */
-  .nav-links a.active {
-    color: var(--accent);
-  }
-
-  .nav-links a.active::after {
-    width: 100%;
-  }
-
+  .nav-links a:hover, .nav-links a:focus { color: var(--accent); }
+  .nav-links a:hover::after, .nav-links a:focus::after { width: 100%; }
+  .hamburger { display: none; }
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a.active::after { width: 100%; }
 }
 
 
