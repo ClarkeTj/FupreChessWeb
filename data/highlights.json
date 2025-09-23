@@ -290,6 +290,15 @@
     },
     {
       "type": "image",
+      "src": "assets/imgs/profile_pics/martins.jpg",
+      "title": "NSE Chess Champion - Martins",
+      "date": "2025-06-10",
+      "category": "photos",
+      "Month": "June",
+      "year": "2025"
+    },
+    {
+      "type": "image",
       "src": "assets/imgs/event_imgs/martinsVStersee.jpg",
       "title": "Martins vs NCC Champion - Tersee",
       "date": "2024-10-10",
