@@ -2,17 +2,17 @@
   "highlights": [
     {
       "type": "image",
-      "src": "assets/imgs/fupreChesslogo.png",
-      "title": "FCC Rapid Final – Trophy Moment",
-      "date": "2025-07-28",
+      "src": "assets/imgs/fcl-events/fcl-ceremony3.jpg",
+      "title": "FCL Final – Trophy Moment",
+      "date": "2025-11-01",
       "category": "photos",
-      "Month": "July",
+      "Month": "April",
       "year": "2025"
     },
     {
       "type": "video",
-      "src": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "title": "Lightning Blitz Highlights",
+      "src": "https://www.youtu.be/wVT5NKeeWiA?si=xqTX8NY%KK1qdfXJ",
+      "title": "2 vs 2 Challenge",
       "date": "2025-07-18",
       "category": "videos",
       "Month": "July",
@@ -20,47 +20,281 @@
     },
     {
       "type": "image",
-      "src": "assets/imgs/chesspic3.jpg",
-      "title": "Grand Rapid – Podium Finishers",
-      "date": "2025-05-30",
+      "src": "assets/imgs/fcl-events/fcl-winners.jpg",
+      "title": "FCL Winners",
+      "date": "2025-04-20",
       "category": "photos",
-      "Month": "May",
+      "Month": "April",
       "year": "2025"
     },
     {
       "type": "image",
-      "src": "assets/imgs/chesspic3.jpg",
-      "title": "Grand Rapid – Podium Finishers",
-      "date": "2025-05-30",
+      "src": "assets/imgs/fcl-events/fcl-team.jpg",
+      "title": "FCL Champions Team",
+      "date": "2025-04-20",
       "category": "photos",
-      "Month": "May",
+      "Month": "April",
       "year": "2025"
     },
     {
       "type": "image",
-      "src": "assets/imgs/chesspic3.jpg",
-      "title": "Grand Rapid – Podium Finishers",
-      "date": "2025-05-30",
+      "src": "assets/imgs/fcl-events/fcl-opening.jpg",
+      "title": "FCL Opening Ceremony",
+      "date": "2025-03-03",
       "category": "photos",
-      "Month": "May",
+      "Month": "March",
       "year": "2025"
     },
     {
       "type": "video",
-      "src": "https://youtu.be/5qap5aO4i9A",
-      "title": "League (FCL) Kickoff Ceremony",
-      "date": "2024-09-26",
+      "src": "https://youtu.be/zGkyRG_rZrs?si=jp3rkUcCl25gyjnB",
+      "title": "Battle of the Agbakoba Brother's",
+      "date": "2025-06-14",
       "category": "videos",
-      "Month": "September",
-      "year": "2024"
+      "Month": "June",
+      "year": "2025"
     },
     {
       "type": "image",
-      "src": "assets/imgs/chesspic2.jpg",
-      "title": "Club Training Meetup",
-      "date": "2024-03-10",
+      "src": "assets/imgs/fcl-events/fcl-match1.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-04-20",
+      "category": "photos",
+      "Month": "April",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-player.jpg",
+      "title": "FCL Player of the Tournament",
+      "date": "2025-04-20",
+      "category": "photos",
+      "Month": "April",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match1.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-19",
       "category": "photos",
       "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match2.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-10",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match3.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-11",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match4.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-12",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match5.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-13",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match6.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-13",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match7.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-14",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match8.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-14",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match9.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-15",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match10.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-15",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match11.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match12.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match13.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match14.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match15.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match16.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match17.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/fcl-events/fcl-match18.jpg",
+      "title": "FCL Match In Progress",
+      "date": "2025-03-16",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/ecobank.jpg",
+      "title": "Ecobank Chess Competion",
+      "date": "2025-06-25",
+      "category": "photos",
+      "Month": "June",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/fcc-nse3.jpg",
+      "title": "NSE Chess Competion",
+      "date": "2025-06-10",
+      "category": "photos",
+      "Month": "June",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/fcc-nse4.jpg",
+      "title": "NSE Chess Competion",
+      "date": "2025-06-10",
+      "category": "photos",
+      "Month": "June",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/fcc-nse5.jpg",
+      "title": "NSE Chess Competion",
+      "date": "2025-06-10",
+      "category": "photos",
+      "Month": "June",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/fcc-nse6.jpg",
+      "title": "NSE Chess Competion",
+      "date": "2025-06-10",
+      "category": "photos",
+      "Month": "June",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/nacos-champ-jesse.jpg",
+      "title": "NACOS Chess Champion - Jesse",
+      "date": "2025-03-10",
+      "category": "photos",
+      "Month": "March",
+      "year": "2025"
+    },
+    {
+      "type": "image",
+      "src": "assets/imgs/event_imgs/martinsVStersee.jpg",
+      "title": "Martins vs NCC Champion - Tersee",
+      "date": "2024-10-10",
+      "category": "photos",
+      "Month": "October",
       "year": "2024"
     }
   ]

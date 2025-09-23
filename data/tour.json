@@ -1,12 +1,12 @@
 {
   "tourName": "Fupre Chess Tour",
-  "startDate": "2026-02-01",
+  "startDate": "2026-01-10",
   "endDate": "2026-03-15",
   "players": [
     {
       "id": 1,
       "name": "Godbless",
-      "photo": "images/players/godbless.png",
+      "photo": "assets/imgs/profile_pics/agent55.jpg",
       "points": 52,
       "eventsPlayed": 7,
       "bestFinish": "1st (Grand Rapid)",
@@ -15,7 +15,7 @@
     {
       "id": 2,
       "name": "Alex",
-      "photo": "images/players/alex.png",
+      "photo": "assets/imgs/profile_pics/jinwoo3.jpg",
       "points": 49,
       "eventsPlayed": 6,
       "bestFinish": "1st (Open Rapid)",
@@ -24,16 +24,16 @@
     {
       "id": 3,
       "name": "ClarkeTJ",
-      "photo": "images/players/tj.png",
+      "photo": "assets/imgs/profile_pics/TJ1.png",
       "points": 46,
       "eventsPlayed": 6,
       "bestFinish": "2nd (Grand Rapid)",
-      "status": "Qualified"
+      "status": "In Contention"
     },
     {
       "id": 4,
       "name": "Hasel",
-      "photo": "images/players/hasel.png",
+      "photo": "assets/imgs/profile_pics/agent11.jpg",
       "points": 42,
       "eventsPlayed": 6,
       "bestFinish": "2nd (Open Rapid)",
@@ -42,7 +42,7 @@
     {
       "id": 5,
       "name": "Destiny",
-      "photo": "images/players/destiny.png",
+      "photo": "assets/imgs/profile_pics/agent22.jpg",
       "points": 39,
       "eventsPlayed": 5,
       "bestFinish": "3rd (Grand Rapid)",
@@ -51,7 +51,7 @@
     {
       "id": 6,
       "name": "Chris",
-      "photo": "images/players/chris.png",
+      "photo": "assets/imgs/profile_pics/jinwoo2.jpg",
       "points": 37,
       "eventsPlayed": 5,
       "bestFinish": "3rd (Open Rapid)",
@@ -60,7 +60,7 @@
     {
       "id": 7,
       "name": "Fortune",
-      "photo": "images/players/fortune.png",
+      "photo": "assets/imgs/profile_pics/agent77.jpg",
       "points": 34,
       "eventsPlayed": 5,
       "bestFinish": "4th (Grand Rapid)",
@@ -69,7 +69,7 @@
     {
       "id": 8,
       "name": "Jesse",
-      "photo": "images/placeholder.png",
+      "photo": "assets/imgs/profile_pics/gojo2.jpg",
       "points": 31,
       "eventsPlayed": 4,
       "bestFinish": "Top 8 (Open Rapid)",
@@ -78,7 +78,7 @@
     {
       "id": 9,
       "name": "Noah",
-      "photo": "images/placeholder.png",
+      "photo": "assets/imgs/profile_pics/noah.jpg",
       "points": 29,
       "eventsPlayed": 4,
       "bestFinish": "Top 8 (Grand Rapid)",
@@ -87,16 +87,16 @@
     {
       "id": 10,
       "name": "Martins",
-      "photo": "images/placeholder.png",
-      "points": 27,
-      "eventsPlayed": 4,
-      "bestFinish": "Top 10 (Open Rapid)",
-      "status": "Not Qualified"
+      "photo": "assets/imgs/profile_pics/martins.jpg",
+      "points": 47,
+      "eventsPlayed": 7,
+      "bestFinish": "2nd (Open Rapid)",
+      "status": "Qualified"
     },
     {
       "id": 11,
       "name": "Prevail",
-      "photo": "images/placeholder.png",
+      "photo": "assets/imgs/profile_pics/gojo4.jpg",
       "points": 22,
       "eventsPlayed": 3,
       "bestFinish": "Top 12 (Open Rapid)",
@@ -105,7 +105,7 @@
     {
       "id": 12,
       "name": "Nelson",
-      "photo": "images/placeholder.png",
+      "photo": "assets/imgs/profile_pics/gojo6.jpg",
       "points": 18,
       "eventsPlayed": 2,
       "bestFinish": "Top 16 (Open Rapid)",
@@ -114,7 +114,7 @@
     {
       "id": 13,
       "name": "Draken.",
-      "photo": "images/placeholder.png",
+      "photo": "assets/imgs/profile_pics/agent44.jpg",
       "points": 15,
       "eventsPlayed": 2,
       "bestFinish": "Top 16 (Open Rapid)",
@@ -123,7 +123,7 @@
     {
       "id": 14,
       "name": "Jeffery",
-      "photo": "images/placeholder.png",
+      "photo": "assets/imgs/profile_pics/agent45.jpg",
       "points": 12,
       "eventsPlayed": 2,
       "bestFinish": "Top 20 (Open Rapid)",

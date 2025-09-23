@@ -2711,6 +2711,165 @@ body.dark .tournaments-info .note { color: #aaa; }
 
 
 
+/* ============================
+   FCC Pre-Footer (scoped)
+   Uses global theme vars: --bg, --text, --accent, --glow, --bg-soft, --border
+============================ */
+.fcc-prefooter{
+  --pf-surface: var(--bg-soft);
+  --pf-text:    var(--text);
+  --pf-accent:  var(--accent);
+  --pf-border:  var(--border);
+
+  margin: 28px auto 0;
+  padding: 12px 0 4px;
+  color: var(--pf-text);
+}
+
+.fcc-prefooter-grid{
+  max-width: 1200px;
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 0 16px 28px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
+}
+
+/* Card */
+.fcc-card{
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  padding: 16px;
+}
+
+.fcc-card-head{ margin-bottom: 10px; }
+.fcc-card-title{
+  font-weight: 800;
+  letter-spacing: .2px;
+  font-size: clamp(1.05rem, .95rem + .5vw, 1.25rem);
+  margin: 0 0 2px;
+}
+.fcc-muted{ opacity: .85; margin: 0; }
+
+/* Partner hero */
+.fcc-partner-hero{
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--pf-border);
+  background:
+    radial-gradient(80% 80% at 10% 10%, color-mix(in srgb, var(--pf-accent) 14%, transparent), transparent 60%),
+    radial-gradient(80% 80% at 90% 20%, color-mix(in srgb, var(--pf-accent) 10%, transparent), transparent 60%),
+    linear-gradient(135deg, rgba(0,0,0,.06), transparent);
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+.fcc-partner-img{
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: .9;               /* gentle overlay feel */
+  mix-blend-mode: normal;
+}
+
+/* Designer */
+.fcc-designer-head{
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.fcc-avatar{
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-weight: 900; letter-spacing: .5px;
+  color: var(--pf-accent);
+  background: color-mix(in srgb, var(--pf-accent) 12%, transparent);
+  border: 2px solid color-mix(in srgb, var(--pf-accent) 35%, transparent);
+}
+
+/* Chips */
+.fcc-chiplist{
+  list-style: none;
+  padding: 0; margin: 6px 0 12px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.fcc-chip{
+  font-size: .82rem; font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--pf-accent);
+  background: color-mix(in srgb, var(--pf-accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pf-accent) 35%, transparent);
+}
+
+/* Actions & contacts */
+.fcc-actions,
+.fcc-contact{
+  display: flex; flex-wrap: wrap; gap: 10px;
+  align-items: center;
+}
+
+.fcc-link{
+  color: var(--pf-accent);
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+/* Buttons */
+.fcc-btn{
+  appearance: none;
+  border: 1px solid var(--pf-border);
+  background: var(--pf-surface);
+  color: var(--pf-text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform .15s ease, background .2s ease, border-color .2s ease;
+}
+.fcc-btn:hover{ transform: translateY(-1px); border-color: var(--pf-accent); }
+
+.fcc-btn-accent{
+  background: var(--pf-accent);
+  color: var(--bg);
+  border-color: var(--pf-accent);
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+}
+.fcc-btn-accent:hover{
+  filter: saturate(1.05);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--pf-accent) 30%, transparent);
+}
+
+.fcc-btn-outline{
+  background: transparent;
+  color: var(--pf-accent);
+  border-color: color-mix(in srgb, var(--pf-accent) 45%, var(--pf-border));
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .fcc-prefooter-grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px){
+  .fcc-card{ padding: 14px; border-radius: 14px; }
+  .fcc-partner-hero{ min-height: 120px; }
+  .fcc-btn{ padding: 9px 12px; font-size: .95rem; }
+  .fcc-chip{ font-size: .8rem; padding: 5px 9px; }
+}
+
+
+
+
 
 
 

@@ -177,7 +177,6 @@ document.addEventListener('DOMContentLoaded', init);
 /* =========================
    Testing checklist (read & tick off manually)
    ----------------------------------------------------------------
-   - Collapsible works on desktop + mobile, remembers state (localStorage).
    - tour.json loads and table renders with 12+ players.
    - Sorting dropdown:
        * "Points" sorts by points DESC; ties broken by eventsPlayed DESC then name ASC.

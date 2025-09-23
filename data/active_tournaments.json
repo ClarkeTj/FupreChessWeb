@@ -57,7 +57,7 @@
     },
     {
       "id": "rapid2025",
-      "name": "Rapid Team Trials 2025",
+      "name": "Grand Rapid 2025",
       "timeControl": "10+0",
       "pairingSystemId": "roundrobin",
       "players": [
@@ -73,8 +73,8 @@
     },
     {
       "id": "rapid2025",
-      "name": "Rapid Team Trials 2025",
-      "timeControl": "10+0",
+      "name": "Lighting Blitz 2025",
+      "timeControl": "3+0",
       "pairingSystemId": "roundrobin",
       "players": [
         { "id": 11, "name": "Alex", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
@@ -90,7 +90,7 @@
 
     {
       "id": "rapid2025",
-      "name": "Rapid Team Trials 2025",
+      "name": "ClarkeTJ Classic 2025",
       "timeControl": "10+0",
       "pairingSystemId": "roundrobin",
       "players": [       

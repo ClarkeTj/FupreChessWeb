@@ -3,8 +3,8 @@
     "name": "Destiny",
     "department": "Chemical Eng",
     "level": 500,
-    "rapid": 2320,
-    "blitz": 2180,
+    "rapid": 2325,
+    "blitz": 2042,
     "achievements": [
       "🏆 FCC Champion",
       "⚡ 3× Lightning Blitz Winner",
@@ -15,8 +15,8 @@
     "name": "Draken",
     "department": "Pertroleum Eng",
     "level": 100,
-    "rapid": 1380,
-    "blitz": 1490,
+    "rapid": 1154,
+    "blitz": 1106,
     "achievements": [
       "⭐ Rising Star"
     ]
@@ -25,8 +25,8 @@
     "name": "Alex",
     "department": "Marine Eng",
     "level": 500,
-    "rapid": 2300,
-    "blitz": 2250,
+    "rapid": 2319,
+    "blitz": 2134,
     "achievements": [
       "🏆 2× FCC Champion",
       "⏱️ 1× Grand Rapid Winner"
@@ -37,8 +37,8 @@
     "name": "Hasel",
     "department": "Chemical Eng",
     "level": 200,
-    "rapid": 1700,
-    "blitz": 1580,
+    "rapid": 1701,
+    "blitz": 1605,
     "achievements": [
         
       "⭐ Rising Star"
@@ -50,8 +50,8 @@
     "name": "Fortune",
     "department": "Comp Sci",
     "level": 300,
-    "rapid": 1600,
-    "blitz": 1650,
+    "rapid": 1507,
+    "blitz": 1716,
     "achievements": [
       "⏱️ 1× Grand Rapid Winner"
     ]
@@ -62,8 +62,8 @@
     "name": "Jesse",
     "department": "Cyber Security",
     "level": 100,
-    "rapid": 1900,
-    "blitz": 1850,
+    "rapid": 1960,
+    "blitz": 1800,
     "achievements": [
       "⏱️ 1× Grand Rapid Winner",
       "🥇 1x NACOS Winner"
@@ -74,8 +74,8 @@
     "name": "Martins",
     "department": "Mech Eng",
     "level": 300,
-    "rapid": 2030,
-    "blitz": 2000,
+    "rapid": 1956,
+    "blitz": 2041,
     "achievements": [
         "🥇 1x NSE Winner",
         "⚡ 2× Lightning Blitz Winner",
@@ -87,7 +87,7 @@
     "name": "Noah",
     "department": "Marine Eng",
     "level": 500,
-    "rapid": 1790,
+    "rapid": 1787,
     "blitz": 1800,
     "achievements": [
             "🥇 1x FCL Winner"
@@ -98,8 +98,8 @@
     "name": "ClarkeTJ",
     "department": "Comp Sci",
     "level": 300,
-    "rapid": 1650,
-    "blitz": 1700,
+    "rapid": 1623,
+    "blitz": 1719,
     "achievements": [
       "🥇 1x FCL Winner"
     ]
@@ -110,8 +110,8 @@
     "name": "Chris",
     "department": "Comp Sci",
     "level": 400,
-    "rapid": 1450,
-    "blitz": 1470,
+    "rapid": 1471,
+    "blitz": 1526,
     "achievements": []
   },
 
@@ -120,8 +120,8 @@
     "name": "Nelson",
     "department": "SLT",
     "level": 200,
-    "rapid": 1430,
-    "blitz": 1400,
+    "rapid": 1391,
+    "blitz": 1414,
     "achievements": []
   },
 
@@ -130,8 +130,8 @@
     "name": "Prevail",
     "department": "Mech Eng",
     "level": 500,
-    "rapid": 1750,
-    "blitz": 1670,
+    "rapid": 1929,
+    "blitz": 1658,
     "achievements": []
   },
 
@@ -140,8 +140,8 @@
     "name": "Orukpe",
     "department": "Elect Eng",
     "level": 300,
-    "rapid": 1050,
-    "blitz": 1070,
+    "rapid": 1011,
+    "blitz": 906,
     "achievements": []
   },
 
@@ -184,7 +184,81 @@
     "blitz": 899,
     "achievements": []
   },
-
+  
+  {
+    "name": "Vertex",
+    "department": "Comp Sci",
+    "level": 200,
+    "rapid": 800,
+    "blitz": 899,
+    "achievements": []
+  },
+  
+  {
+    "name": "Tsegbemi",
+    "department": "Pertroleum Eng",
+    "level": 500,
+    "rapid": 1753,
+    "blitz": 1709,
+    "achievements": [
+      "🥇 1x FCL Winner"
+    ]
+  },
+  
+  {
+    "name": "Uzezi",
+    "department": "Comp Sci",
+    "level": 100,
+    "rapid": 1702,
+    "blitz": 1600,
+    "achievements": []
+  },
+  
+  {
+    "name": "Joel",
+    "department": "Chemical Eng",
+    "level": 500,
+    "rapid": 1399,
+    "blitz": 1400,
+    "achievements": []
+  },
+  
+  {
+    "name": "Samson",
+    "department": "Comp Sci",
+    "level": 200,
+    "rapid": 1262,
+    "blitz": 1299,
+    "achievements": []
+  },
+  
+  {
+    "name": "Distinct",
+    "department": "EMT",
+    "level": 300,
+    "rapid": 1218,
+    "blitz": 1200,
+    "achievements": []
+  },
+  
+  {
+    "name": "Ewoma",
+    "department": "Elect Eng",
+    "level": 300,
+    "rapid": 1004,
+    "blitz": 1000,
+    "achievements": []
+  },
+  
+  {
+    "name": "Caleb",
+    "department": "Chemical Eng",
+    "level": 100,
+    "rapid": 710,
+    "blitz": 710,
+    "achievements": []
+  },
+  
   {
     "name": "Godbless",
     "department": "Mech Eng",
