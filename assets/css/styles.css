@@ -2710,10 +2710,8 @@ body.dark .tournaments-info .note { color: #aaa; }
 
 
 
-
 /* ============================
-   FCC Pre-Footer (scoped)
-   Uses global theme vars: --bg, --text, --accent, --glow, --bg-soft, --border
+   FCC Pre-Footer Section
 ============================ */
 .fcc-prefooter{
   --pf-surface: var(--bg-soft);
@@ -2724,6 +2722,7 @@ body.dark .tournaments-info .note { color: #aaa; }
   margin: 28px auto 0;
   padding: 12px 0 4px;
   color: var(--pf-text);
+  overflow-x: clip;      
 }
 
 .fcc-prefooter-grid{
@@ -2743,6 +2742,8 @@ body.dark .tournaments-info .note { color: #aaa; }
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0,0,0,.08);
   padding: 16px;
+  max-width: 100%;             /* guard against accidental overflow */
+  overflow: hidden;            /* shadows/inner content can't cause scroll */
 }
 
 .fcc-card-head{ margin-bottom: 10px; }
@@ -2754,7 +2755,7 @@ body.dark .tournaments-info .note { color: #aaa; }
 }
 .fcc-muted{ opacity: .85; margin: 0; }
 
-/* Partner hero */
+/* Partner hero (fixed aspect ratio so images can't break layout) */
 .fcc-partner-hero{
   position: relative;
   overflow: hidden;
@@ -2764,18 +2765,22 @@ body.dark .tournaments-info .note { color: #aaa; }
     radial-gradient(80% 80% at 10% 10%, color-mix(in srgb, var(--pf-accent) 14%, transparent), transparent 60%),
     radial-gradient(80% 80% at 90% 20%, color-mix(in srgb, var(--pf-accent) 10%, transparent), transparent 60%),
     linear-gradient(135deg, rgba(0,0,0,.06), transparent);
-  min-height: 140px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 12px;
+  aspect-ratio: 16 / 9;        /* ✅ locks the frame size */
+  min-height: 140px;           /* graceful floor for very narrow screens */
+  display: block;
+  margin: 0 0 12px;
 }
 
 .fcc-partner-img{
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
-  opacity: .9;               /* gentle overlay feel */
-  mix-blend-mode: normal;
+  display: block;              /* no extra inline gap */
+  width: 100%;
+  height: 100%;
+  object-fit: fill;           /* fill the frame without distortion */
+  object-position: center;
+  max-width: none;             /* override any global max-width rules */
+  opacity: .95;
+  pointer-events: none;        /* image won’t catch taps/long-press */
+  -webkit-user-drag: none;
 }
 
 /* Designer */
@@ -2821,6 +2826,7 @@ body.dark .tournaments-info .note { color: #aaa; }
   color: var(--pf-accent);
   text-decoration: underline;
   word-break: break-word;
+  overflow-wrap: anywhere;     /* long emails/urls won’t push width */
 }
 
 /* Buttons */
@@ -2835,6 +2841,7 @@ body.dark .tournaments-info .note { color: #aaa; }
   text-decoration: none;
   display: inline-flex; align-items: center; justify-content: center;
   transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  max-width: 100%;
 }
 .fcc-btn:hover{ transform: translateY(-1px); border-color: var(--pf-accent); }
 
@@ -2862,9 +2869,11 @@ body.dark .tournaments-info .note { color: #aaa; }
 
 @media (max-width: 520px){
   .fcc-card{ padding: 14px; border-radius: 14px; }
-  .fcc-partner-hero{ min-height: 120px; }
+  .fcc-partner-hero{ aspect-ratio: 16 / 9; min-height: 120px; }
   .fcc-btn{ padding: 9px 12px; font-size: .95rem; }
   .fcc-chip{ font-size: .8rem; padding: 5px 9px; }
+  .fcc-actions, .fcc-contact{ justify-content: center; }
+  .fcc-contact .fcc-btn{ width: 100%; }      /* full-width buttons on phones */
 }
 
 
