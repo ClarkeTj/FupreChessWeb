@@ -362,14 +362,15 @@ function fireMiniConfetti(container) {
 
 
 
-
 /* =========================================
-   Developer Credit Widget (Celebrate only)
+         Developer Credit Widget 
 ========================================= */
 (function devCredit(){
   if (document.getElementById('dev-credit')) return; // avoid duplicates
 
-  // 👉 Change this line to any tagline you like
+  // 🔧 Change this to your real portfolio URL
+  const PORTFOLIO_URL = 'https://clarketj.github.io/clarketj-portfolio/';
+
   const DEV_TAGLINE = 'Code the plan. Checkmate the bugs.';
 
   const wrap = document.createElement('div');
@@ -390,6 +391,8 @@ function fireMiniConfetti(container) {
         <button class="btn" id="dev-close" aria-label="Close">×</button>
       </div>
       <div class="actions">
+        <a class="btn btn-accent" id="dev-about" href="${PORTFOLIO_URL}"
+           target="_blank" rel="noopener">About me</a>
         <button class="btn" id="dev-celebrate" title="Celebrate">Spark! ✨</button>
       </div>
     </div>
@@ -400,6 +403,7 @@ function fireMiniConfetti(container) {
   const panel        = wrap.querySelector('#dev-credit-panel');
   const closeBtn     = wrap.querySelector('#dev-close');
   const celebrateBtn = wrap.querySelector('#dev-celebrate');
+  const aboutBtn     = wrap.querySelector('#dev-about');
 
   function setOpen(open){
     wrap.classList.toggle('open', open);
@@ -434,4 +438,8 @@ function fireMiniConfetti(container) {
       {duration: 400}
     );
   });
+
+  // optional: close the panel after opening the portfolio
+  aboutBtn?.addEventListener('click', () => setTimeout(() => setOpen(false), 50));
 })();
+

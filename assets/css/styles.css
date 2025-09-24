@@ -2593,10 +2593,6 @@ body.dark .tournaments-info .note { color: #aaa; }
 }
 
 
-
-
-
-
 /* =========================
    Developer Credit Widget
 ========================= */
@@ -2680,8 +2676,10 @@ body.dark .tournaments-info .note { color: #aaa; }
 
 .dev-credit .actions{
   display: flex;
+  flex-wrap: wrap;
   gap: .5rem;
   margin-top: .6rem;
+  justify-content: flex-end;
 }
 
 .dev-credit .btn{
@@ -2692,7 +2690,11 @@ body.dark .tournaments-info .note { color: #aaa; }
   padding: .45rem .7rem;
   font-size: .9rem;
   cursor: pointer;
-  transition: background .2s, transform .08s;
+  transition: background .2s, transform .08s, color .2s, border-color .2s;
+  text-decoration: none; /* so <a> looks like button */
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
 }
 .dev-credit .btn:hover{
   background: var(--accent);
@@ -2700,12 +2702,21 @@ body.dark .tournaments-info .note { color: #aaa; }
 }
 .dev-credit .btn:active{ transform: translateY(1px); }
 
+/* accent style for primary CTA (About me) */
+.dev-credit .btn-accent{
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.dev-credit .btn-accent:hover{
+  filter: saturate(1.05);
+}
+
 @media (max-width: 600px){
   .dev-credit{ right: 12px; }
   .dev-credit .chip{ font-size: .9rem; padding: .5rem .7rem; }
   .dev-credit .panel{ width: min(96vw, 320px); }
 }
-
 
 
 
