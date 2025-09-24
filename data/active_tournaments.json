@@ -90,8 +90,8 @@
 
     {
       "id": "rapid2025",
-      "name": "ClarkeTJ Classic 2025",
-      "timeControl": "10+0",
+      "name": "Classic TJ 2025",
+      "timeControl": "10+30",
       "pairingSystemId": "roundrobin",
       "players": [       
         { "id": 11, "name": "Alex", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },

@@ -58,9 +58,9 @@
       "type": "image",
       "src": "assets/imgs/fcl-events/fcl-match1.jpg",
       "title": "FCL Match In Progress",
-      "date": "2025-04-20",
+      "date": "2025-03-20",
       "category": "photos",
-      "Month": "April",
+      "Month": "March",
       "year": "2025"
     },
     {
@@ -72,15 +72,7 @@
       "Month": "April",
       "year": "2025"
     },
-    {
-      "type": "image",
-      "src": "assets/imgs/fcl-events/fcl-match1.jpg",
-      "title": "FCL Match In Progress",
-      "date": "2025-03-19",
-      "category": "photos",
-      "Month": "March",
-      "year": "2025"
-    },
+    
     {
       "type": "image",
       "src": "assets/imgs/fcl-events/fcl-match2.jpg",
