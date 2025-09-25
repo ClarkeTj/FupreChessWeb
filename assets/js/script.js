@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
 /* ---------- Active nav link ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const currentPath = window.location.pathname.split("/").pop();
@@ -442,4 +443,122 @@ function fireMiniConfetti(container) {
   // optional: close the panel after opening the portfolio
   aboutBtn?.addEventListener('click', () => setTimeout(() => setOpen(false), 50));
 })();
+
+
+
+
+/* ================================
+   Google Analytics Custom Tracking
+   ================================ */
+
+function trackEvent(eventName, params = {}) {
+  if (typeof gtag === "function") {
+    gtag("event", eventName, params);
+    console.log("GA Event:", eventName, params);
+  } else {
+    console.warn("gtag not found – GA event not sent:", eventName);
+  }
+}
+
+// 1. Dark Mode Toggle
+document.getElementById("dark-toggle")?.addEventListener("click", () => {
+  trackEvent("dark_mode_toggle", {
+    event_category: "ui_interaction",
+    event_label: "Dark Mode Button"
+  });
+});
+
+// 2. Navbar Link Clicks
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    trackEvent("nav_click", {
+      event_category: "navigation",
+      event_label: link.textContent.trim()
+    });
+  });
+});
+
+// 3. Gallery Interactions
+document.querySelectorAll(".gallery-item img").forEach(img => {
+  img.addEventListener("click", () => {
+    trackEvent("gallery_open", {
+      event_category: "engagement",
+      event_label: img.alt || "Unnamed Image"
+    });
+  });
+});
+
+// 4. Quote Button
+document.getElementById("next-quote")?.addEventListener("click", () => {
+  trackEvent("quote_refresh", {
+    event_category: "engagement",
+    event_label: "Quote Button Click"
+  });
+});
+
+// 5. Countdown Section Viewed
+const countdownSection = document.querySelector(".countdown-section");
+if (countdownSection) {
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(e => e.isIntersecting)) {
+      trackEvent("countdown_viewed", {
+        event_category: "content",
+        event_label: "Countdown Section"
+      });
+      observer.disconnect();
+    }
+  }, { threshold: 0.5 });
+  observer.observe(countdownSection);
+}
+
+// 6. Event Sign-Up Buttons
+document.querySelectorAll(".events .btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const eventName = btn.closest(".card")?.querySelector("h3")?.textContent.trim() || "Unknown Event";
+    trackEvent("register_click", {
+      event_category: "conversion",
+      event_label: eventName
+    });
+  });
+});
+
+// 7. Partner Site Click
+document.querySelector(".fcc-partner a.fcc-btn")?.addEventListener("click", () => {
+  trackEvent("partner_site_visit", {
+    event_category: "outbound",
+    event_label: "Fupre Sports Media"
+  });
+});
+
+// 8. Contact Links
+document.querySelectorAll(".fcc-contact a, .footer-contact a").forEach(link => {
+  link.addEventListener("click", () => {
+    trackEvent("contact_click", {
+      event_category: "engagement",
+      event_label: link.textContent.trim()
+    });
+  });
+});
+
+// 9. Developer Credit Widget
+document.getElementById("dev-credit-toggle")?.addEventListener("click", () => {
+  trackEvent("dev_credit_toggle", {
+    event_category: "ui_interaction",
+    event_label: "Dev Widget Toggle"
+  });
+});
+
+document.getElementById("dev-celebrate")?.addEventListener("click", () => {
+  trackEvent("dev_credit_celebrate", {
+    event_category: "engagement",
+    event_label: "Celebrate Spark"
+  });
+});
+
+document.getElementById("dev-about")?.addEventListener("click", () => {
+  trackEvent("dev_credit_about", {
+    event_category: "outbound",
+    event_label: "About Me Portfolio"
+  });
+});
 

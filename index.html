@@ -81,7 +81,14 @@
         <div class="card">
           <h3>Lightning Blitz</h3>
           <p>Date: Janurary 16, 2026</p>
-          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Register</a>
+          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" 
+          target="_blank"
+           class="btn" 
+          onclick="gtag('event', 'register_click', {
+      event_category: 'engagement',
+      event_label: 'Lightning Blitz Registration',
+      value: 1
+   });">Register</a>
         </div>
         <div class="card">
           <h3>Training Session</h3>
