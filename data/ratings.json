@@ -2,7 +2,7 @@
   {
     "name": "Destiny",
     "department": "Chemical Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 2325,
     "blitz": 2042,
     "achievements": [
@@ -14,7 +14,7 @@
   {
     "name": "Draken",
     "department": "Pertroleum Eng",
-    "level": 100,
+    "level": 200,
     "rapid": 1154,
     "blitz": 1106,
     "achievements": [
@@ -24,7 +24,7 @@
   {
     "name": "Alex",
     "department": "Marine Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 2319,
     "blitz": 2134,
     "achievements": [
@@ -36,7 +36,7 @@
     {
     "name": "Hasel",
     "department": "Chemical Eng",
-    "level": 200,
+    "level": 300,
     "rapid": 1701,
     "blitz": 1605,
     "achievements": [
@@ -49,7 +49,7 @@
     {
     "name": "Fortune",
     "department": "Comp Sci",
-    "level": 300,
+    "level": 400,
     "rapid": 1507,
     "blitz": 1716,
     "achievements": [
@@ -61,7 +61,7 @@
     {
     "name": "Jesse",
     "department": "Cyber Security",
-    "level": 100,
+    "level": 200,
     "rapid": 1960,
     "blitz": 1800,
     "achievements": [
@@ -73,7 +73,7 @@
     {
     "name": "Martins",
     "department": "Mech Eng",
-    "level": 300,
+    "level": 400,
     "rapid": 1956,
     "blitz": 2041,
     "achievements": [
@@ -86,7 +86,7 @@
   {
     "name": "Noah",
     "department": "Marine Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 1787,
     "blitz": 1800,
     "achievements": [
@@ -97,7 +97,7 @@
   {
     "name": "ClarkeTJ",
     "department": "Comp Sci",
-    "level": 300,
+    "level": 400,
     "rapid": 1623,
     "blitz": 1719,
     "achievements": [
@@ -109,7 +109,7 @@
   {
     "name": "Chris",
     "department": "Comp Sci",
-    "level": 400,
+    "level": "Alumni",
     "rapid": 1471,
     "blitz": 1526,
     "achievements": []
@@ -119,7 +119,7 @@
   {
     "name": "Nelson",
     "department": "SLT",
-    "level": 200,
+    "level": 300,
     "rapid": 1391,
     "blitz": 1414,
     "achievements": []
@@ -129,7 +129,7 @@
   {
     "name": "Prevail",
     "department": "Mech Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 1929,
     "blitz": 1658,
     "achievements": []
@@ -139,7 +139,7 @@
   {
     "name": "Orukpe",
     "department": "Elect Eng",
-    "level": 300,
+    "level": 400,
     "rapid": 1011,
     "blitz": 906,
     "achievements": []
@@ -149,7 +149,7 @@
   {
     "name": "Worship",
     "department": "EMT",
-    "level": 300,
+    "level": 400,
     "rapid": 1624,
     "blitz": 1700,
     "achievements": []
@@ -159,7 +159,7 @@
   {
     "name": "God's Power",
     "department": "Chemistry",
-    "level": 300,
+    "level": 400,
     "rapid": 1382,
     "blitz": 1396,
     "achievements": []
@@ -186,18 +186,9 @@
   },
   
   {
-    "name": "Vertex",
-    "department": "Comp Sci",
-    "level": 200,
-    "rapid": 800,
-    "blitz": 899,
-    "achievements": []
-  },
-  
-  {
     "name": "Tsegbemi",
     "department": "Pertroleum Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 1753,
     "blitz": 1709,
     "achievements": [
@@ -208,7 +199,7 @@
   {
     "name": "Uzezi",
     "department": "Comp Sci",
-    "level": 100,
+    "level": 200,
     "rapid": 1702,
     "blitz": 1600,
     "achievements": []
@@ -217,7 +208,7 @@
   {
     "name": "Joel",
     "department": "Chemical Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 1399,
     "blitz": 1400,
     "achievements": []
@@ -226,7 +217,7 @@
   {
     "name": "Samson",
     "department": "Comp Sci",
-    "level": 200,
+    "level": 300,
     "rapid": 1262,
     "blitz": 1299,
     "achievements": []
@@ -235,7 +226,7 @@
   {
     "name": "Distinct",
     "department": "EMT",
-    "level": 300,
+    "level": 400,
     "rapid": 1218,
     "blitz": 1200,
     "achievements": []
@@ -244,7 +235,7 @@
   {
     "name": "Ewoma",
     "department": "Elect Eng",
-    "level": 300,
+    "level": 400,
     "rapid": 1004,
     "blitz": 1000,
     "achievements": []
@@ -253,7 +244,7 @@
   {
     "name": "Caleb",
     "department": "Chemical Eng",
-    "level": 100,
+    "level": 200,
     "rapid": 710,
     "blitz": 710,
     "achievements": []
@@ -262,7 +253,7 @@
   {
     "name": "Godbless",
     "department": "Mech Eng",
-    "level": 500,
+    "level": "Alumni",
     "rapid": 1830,
     "blitz": 1800,
     "achievements": [
