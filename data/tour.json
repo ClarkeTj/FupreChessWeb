@@ -10,25 +10,25 @@
       "points": 52,
       "eventsPlayed": 7,
       "bestFinish": "1st (Grand Rapid)",
-      "status": "Qualified"
+      "status": "In Contention"
     },
     {
       "id": 2,
       "name": "Alex",
       "photo": "assets/imgs/profile_pics/jinwoo3.jpg",
-      "points": 49,
+      "points": 57,
       "eventsPlayed": 6,
-      "bestFinish": "1st (Open Rapid)",
+      "bestFinish": "1st (⚡Blitz)",
       "status": "Qualified"
     },
     {
       "id": 3,
       "name": "ClarkeTJ",
       "photo": "assets/imgs/profile_pics/TJ1.png",
-      "points": 46,
-      "eventsPlayed": 6,
+      "points": 52,
+      "eventsPlayed": 7,
       "bestFinish": "2nd (Grand Rapid)",
-      "status": "In Contention"
+      "status": "Qualified"
     },
     {
       "id": 4,
@@ -36,16 +36,16 @@
       "photo": "assets/imgs/profile_pics/agent11.jpg",
       "points": 42,
       "eventsPlayed": 6,
-      "bestFinish": "2nd (Open Rapid)",
+      "bestFinish": "1st (Grand Rapid)",
       "status": "In Contention"
     },
     {
       "id": 5,
       "name": "Destiny",
       "photo": "assets/imgs/profile_pics/agent22.jpg",
-      "points": 39,
-      "eventsPlayed": 5,
-      "bestFinish": "3rd (Grand Rapid)",
+      "points": 50,
+      "eventsPlayed": 6,
+      "bestFinish": "2nd (Grand Rapid)",
       "status": "In Contention"
     },
     {
@@ -54,7 +54,7 @@
       "photo": "assets/imgs/profile_pics/jinwoo2.jpg",
       "points": 37,
       "eventsPlayed": 5,
-      "bestFinish": "3rd (Open Rapid)",
+      "bestFinish": "4th (⚡Blitz)",
       "status": "In Contention"
     },
     {
@@ -70,10 +70,10 @@
       "id": 8,
       "name": "Jesse",
       "photo": "assets/imgs/profile_pics/gojo2.jpg",
-      "points": 31,
-      "eventsPlayed": 4,
-      "bestFinish": "Top 8 (Open Rapid)",
-      "status": "Not Qualified"
+      "points": 39,
+      "eventsPlayed": 5,
+      "bestFinish": "3rd (⚡Blitz)",
+      "status": "In Contention"
     },
     {
       "id": 9,
@@ -88,9 +88,9 @@
       "id": 10,
       "name": "Martins",
       "photo": "assets/imgs/profile_pics/martins.jpg",
-      "points": 47,
+      "points": 55,
       "eventsPlayed": 7,
-      "bestFinish": "2nd (Open Rapid)",
+      "bestFinish": "1st (⚡Blitz)",
       "status": "Qualified"
     },
     {
@@ -99,7 +99,7 @@
       "photo": "assets/imgs/profile_pics/gojo4.jpg",
       "points": 22,
       "eventsPlayed": 3,
-      "bestFinish": "Top 12 (Open Rapid)",
+      "bestFinish": "Top 12 (⚡Blitz)",
       "status": "Not Qualified"
     },
     {
@@ -108,7 +108,7 @@
       "photo": "assets/imgs/profile_pics/gojo6.jpg",
       "points": 18,
       "eventsPlayed": 2,
-      "bestFinish": "Top 16 (Open Rapid)",
+      "bestFinish": "Top 16 (⚡Blitz)",
       "status": "Not Qualified"
     },
     {
@@ -117,7 +117,7 @@
       "photo": "assets/imgs/profile_pics/agent44.jpg",
       "points": 15,
       "eventsPlayed": 2,
-      "bestFinish": "Top 16 (Open Rapid)",
+      "bestFinish": "Top 16 (Grand Rapid)",
       "status": "Not Qualified"
     },
     {
@@ -126,7 +126,7 @@
       "photo": "assets/imgs/profile_pics/agent45.jpg",
       "points": 12,
       "eventsPlayed": 2,
-      "bestFinish": "Top 20 (Open Rapid)",
+      "bestFinish": "Top 20 (⚡Blitz)",
       "status": "Not Qualified"
     }
   ]

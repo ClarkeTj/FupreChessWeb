@@ -2,31 +2,33 @@
   "completedTournaments": [
     {
       "id": "rapid2024",
-      "name": "Rapid Tournament 2024",
+      "name": "Grand Rapid Tournament 2024",
       "finalStandings": [
-        { "name": "Hasel", "points": 5 },
-        { "name": "Alex", "points": 3 },
-        { "name": "Destiny", "points": 2.5 },
-        { "name": "ClarkeTJ", "points": 1.5 },
-        { "name": "Martins", "points": 1.5 },
-        { "name": "Noah", "points": 1.5 },
-        { "name": "Jesse", "points": 1.5 },
-        { "name": "Fortune", "points": 1.5 },
-        { "name": "Chris", "points": 1.5 }
+        { "name": "Hasel", "points": 11 },
+        { "name": "Alex", "points": 10 },
+        { "name": "Destiny", "points": 9.5 },
+        { "name": "ClarkeTJ", "points": 9.5 },
+        { "name": "Martins", "points": 8 },
+        { "name": "Noah", "points": 7 },
+        { "name": "Jesse", "points": 6.5 },
+        { "name": "Fortune", "points": 5 },
+        { "name": "Chris", "points": 1.5 },
+        { "name": "Draken", "points": 0.5 },
+        { "name": "Vertex", "points": 0 }
       ]
     },
     {
       "id": "rapid2024",
-      "name": "Rapid Tournament 2024",
+      "name": "⚡Blitz Tournament 2024",
       "finalStandings": [
-        { "name": "Hasel", "points": 5 },
-        { "name": "Alex", "points": 3 },
-        { "name": "Destiny", "points": 2.5 },
-        { "name": "ClarkeTJ", "points": 1.5 },
-        { "name": "Martins", "points": 1.5 },
-        { "name": "Noah", "points": 1.5 },
-        { "name": "Jesse", "points": 1.5 },
-        { "name": "Fortune", "points": 1.5 },
+        { "name": "Martins", "points": 8.5 },
+        { "name": "Alex", "points": 8 },
+        { "name": "Destiny", "points": 8 },
+        { "name": "ClarkeTJ", "points": 7.5 },
+        { "name": "Hasel", "points": 5.5 },
+        { "name": "Noah", "points": 5 },
+        { "name": "Jesse", "points": 5 },
+        { "name": "Fortune", "points": 4.5 },
         { "name": "Chris", "points": 1.5 }
       ]
     }
