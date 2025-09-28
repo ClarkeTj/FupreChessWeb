@@ -2105,6 +2105,31 @@
       "event": "FCL",
       "timeControl": "Rapid"
     },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
+      "event": "Rated Match",
+      "timeControl": "Rapid"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
+      "event": "Rated Match",
+      "timeControl": "Rapid"
+    },
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3301,6 +3326,46 @@
       "playerB": "Hasel",
       "result": "1 - 0",
       "date": "2025-09-26",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Chris",
+      "result": "1 - 0",
+      "date": "2025-09-27",
       "event": "Rated Match",
       "timeControl": "Blitz"
     },
