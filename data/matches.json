@@ -2217,7 +2217,30 @@
       "event": "Rated Match",
       "timeControl": "Rapid"
     },
-
+{
+      "playerA": "Jesse",
+      "playerB": "ClarkeTJ",
+      "result": "1 - 0",
+      "date": "2025-05-17",
+      "event": "NACOS CHAMPIONSHIP",
+      "timeControl": "Rapid"
+    },
+{
+      "playerA": "Jesse",
+      "playerB": "Fortune",
+      "result": "1 - 0",
+      "date": "2025-05-17",
+      "event": "NACOS CHAMPIONSHIP",
+      "timeControl": "Rapid"
+    },
+{
+      "playerA": "ClarkeTJ",
+      "playerB": "Fortune",
+      "result": "1 - 0",
+      "date": "2025-05-17",
+      "event": "NACOS CHAMPIONSHIP",
+      "timeControl": "Rapid"
+    },
 
 
 

@@ -38,8 +38,8 @@
     "name": "Hasel",
     "department": "Chemical Eng",
     "level": 300,
-    "rapid": 1701,
-    "blitz": 1605,
+    "rapid": 1683,
+    "blitz": 1646,
     "achievements": [
         
       "⭐ Rising Star"
@@ -63,8 +63,8 @@
     "name": "Jesse",
     "department": "Cyber Security",
     "level": 200,
-    "rapid": 1960,
-    "blitz": 1800,
+    "rapid": 1928,
+    "blitz": 1794,
     "achievements": [
       "⏱️ 2× Grand Rapid Winner",
       "🥇 1x NACOS Winner"
@@ -75,8 +75,8 @@
     "name": "Martins",
     "department": "Mech Eng",
     "level": 400,
-    "rapid": 1956,
-    "blitz": 2041,
+    "rapid": 1968,
+    "blitz": 1968,
     "achievements": [
         "🥇 1x NSE Winner",
         "⚡ 9× Lightning Blitz Winner",
@@ -111,8 +111,8 @@
     "name": "Chris",
     "department": "Comp Sci",
     "level": "Alumni",
-    "rapid": 1471,
-    "blitz": 1526,
+    "rapid": 1469,
+    "blitz": 1544,
     "achievements": []
   },
 
@@ -121,7 +121,7 @@
     "name": "Nelson",
     "department": "SLT",
     "level": 300,
-    "rapid": 1391,
+    "rapid": 1431,
     "blitz": 1414,
     "achievements": []
   },
@@ -255,8 +255,8 @@
     "name": "Godbless",
     "department": "Mech Eng",
     "level": "Alumni",
-    "rapid": 1830,
-    "blitz": 1800,
+    "rapid": 1803,
+    "blitz": 1731,
     "achievements": [
       "⏱️ 1× Grand Rapid Winner"
     ]
