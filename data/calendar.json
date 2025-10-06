@@ -2,76 +2,58 @@
   "year": 2026,
   "months": [
     {
+      "month": "December",
+      "weekly": "Lightning Blitz (Fridays)",
+      "monthly": "Grand Rapid (19th)",
+      "events": "Semester opening; Training resumes; Welcome Blitz Arena."
+    },
+    {
       "month": "January",
       "weekly": "Lightning Blitz (Fridays)",
       "monthly": "Grand Rapid (31st)",
-      "events": "Training meetups resume after holidays, Strategy workshops."
+      "events": "Mid-semester tournaments; Strategy workshops; Rapid & Blitz practice."
     },
     {
       "month": "February",
       "weekly": "Lightning Blitz (Fridays)",
-      "monthly": "Grand Rapid (28th)",
-      "events": " Grand Swiss | Classic TJ"
+      "monthly": "Grand Rapid (21st)",
+      "events": "Grand Swiss | Classic TJ; FCM 8-player Candidates (~1 week)."
     },
     {
       "month": "March",
-      "weekly": "Lightning Blitz (Fridays)",
-      "monthly": "Grand Rapid (28th)",
-      "events": "FCM – 8 players Candidates (~1 week)."
+      "weekly": "–",
+      "monthly": "–",
+      "events": "Off-season rest; Training camps;"
     },
     {
       "month": "April",
       "weekly": "Lightning Blitz (Fridays)",
       "monthly": "–",
-      "events": "FCC – Rapid (10 days) + Blitz (≤3 days). Closing ceremony."
+      "events": "FCC Rapid (10 days) + Blitz (≤3 days). Commencing immediately after exams."
     },
     {
       "month": "May",
       "weekly": "Lightning Blitz (Fridays)",
       "monthly": "Grand Rapid (30th)",
-      "events": "Fun blitz simuls before exams"
+      "events": "FCL begins – semester-long league. Opening ceremony."
     },
     {
       "month": "June",
-      "weekly": "–",
+      "weekly": "Lightning Blitz (Fridays)",
       "monthly": "Grand Rapid (27th)",
-      "events": "Summer casuals: simuls, analysis, meetups"
+      "events": "FCL ongoing + weekly training & puzzle rush."
     },
     {
       "month": "July",
-      "weekly": "–",
+      "weekly": "Lightning Blitz (Fridays)",
       "monthly": "Grand Rapid (25th)",
-      "events": "Summer training camp"
+      "events": "Semester closing:FCL Finals → League Champion crowned."
     },
     {
       "month": "August",
       "weekly": "–",
       "monthly": "Grand Rapid (29th)",
-      "events": "End-of-break friendlies"
-    },
-    {
-      "month": "September",
-      "weekly": "Lightning Blitz (Fridays)",
-      "monthly": "Grand Rapid (26th)",
-      "events": "FCL begins – semester-long league. Opening ceremony"
-    },
-    {
-      "month": "October",
-      "weekly": "Lightning Blitz (Fridays)",
-      "monthly": "Grand Rapid (31st)",
-      "events": "FCL ongoing + training"
-    },
-    {
-      "month": "November",
-      "weekly": "Lightning Blitz (Fridays)",
-      "monthly": "Grand Rapid (28th)",
-      "events": "FCL ongoing + puzzle rush & simuls"
-    },
-    {
-      "month": "December",
-      "weekly": "Lightning Blitz (Fridays)",
-      "monthly": "Grand Rapid (19th)*",
-      "events": "FCL concludes → League Champion crowned. End-of-year awards party"
+      "events": "End-of-break friendlies, analysis meetups; Recruitment drive."
     }
   ]
 }
