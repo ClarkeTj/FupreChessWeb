@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { text: "The Chess speaks for itself.", author: "Hans Niemann" },
     { text: "Every chess master was once a beginner.", author: "Irving Chernev" },
     { text: "The blunders are all there on the board, waiting to be made.", author: "Savielly Tartakower" },
+    { text: "Chess is a contributor to the net human unhappiness, since the pleasure of victory is greatly exceeded by the pain of defeat.", author: "Bill Hartston" },
     { text: "Play the opening like a book, the middlegame like a magician, and the endgame like a machine.", author: "Rudolf Spielmann" }
   ];
 
