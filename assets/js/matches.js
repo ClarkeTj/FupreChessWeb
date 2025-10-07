@@ -326,3 +326,152 @@
     `;
   }
 })();
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const res = await fetch("data/matches.json");
+    let matches = await res.json();
+
+    // ✅ Handle both {matches: [...]} or [...] formats
+    if (matches.matches) matches = matches.matches;
+
+    const total = matches.length || 0;
+    const blitz = matches.filter(m => m.timeControl?.toLowerCase() === "blitz").length;
+    const rapid = matches.filter(m => m.timeControl?.toLowerCase() === "rapid").length;
+
+    // Animated count-up function
+    const animateCount = (el, value, duration = 1200) => {
+      if (!el) return;
+      let start = 0;
+      const stepTime = Math.max(Math.floor(duration / (value || 1)), 20);
+      const timer = setInterval(() => {
+        start += 1;
+        el.textContent = start;
+        if (start >= value) clearInterval(timer);
+      }, stepTime);
+    };
+
+    animateCount(document.getElementById("totalMatches"), total);
+    animateCount(document.getElementById("blitzCount"), blitz);
+    animateCount(document.getElementById("rapidCount"), rapid);
+
+  } catch (err) {
+    console.error("Error loading match data:", err);
+  }
+});
+
+
+
+(function(){
+  const q = (s,el=document)=>el.querySelector(s);
+  const qa = (s,el=document)=>[...el.querySelectorAll(s)];
+
+  async function loadMatches() {
+    const res = await fetch("data/matches.json");
+    let data = await res.json();
+    const matches = Array.isArray(data) ? data : (data.matches || []);
+
+    const normalizeTC = v => (v||"").toString().trim().toLowerCase();
+    const total = matches.length;
+    const blitz = matches.filter(m => normalizeTC(m.timeControl)==="blitz").length;
+    const rapid = matches.filter(m => normalizeTC(m.timeControl)==="rapid").length;
+
+    // Latest date
+    const latest = matches.reduce((max,m)=>{
+      const d = Date.parse(m.date || "");
+      return isNaN(d) ? max : Math.max(max,d);
+    }, 0);
+
+    // Animate numbers (already present in your code)
+    const animateCount = (el, value, duration = 1200) => {
+      if (!el) return;
+      let start = 0;
+      const step = Math.max(Math.floor(duration / Math.max(value,1)), 18);
+      const t = setInterval(()=>{ start++; el.textContent = start; if (start>=value) clearInterval(t); }, step);
+    };
+    animateCount(q("#totalMatches"), total);
+    animateCount(q("#blitzCount"), blitz);
+    animateCount(q("#rapidCount"), rapid);
+
+    // Percentages + bars
+    const pct = (n)=> total ? Math.round((n/total)*100) : 0;
+    const pTotal = 100, pBlitz = pct(blitz), pRapid = pct(rapid);
+
+    const setText = (sel, txt)=>{ const el=q(sel); if(el) el.textContent = txt; };
+    setText("#pctTotal", `${pTotal}% of dataset`);
+    setText("#pctBlitz", `${pBlitz}% of total`);
+    setText("#pctRapid", `${pRapid}% of total`);
+
+    const w = (sel, val)=>{ const el=q(sel); if(el) el.style.width = val + "%"; };
+    w("#barTotal", pTotal);
+    w("#barBlitz", pBlitz);
+    w("#barRapid", pRapid);
+
+    if (latest) {
+      const d = new Date(latest);
+      setText("#latestDate", d.toISOString().slice(0,10)); // YYYY-MM-DD
+    }
+
+    // Click-to-filter — non-invasive (hides cards by timeControl)
+    const setActive = (which)=>{
+      qa(".match-counter .counter-item").forEach(i=>i.classList.toggle("active", i.dataset.filter===which));
+    };
+
+    const detectAndTagCards = ()=>{
+      // Tag existing rendered cards with data-timecontrol for cheap filtering
+      const candidates = qa(".match-card, .match, .match-item, .card"); // broad selectors
+      candidates.forEach(card=>{
+        if (card.dataset.timecontrol) return;
+        const t = card.textContent.toLowerCase();
+        if (t.includes("blitz")) card.dataset.timecontrol = "blitz";
+        else if (t.includes("rapid")) card.dataset.timecontrol = "rapid";
+      });
+      return candidates;
+    };
+
+    const applyFilter = (which)=>{
+      const cards = detectAndTagCards();
+      cards.forEach(card=>{
+        const tc = (card.dataset.timecontrol||"").toLowerCase();
+        const show = (which==="all") || (tc===which);
+        card.classList.toggle("is-hidden", !show);
+      });
+      setActive(which);
+    };
+
+    // Attach clicks
+    const totalTile = q(".counter-item.total");
+    const blitzTile = q(".counter-item.blitz");
+    const rapidTile = q(".counter-item.rapid");
+    totalTile?.addEventListener("click", ()=>applyFilter("all"));
+    blitzTile?.addEventListener("click", ()=>applyFilter("blitz"));
+    rapidTile?.addEventListener("click", ()=>applyFilter("rapid"));
+
+    // Initial active = all
+    setActive("all");
+
+    // Expose for other UI controls if needed
+    window.fccFilterMatches = applyFilter;
+
+    // Scroll-reveal for counter (IntersectionObserver)
+    const counter = q("#match-counter");
+    if (counter) {
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if (e.isIntersecting){
+            counter.classList.add("in-view");
+            io.unobserve(counter);
+          }
+        });
+      }, {threshold:.25});
+      io.observe(counter);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    loadMatches().catch(err=>console.error("Counter setup failed:", err));
+  });
+})();
+
+
+

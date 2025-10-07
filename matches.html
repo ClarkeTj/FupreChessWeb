@@ -62,6 +62,36 @@
 
   <main class="main-content">
 
+    <section id="match-counter" class="match-counter">
+  <div class="counter-item total" data-filter="all">
+    <h2 id="totalMatches" class="count">0</h2>
+    <!-- percentage bar + label -->
+    <div class="mini-bar"><div class="fill" id="barTotal"></div></div>
+    <p>Total Matches</p>
+    <div class="substat" id="pctTotal">—</div>
+  </div>
+
+  <div class="counter-item blitz" data-filter="blitz">
+    <h3 id="blitzCount" class="count">0</h3>
+    <div class="mini-bar"><div class="fill" id="barBlitz"></div></div>
+    <p>Blitz</p>
+    <div class="substat" id="pctBlitz">—</div>
+  </div>
+
+  <div class="counter-item rapid" data-filter="rapid">
+    <h3 id="rapidCount" class="count">0</h3>
+    <div class="mini-bar"><div class="fill" id="barRapid"></div></div>
+    <p>Rapid</p>
+    <div class="substat" id="pctRapid">—</div>
+  </div>
+</section>
+
+<!-- Latest date line (put right below the counter section) -->
+<p class="latest-date">Last Match: <span id="latestDate">—</span></p>
+
+
+
+
     <section class="matches-section">
   <h2>Match History</h2>
   <p>Track recent games and results.</p>
