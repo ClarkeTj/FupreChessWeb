@@ -371,7 +371,7 @@ function fireMiniConfetti(container) {
   if (document.getElementById('dev-credit')) return; // avoid duplicates
 
   // 🔧 Change this to your real portfolio URL
-  const PORTFOLIO_URL = 'https://clarketj.github.io/clarketj-portfolio/';
+  const PORTFOLIO_URL = 'https://clarketj.github.io/ClarkeTJ-portfolio/';
 
   const DEV_TAGLINE = 'Code the plan. Checkmate the bugs.';
 
