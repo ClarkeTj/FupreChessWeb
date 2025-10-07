@@ -2250,6 +2250,23 @@
       "event": "Rated Match",
       "timeControl": "Rapid"
     },
+{
+      "playerA": "Nelson",
+      "playerB": "Jesse",
+      "result": "1 - 0",
+      "date": "2025-09-16",
+      "event": "Rated Match",
+      "timeControl": "Rapid"
+    },
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5763,6 +5780,46 @@
       "playerB": "Nelson",
       "result": "1 - 0",
       "date": "2025-10-06",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Hasel",
+      "result": "1 - 0",
+      "date": "2025-10-07",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Hasel",
+      "result": "1 - 0",
+      "date": "2025-10-07",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Hasel",
+      "result": "1 - 0",
+      "date": "2025-10-07",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Hasel",
+      "playerB": "Martins",
+      "result": "1 - 0",
+      "date": "2025-10-07",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Hasel",
+      "playerB": "Martins",
+      "result": "1 - 0",
+      "date": "2025-10-07",
       "event": "Rated Match",
       "timeControl": "Blitz"
     },
