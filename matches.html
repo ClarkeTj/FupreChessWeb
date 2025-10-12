@@ -14,7 +14,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <title>Matches | Fupre Chess Club Match History</title>
 <meta name="description" content="Browse recorded chess matches at Fupre Chess Club. See results, head-to-head stats, and player performances across all events.">
 <meta name="keywords" content="Fupre Chess matches, chess games, match records, player stats, chess history FUPRE">
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script defer src="assets/js/script.js"></script>
 </head>
+
 <body>
   <header class="navbar">
     <div class="logo-container">
@@ -162,10 +163,51 @@
 </section>
 
 
+
+
+<!-- =======================
+     Club Game GIF Gallery
+========================= -->
+<section class="chess-gif-gallery">
+  <h2 class="gallery-title">♟ Club Game Highlights</h2>
+  <p class="gallery-subtitle">Explore animated replays from our rated games — tap any board to view full screen.</p>
+
+  <!-- Filter Buttons -->
+  <div class="gif-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="blitz">Blitz</button>
+    <button class="filter-btn" data-filter="rapid">Rapid</button>
+  </div>
+
+  <!-- GIF Grid -->
+  <div id="gifGrid" class="gif-grid"></div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="gifLightbox" class="gif-lightbox">
+  <span class="close-lightbox">&times;</span>
+  <img id="lightboxImg" class="lightbox-img" src="" alt="Chess Game Replay">
+  <div id="lightboxCaption" class="lightbox-caption"></div>
+</div>
+
+
+
+
+
+
+<section class="gif-credits">
+  <h3>GIF Tools Credits</h3>
+  <ul>
+    <li><a href="https://support.chess.com/en/articles/8705915-how-can-i-make-an-animated-gif-of-my-game" target="_blank">Chess.com GIF Maker</a></li>
+    <li><a href="https://chessnonstop.com/chess-gif-maker" target="_blank">ChessGIF Maker by ChessNonStop</a></li>
+    <li><a href="https://chessboardmagic.com/gifgenerator" target="_blank">Chessboard Magic’s GIF Generator</a></li>
+  </ul>
+</section>
+
   </main>
 
-
 <script src="assets/js/matches.js"></script>
+
 
 
 </body>

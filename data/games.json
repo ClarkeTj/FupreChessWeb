@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "white": "ClarkeTJ",
+    "black": "Destiny",
+    "event": "FCL",
+    "timeControl": "Rapid",
+    "result": "1-0",
+    "date": "2025-04-06",
+    "gif": "assets/gifs/TJvsDestiny.gif",
+    "caption": "FCL encounter — Opposite castling attack."
+  },
+  {
+    "id": 2,
+    "white": "Prevail",
+    "black": "Destiny",
+    "event": "FCL",
+    "timeControl": "Rapid",
+    "result": "1-0",
+    "date": "2025-04-07",
+    "gif": "assets/gifs/PrevailvsDestiny.gif",
+    "caption": "FCL encounter — Shocking blunder in the middlegame."
+  },
+  {
+    "id": 3,
+    "white": "ClarkeTJ",
+    "black": "Fortune",
+    "event": "Casual",
+    "timeControl": "Rapid",
+    "result": "1-0",
+    "date": "2025-10-06",
+    "gif": "assets/gifs/TJvsFortune.gif",
+    "caption": "Sharp Tactics."
+  },
+  {
+    "id": 4,
+    "white": "ClarkeTJ",
+    "black": "Hasel",
+    "event": "Casual",
+    "timeControl": "Rapid",
+    "result": "1-0",
+    "date": "2025-10-08",
+    "gif": "assets/gifs/TJvsHasel.gif",
+    "caption": "Rapid duel featuring the English opening."
+  }
+]

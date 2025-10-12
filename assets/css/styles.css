@@ -3051,10 +3051,233 @@ body.dark .tournaments-info .note { color: #aaa; }
 
 
 
+/* ============================
+   Chess GIF Gallery Styles
+============================ */
+.chess-gif-gallery {
+  text-align: center;
+  padding: 2.5rem 1rem 4rem;
+  background: linear-gradient(to bottom right, rgba(15,15,25,0.8), rgba(5,5,15,0.9));
+  border-radius: 1.5rem;
+  margin: 3rem auto;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  max-width: 1000px;
+  animation: fadeIn 1s ease both;
+}
+
+.gallery-title {
+  font-size: 1.8rem;
+  color: var(--accent-2, #00bfff);
+  margin-bottom: 0.3rem;
+}
+
+.gallery-subtitle {
+  font-size: 0.95rem;
+  color: var(--muted, #a0a7b3);
+  margin-bottom: 1.5rem;
+}
+
+/* Filter buttons */
+.gif-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--accent-2, #00bfff);
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--accent-2, #00bfff);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0,191,255,0.4);
+}
+
+/* GIF Grid */
+.gif-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.8rem;
+  justify-items: center;
+}
+
+.gif-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.04);
+  border: 2px solid rgba(255,255,255,0.05);
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 240px;
+}
+
+.gif-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 0 20px rgba(0,200,255,0.4);
+}
+
+.gif-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* keeps square shape */
+  object-fit: cover; /* keeps proportions without squishing */
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+  display: block;
+}
+
+/* Info / caption */
+.gif-info {
+  padding: 0.6rem 0.5rem 0.8rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.gif-info strong {
+  color: var(--accent-2, #00bfff);
+  display: block;
+  font-size: 0.95rem;
+}
+
+.gif-info small {
+  display: block;
+  color: var(--muted, #a0a7b3);
+  margin-top: 0.2rem;
+}
+
+.gif-caption-text {
+  display: block;
+  color: #9ca3af;
+  font-style: italic;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+}
+
+/* Lightbox */
+.gif-lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gif-lightbox.active {
+  display: flex;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.lightbox-img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(0,200,255,0.4);
+}
+
+.lightbox-caption {
+  color: var(--accent, #35c759);
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 25px;
+  right: 40px;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.close-lightbox:hover {
+  transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 
 
 
+/* ============================
+   Filter Transition Animations
+============================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInCard 0.4s ease forwards;
+}
+
+@keyframes fadeInCard {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.gif-grid {
+  transition: opacity 0.2s ease;
+}
 
 
 
+.gif-credits {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    background: #111;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+  }
+  .gif-credits h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .gif-credits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .gif-credits li {
+    margin: 5px 0;
+  }
+  .gif-credits a {
+    color: #4da6ff;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .gif-credits a:hover {
+    color: #66ccff;
+    text-decoration: underline;
+  }

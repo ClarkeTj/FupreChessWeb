@@ -475,3 +475,97 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
+
+// =============================
+// Chess GIF Gallery (Dynamic + Filterable + Animated Transitions)
+// =============================
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const res = await fetch("data/games.json?nocache=" + Date.now());
+    let games = await res.json();
+
+    // ✅ Auto-sort by date (latest first)
+    games.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const grid = document.getElementById("gifGrid");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+
+    function renderGames(filter = "all") {
+      // fade out grid
+      grid.classList.add("fade-out");
+
+      setTimeout(() => {
+        grid.innerHTML = "";
+
+        const filtered =
+          filter === "all"
+            ? games
+            : games.filter(
+                (g) => g.timeControl.toLowerCase() === filter.toLowerCase()
+              );
+
+        filtered.forEach((g, idx) => {
+          const card = document.createElement("div");
+          card.className = "gif-card fade-in";
+          card.style.animationDelay = `${idx * 0.05}s`;
+          card.innerHTML = `
+            <img src="${g.gif}" alt="${g.white} vs ${g.black}">
+            <div class="gif-info">
+              <strong>${g.white} vs ${g.black}</strong>
+              <small>${g.event} • ${g.timeControl} • ${g.result}</small>
+              <small class="gif-caption-text">${g.caption || ""}</small>
+            </div>
+          `;
+          grid.appendChild(card);
+          card.addEventListener("click", () =>
+            openLightbox(
+              g.gif,
+              `${g.white} vs ${g.black} — ${g.event} • ${g.result}`
+            )
+          );
+        });
+
+        if (!filtered.length) {
+          grid.innerHTML = `<p style="color:#888;">No ${filter} games found.</p>`;
+        }
+
+        // fade back in
+        grid.classList.remove("fade-out");
+      }, 200);
+    }
+
+    // Initial render
+    renderGames();
+
+    // Filter button logic
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderGames(btn.dataset.filter);
+      });
+    });
+
+    // Lightbox logic
+    const lightbox = document.getElementById("gifLightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const caption = document.getElementById("lightboxCaption");
+    const closeBtn = document.querySelector(".close-lightbox");
+
+    function openLightbox(src, text) {
+      lightboxImg.src = src;
+      caption.textContent = text;
+      lightbox.classList.add("active");
+    }
+
+    closeBtn.addEventListener("click", () => lightbox.classList.remove("active"));
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.classList.remove("active");
+    });
+  } catch (err) {
+    console.error("Error loading GIF games:", err);
+  }
+});
+
+
