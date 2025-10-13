@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("data/matches.json");
     let matches = await res.json();
 
-    // ✅ Handle both {matches: [...]} or [...] formats
+    //  Handle both {matches: [...]} or [...] formats
     if (matches.matches) matches = matches.matches;
 
     const total = matches.length || 0;
@@ -582,36 +582,57 @@ document.addEventListener("DOMContentLoaded", async () => {
       }, 200);
     }
 
-    function applyGifCollapsible() {
-      const cards = document.querySelectorAll(".gif-card");
-      if (!cards.length) return;
+function applyGifCollapsible() {
+  const cards = document.querySelectorAll(".gif-card");
 
-      const maxVisible = window.innerWidth <= 480 ? 3 : 3;
+  //  Wait until cards actually exist
+  if (!cards.length) {
+    setTimeout(applyGifCollapsible, 150); // retry shortly
+    return;
+  }
 
-      cards.forEach(c => c.style.display = "block");
-      cards.forEach((c, i) => { if (i >= maxVisible) c.style.display = "none"; });
+  const maxVisible = window.innerWidth <= 480 ? 3 : 3;
 
-      let expanded = false;
-      gifToggle.style.display = cards.length > maxVisible ? "flex" : "none";
+  // Reset state
+  cards.forEach(c => c.style.display = "block");
+  cards.forEach((c, i) => {
+    if (i >= maxVisible) c.style.display = "none";
+  });
 
-      gifToggle.onclick = () => {
-        expanded = !expanded;
-        gifToggle.classList.toggle("active", expanded);
+  let expanded = false;
 
-        cards.forEach((c, i) => {
-          if (expanded) {
-            c.style.display = "block";
-            c.classList.add("fade-in");
-            setTimeout(() => c.classList.remove("fade-in"), 400);
-          } else if (i >= maxVisible) {
-            c.style.display = "none";
-          }
-        });
-      };
-    }
+  //  Ensure the toggle always shows once we have cards
+  gifToggle.style.display = cards.length > maxVisible ? "flex" : "none";
+
+  //  Watch for layout changes (e.g. filters switching, slow render)
+  const observer = new MutationObserver(() => {
+    const newCards = document.querySelectorAll(".gif-card");
+    gifToggle.style.display = newCards.length > maxVisible ? "flex" : "none";
+  });
+  observer.observe(grid, { childList: true });
+
+  //  Handle expand/collapse
+  gifToggle.onclick = () => {
+    expanded = !expanded;
+    gifToggle.classList.toggle("active", expanded);
+
+    cards.forEach((c, i) => {
+      if (expanded) {
+        c.style.display = "block";
+        c.classList.add("fade-in");
+        setTimeout(() => c.classList.remove("fade-in"), 400);
+      } else if (i >= maxVisible) {
+        c.style.display = "none";
+      }
+    });
+  };
+}
+
 
     // Initial render
     renderGames();
+    window.addEventListener("resize", () => applyGifCollapsible());
+
 
     // Filter button logic
     filterBtns.forEach((btn) => {

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnText  = sendBtn.querySelector(".btn-text");
   const spinner  = sendBtn.querySelector(".spinner");
 
-  // ✅ Set your EmailJS IDs here
+  //  Set your EmailJS IDs here
   const SERVICE_ID             = "service_cmzxm2m";
   const CONTACT_TEMPLATE_ID    = "template_y5ung5c";
   const AUTOREPLY_TEMPLATE_ID  = ""; // e.g. "template_autoreply" (leave empty to skip)
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       feedback.textContent = "❌ Oops, something went wrong. Try again later.";
       feedback.style.color = "red";
     } finally {
-      // ✅ Always reset button + spinner
+      //  Always reset button + spinner
       sendBtn.disabled = false;
       sendBtn.removeAttribute("aria-busy");
       btnText.textContent = "Send Message";
