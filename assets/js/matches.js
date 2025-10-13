@@ -195,66 +195,94 @@
     });
   }
 
-  // ---------- collapsible w/ glow ----------
-  function applyCollapsible() {
-    $$(".collapse-btn").forEach(b => b.remove());
 
-    const items = $$(".match-card");
-    if (!items.length) return;
+  // ---------- collapsible with glowing arrow ----------
+function applyCollapsible() {
+  // remove old buttons
+  $$(".show-toggle").forEach(b => b.remove());
 
-    const maxRows = window.innerWidth <= 480 ? 4 : 8;
+  const items = $$(".match-card");
+  if (!items.length) return;
 
-    items.forEach(el => { el.classList.remove("show","glow"); el.style.display = "block"; });
-    items.forEach(el => el.classList.add("hidden"));
+  const maxRows = window.innerWidth <= 480 ? 4 : 8;
 
-    items.slice(0, maxRows).forEach((el,i) => {
-      setTimeout(() => {
-        el.classList.remove("hidden");
-        el.classList.add("show");
+  // reset visibility
+  items.forEach(el => { 
+    el.classList.remove("show","glow");
+    el.style.display = "block";
+  });
+
+  // hide everything initially
+  items.forEach(el => el.classList.add("hidden"));
+
+  // show first batch with glow animation
+  items.slice(0, maxRows).forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.remove("hidden");
+      el.classList.add("show");
+      void el.offsetWidth;
+      el.classList.add("glow");
+    }, i * 80);
+  });
+
+  // if not enough cards, no toggle
+  if (items.length <= maxRows) return;
+
+  // hide the rest
+  items.slice(maxRows).forEach(el => { 
+    el.classList.add("hidden"); 
+    el.style.display = "none"; 
+  });
+
+  // create glowing arrow button
+  const host = $(".matches-wrapper");
+  const btn = document.createElement("button");
+  btn.className = "show-toggle";
+  btn.innerHTML = `
+    <svg class="arrow-icon" viewBox="0 0 24 24" width="32" height="32">
+      <defs>
+        <linearGradient id="glowArrow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#00e6ff"/>
+          <stop offset="100%" stop-color="#4a00e0"/>
+        </linearGradient>
+      </defs>
+      <path d="M6 9l6 6 6-6"
+            stroke="url(#glowArrow)" stroke-width="3" fill="none"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
+  host.insertAdjacentElement("afterend", btn);
+
+  let expanded = false;
+
+  // toggle logic
+  on(btn, "click", () => {
+    expanded = !expanded;
+    btn.classList.toggle("active", expanded); // rotates arrow
+    items.slice(maxRows).forEach((el, i) => {
+      if (expanded) {
+        el.style.display = "block";
         void el.offsetWidth;
-        el.classList.add("glow");
-      }, i * 80);
-    });
-
-    if (items.length <= maxRows) return;
-
-    items.slice(maxRows).forEach(el => { el.classList.add("hidden"); el.style.display = "none"; });
-
-    const host = $(".matches-wrapper");
-    const btn = document.createElement("button");
-    btn.className = "collapse-btn";
-    btn.innerHTML = `Show More <span class="chev">▼</span>`;
-    host.insertAdjacentElement("afterend", btn);
-
-    let expanded = false;
-    on(btn, "click", () => {
-      expanded = !expanded;
-      items.slice(maxRows).forEach((el,i) => {
-        if (expanded) {
-          el.style.display = "block";
+        setTimeout(() => {
+          el.classList.remove("hidden");
+          el.classList.add("show");
           void el.offsetWidth;
+          el.classList.add("glow");
+        }, i * 90);
+      } else {
+        setTimeout(() => {
+          el.classList.remove("show");
           setTimeout(() => {
-            el.classList.remove("hidden");
-            el.classList.add("show");
-            void el.offsetWidth;
-            el.classList.add("glow");
-          }, i * 90);
-        } else {
-          setTimeout(() => {
-            el.classList.remove("show");
-            setTimeout(() => {
-              el.classList.add("hidden");
-              el.style.display = "none";
-            }, 260);
-          }, i * 80);
-        }
-      });
-      btn.innerHTML = expanded ? `Show Less <span class="chev">▲</span>`
-                               : `Show More <span class="chev">▼</span>`;
-      btn.classList.toggle("expanded", expanded);
+            el.classList.add("hidden");
+            el.style.display = "none";
+          }, 260);
+        }, i * 80);
+      }
     });
-  }
+  });
+}
 
+  
   // ---------- badge ----------
   function updatePlayerBadge() {
     const badge = $("#playerBadge");
@@ -485,14 +513,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("data/games.json?nocache=" + Date.now());
     let games = await res.json();
 
-    // ✅ Auto-sort by date (latest first)
+    // Auto-sort by date (latest first)
     games.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const grid = document.getElementById("gifGrid");
     const filterBtns = document.querySelectorAll(".filter-btn");
 
+    // Create collapsible arrow
+    const gifToggle = document.createElement("button");
+    gifToggle.className = "show-toggle";
+    gifToggle.innerHTML = `
+      <svg class="arrow-icon" viewBox="0 0 24 24" width="32" height="32">
+        <defs>
+          <linearGradient id="glowArrow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00e6ff"/>
+            <stop offset="100%" stop-color="#4a00e0"/>
+          </linearGradient>
+        </defs>
+        <path d="M6 9l6 6 6-6"
+              stroke="url(#glowArrow)" stroke-width="3" fill="none"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+    grid.insertAdjacentElement("afterend", gifToggle);
+
     function renderGames(filter = "all") {
-      // fade out grid
       grid.classList.add("fade-out");
 
       setTimeout(() => {
@@ -530,9 +575,39 @@ document.addEventListener("DOMContentLoaded", async () => {
           grid.innerHTML = `<p style="color:#888;">No ${filter} games found.</p>`;
         }
 
-        // fade back in
         grid.classList.remove("fade-out");
+
+        // Apply collapsible behavior
+        applyGifCollapsible();
       }, 200);
+    }
+
+    function applyGifCollapsible() {
+      const cards = document.querySelectorAll(".gif-card");
+      if (!cards.length) return;
+
+      const maxVisible = window.innerWidth <= 480 ? 3 : 3;
+
+      cards.forEach(c => c.style.display = "block");
+      cards.forEach((c, i) => { if (i >= maxVisible) c.style.display = "none"; });
+
+      let expanded = false;
+      gifToggle.style.display = cards.length > maxVisible ? "flex" : "none";
+
+      gifToggle.onclick = () => {
+        expanded = !expanded;
+        gifToggle.classList.toggle("active", expanded);
+
+        cards.forEach((c, i) => {
+          if (expanded) {
+            c.style.display = "block";
+            c.classList.add("fade-in");
+            setTimeout(() => c.classList.remove("fade-in"), 400);
+          } else if (i >= maxVisible) {
+            c.style.display = "none";
+          }
+        });
+      };
     }
 
     // Initial render
@@ -567,5 +642,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error loading GIF games:", err);
   }
 });
-
-

@@ -182,46 +182,56 @@ function makeTableCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 10 
   const table = document.getElementById(tableId);
   if (!table) return;
 
+  //  Prevent duplicate arrows if function runs again
+  const nextElem = table.nextElementSibling;
+  if (nextElem && nextElem.classList.contains("show-toggle")) return;
+
   const tbody = table.querySelector("tbody");
   const rows = Array.from(tbody.querySelectorAll("tr"));
   if (rows.length <= maxRows) return; // nothing to collapse
 
   // Hide extra rows initially
   rows.slice(maxRows).forEach(row => {
-    row.classList.add("hidden"); // CSS handles hidden state
+    row.classList.add("hidden");
   });
 
-  // Create button
+  // Create glowing arrow toggle button
   const btn = document.createElement("button");
-  btn.className = "collapse-btn";
-  btn.innerHTML = `Show More <span class="chev">▼</span>`;
+  btn.className = "show-toggle";
+  btn.innerHTML = `
+    <svg class="arrow-icon" viewBox="0 0 24 24" width="32" height="32">
+      <defs>
+        <linearGradient id="glowArrow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#00e6ff"/>
+          <stop offset="100%" stop-color="#4a00e0"/>
+        </linearGradient>
+      </defs>
+      <path d="M6 9l6 6 6-6"
+            stroke="url(#glowArrow)" stroke-width="3" fill="none"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
   table.insertAdjacentElement("afterend", btn);
 
   let expanded = false;
   btn.addEventListener("click", () => {
     expanded = !expanded;
+    btn.classList.toggle("active", expanded); // rotates arrow
 
     rows.slice(maxRows).forEach((row, i) => {
       if (expanded) {
-        // prepare row
         row.classList.remove("hidden");
-
         setTimeout(() => {
           row.classList.add("show", "glow");
-          // reset glow to allow retrigger
           setTimeout(() => row.classList.remove("glow"), 1200);
-        }, i * 120); // stagger
+        }, i * 120);
       } else {
         setTimeout(() => {
           row.classList.remove("show", "glow");
           setTimeout(() => row.classList.add("hidden"), 400);
-        }, i * 120); // stagger fade-out
+        }, i * 120);
       }
     });
-
-    btn.innerHTML = expanded
-      ? `Show Less <span class="chev">▲</span>`
-      : `Show More <span class="chev">▼</span>`;
   });
 }
 

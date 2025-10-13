@@ -1040,41 +1040,6 @@ body.dark #blitz-leaderboard  tbody tr:nth-child(-n+3) td:last-child {
 #toggle-view.table-mode { background: var(--accent); color: var(--bg); }
 #toggle-view.card-mode  { background: var(--text); color: var(--bg); border: 2px solid var(--accent); }
 
-/* Collapsible toggle button */
-.collapse-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  margin: .75rem auto 1.5rem;
-  padding: .55rem 1rem;
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: transform .15s ease, background .25s ease;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-}
-.collapse-btn:hover {
-  background: var(--glow);
-  transform: translateY(-1px) scale(1.02);
-}
-
-.collapse-btn:active {
-  transform: translateY(0);
-}
-
-/* Little chevron that rotates */
-.collapse-btn .chev {
-  display: inline-block;
-  transition: transform .25s ease;
-}
-.collapse-btn.expanded .chev {
-  transform: rotate(180deg);
-}
-
 /* Smooth collapse/expand animation */
 .collapsible-row {
   display: none;
@@ -3050,7 +3015,6 @@ body.dark .tournaments-info .note { color: #aaa; }
 
 
 
-
 /* ============================
    Chess GIF Gallery Styles
 ============================ */
@@ -3281,3 +3245,33 @@ body.dark .tournaments-info .note { color: #aaa; }
     color: #66ccff;
     text-decoration: underline;
   }
+
+
+.show-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto 2rem;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: rgba(0,191,255,0.15);
+  box-shadow: 0 0 25px rgba(0,191,255,0.35);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.show-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(0,191,255,0.6);
+}
+
+.arrow-icon {
+  transition: transform 0.35s ease;
+}
+
+.show-toggle.active .arrow-icon {
+  transform: rotate(180deg);
+}

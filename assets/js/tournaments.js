@@ -49,8 +49,9 @@ async function loadCalendar() {
   }
 }
 
+
 /* ==============================
-   Collapsible Rows
+   Collapsible Rows (with glowing arrow)
 ============================== */
 function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 3 : 4)) {
   const table = document.getElementById(tableId);
@@ -74,19 +75,32 @@ function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 
     row.style.display = "none";
   });
 
-  // Remove old button
-  const oldBtn = table.parentElement.querySelector(".collapse-btn");
+  // Remove any old toggle to prevent duplicates
+  const oldBtn = table.parentElement.querySelector(".show-toggle");
   if (oldBtn) oldBtn.remove();
 
-  // Collapse button
+  // Create glowing SVG arrow toggle
   const btn = document.createElement("button");
-  btn.className = "collapse-btn";
-  btn.innerHTML = `Show More <span class="chev">▼</span>`;
+  btn.className = "show-toggle";
+  btn.innerHTML = `
+    <svg class="arrow-icon" viewBox="0 0 24 24" width="32" height="32">
+      <defs>
+        <linearGradient id="glowArrow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#00e6ff"/>
+          <stop offset="100%" stop-color="#4a00e0"/>
+        </linearGradient>
+      </defs>
+      <path d="M6 9l6 6 6-6"
+            stroke="url(#glowArrow)" stroke-width="3" fill="none"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
   table.insertAdjacentElement("afterend", btn);
 
   let expanded = false;
   btn.addEventListener("click", () => {
     expanded = !expanded;
+    btn.classList.toggle("active", expanded); // rotate arrow
 
     rows.slice(maxRows).forEach((row, i) => {
       if (expanded) {
@@ -113,12 +127,9 @@ function makeCalendarCollapsible(tableId, maxRows = (window.innerWidth <= 480 ? 
         }, i * 150);
       }
     });
-
-    btn.innerHTML = expanded
-      ? `Show Less <span class="chev">▲</span>`
-      : `Show More <span class="chev">▼</span>`;
   });
 }
+
 
 /* ==============================
    Swipe Hint (mobile, table only)
