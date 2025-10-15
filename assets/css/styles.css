@@ -3276,3 +3276,8 @@ body.dark .tournaments-info .note { color: #aaa; }
 .show-toggle.active .arrow-icon {
   transform: rotate(180deg);
 }
+
+.rt{
+  display: flex;
+  justify-content: right;
+}
