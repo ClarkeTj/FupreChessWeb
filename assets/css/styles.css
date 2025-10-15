@@ -3217,16 +3217,16 @@ body.dark .tournaments-info .note { color: #aaa; }
 .gif-credits {
     text-align: center;
     margin-top: 30px;
-    padding: 15px;
+    padding: 10px;
     background: #111;
     color: #ccc;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     border-radius: 10px;
   }
   .gif-credits h3 {
     color: #fff;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
+    margin-bottom: 3px;
+    font-size: 0.8rem;
   }
   .gif-credits ul {
     list-style: none;
@@ -3234,9 +3234,10 @@ body.dark .tournaments-info .note { color: #aaa; }
     margin: 0;
   }
   .gif-credits li {
-    margin: 5px 0;
+    margin: 1px 0;
   }
   .gif-credits a {
+    font-size: 0.6rem;
     color: #4da6ff;
     text-decoration: none;
     transition: color 0.2s;

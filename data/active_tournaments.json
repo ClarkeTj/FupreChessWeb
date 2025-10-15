@@ -6,101 +6,130 @@
       "timeControl": "5+0",
       "pairingSystemId": "swiss",
       "players": [
-        { "id": 1, "name": "ClarkeTJ", "rating": 1700, "wins": 1, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 2, "name": "Chris", "rating": 1600, "wins": 0, "losses": 0, "draws": 3, "points": 0 },
-        { "id": 3, "name": "Godbless", "rating": 1650, "wins": 2, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 4, "name": "Hasel", "rating": 1500, "wins": 2, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 5, "name": "Destiny", "rating": 1750, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 6, "name": "Alex", "rating": 1750, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 7, "name": "Jesse", "rating": 1750, "wins": 0, "losses": 3, "draws": 0, "points": 0 },
-        { "id": 8, "name": "Noah", "rating": 1750, "wins": 1, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 9, "name": "Prevail", "rating": 1750, "wins": 0, "losses": 0, "draws": 3, "points": 0 },
-        { "id": 10, "name": "Fortune", "rating": 1750, "wins": 1, "losses": 0, "draws": 0, "points": 0 }
+        { "id": 1, "name": "ClarkeTJ", "rating": 1719, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 2, "name": "Chris", "rating": 1544, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 3, "name": "Godbless", "rating": 1731, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 4, "name": "Hasel", "rating": 1646, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 5, "name": "Jesse", "rating": 1794, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 6, "name": "Martins", "rating": 1968, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
+      ],
+      "rounds":[ ]
+    },
+    {
+      "id": "rapidNov",
+      "name": "Grand Rapid Nov",
+      "timeControl": "10+0",
+      "pairingSystemId": "roundrobin",
+      "players": [
+        { "id": 31, "name": "Alex", "rating": 2319, "wins": 3, "losses": 3, "draws": 0, "points": 0 },
+        { "id": 32, "name": "Destiny", "rating": 2325, "wins": 2, "losses": 2, "draws": 2, "points": 0 },
+        { "id": 33, "name": "Martins", "rating": 1968, "wins": 2, "losses": 1, "draws": 2, "points": 0 },
+        { "id": 34, "name": "Jesse", "rating": 1928, "wins": 1, "losses": 3, "draws": 1, "points": 0 },
+        { "id": 35, "name": "Hasel", "rating": 1683, "wins": 2, "losses": 2, "draws": 2, "points": 0 },
+        { "id": 36, "name": "Godbless", "rating": 1803, "wins": 2, "losses": 0, "draws": 3, "points": 0 },
+        { "id": 37, "name": "ClarkeTJ", "rating": 1623, "wins": 2, "losses": 1, "draws": 2, "points": 0 }
       ],
       "rounds": [
-                        {
-          "round": 1,
-          "pairings": [
-            { "white": 5, "black": 2, "result": "1-0" },
-            { "white": 1, "black": 3, "result": "0.5-0.5" },
-            { "white": 4, "black": 6, "result": "1-0" },
-            { "white": 7, "black": 8, "result": "1-0" },
-            { "white": 10, "black": 9, "result": "1-0" }
-          ]
-        },
 
 
-                      {
-          "round": 2,
-          "pairings": [
-            { "white": 5, "black": 2, "result": "1-0" },
-            { "white": 1, "black": 3, "result": "0.5-0.5" },
-            { "white": 4, "black": 6, "result": "1-0" },
-            { "white": 7, "black": 8, "result": "1-0" },
-            { "white": 10, "black": 9, "result": "1-0" }
-          ]
-        },
+                     {
+  "round": 1,
+  "pairings": [
+    { "white": 32, "black": 37, "result": "1-0" },
+    { "white": 33, "black": 36, "result": "0-1" },
+    { "white": 34, "black": 35, "result": "0.5-0.5" },
+    { "white": 31, "black": 0, "result": "BYE" }
+  ]
+},
 
-                      {
-          "round": 3,
-          "pairings": [
-            { "white": 1, "black": 6, "result": "1-0" },
-            { "white": 2, "black": 7, "result": "0.5-0.5" },
-            { "white": 3, "black": 8, "result": "1-0" },
-            { "white": 4, "black": 9, "result": "1-0" },
-            { "white": 5, "black": 10, "result": "1-0" }
-          ]
-        }
+                     {
+  "round": 2,
+  "pairings": [
+    { "white": 37, "black": 31, "result": "1-0" },
+    { "white": 35, "black": 32, "result": "0-1" },
+    { "white": 34, "black": 33, "result": "0.5-0.5" },
+    { "white": 36, "black": 0, "result": "BYE" }
+  ]
+},
+                     {
+  "round": 3,
+  "pairings": [
+    { "white": 31, "black": 36, "result": "1-0" },
+    { "white": 37, "black": 34, "result": "0-1" },
+    { "white": 32, "black": 33, "result": "0.5-0.5" },
+    { "white": 35, "black": 0, "result": "BYE" }
+  ]
+},
+                     {
+  "round": 4,
+  "pairings": [
+    { "white": 34, "black": 31, "result": "1-0" },
+    { "white": 35, "black": 36, "result": "0-1" },
+    { "white": 33, "black": 37, "result": "0.5-0.5" },
+    { "white": 32, "black": 0, "result": "BYE" }
+  ]
+},
+                     {
+  "round": 5,
+  "pairings": [
+    { "white": 31, "black": 35, "result": "1-0" },
+    { "white": 34, "black": 33, "result": "0-1" },
+    { "white": 36, "black": 32, "result": "0.5-0.5" },
+    { "white": 37, "black": 0, "result": "BYE" }
+  ]
+},
+                     {
+  "round": 6,
+  "pairings": [
+    { "white": 33, "black": 31, "result": "1-0" },
+    { "white": 32, "black": 35, "result": "0-1" },
+    { "white": 37, "black": 36, "result": "0.5-0.5" },
+    { "white": 34, "black": 0, "result": "BYE" }
+  ]
+},
+                     {
+  "round": 7,
+  "pairings": [
+    { "white": 31, "black": 32, "result": "1-0" },
+    { "white": 35, "black": 37, "result": "0-1" },
+    { "white": 34, "black": 36, "result": "0.5-0.5" },
+    { "white": 33, "black": 0, "result": "BYE" }
+  ]
+}
 
 
       ]
     },
     {
-      "id": "rapid2025",
-      "name": "Grand Rapid 2025",
-      "timeControl": "10+0",
-      "pairingSystemId": "roundrobin",
-      "players": [
-        { "id": 11, "name": "Alex", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 12, "name": "Destiny", "rating": 1550, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Martins", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Jesse", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Hasel", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Godbless", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 14, "name": "ClarkeTJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
-      ],
-      "rounds": []
-    },
-    {
-      "id": "rapid2025",
-      "name": "Lighting Blitz 2025",
+      "id": "blitzNov",
+      "name": "Lighting Blitz Nov",
       "timeControl": "3+0",
       "pairingSystemId": "roundrobin",
       "players": [
-        { "id": 11, "name": "Alex", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 12, "name": "Destiny", "rating": 1550, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Martins", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Jesse", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Hasel", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Godbless", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 14, "name": "ClarkeTJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
+        { "id": 15, "name": "Alex", "rating": 2134, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 16, "name": "Destiny", "rating": 2042, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 17, "name": "Martins", "rating": 1968, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 18, "name": "Jesse", "rating": 1794, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 19, "name": "Hasel", "rating": 1646, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 20, "name": "Godbless", "rating": 1731, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 21, "name": "ClarkeTJ", "rating": 1719, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
       ],
       "rounds": []
     },
 
     {
-      "id": "rapid2025",
+      "id": "rapidTJ",
       "name": "Classic TJ 2025",
       "timeControl": "10+30",
       "pairingSystemId": "roundrobin",
       "players": [       
-        { "id": 11, "name": "Alex", "rating": 1800, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 12, "name": "Destiny", "rating": 1550, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Martins", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Jesse", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Hasel", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 13, "name": "Godbless", "rating": 1450, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
-        { "id": 14, "name": "ClarkeTJ", "rating": 1650, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
+        { "id": 22, "name": "Alex", "rating": 2319, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 23, "name": "Destiny", "rating": 2325, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 24, "name": "Martins", "rating": 1968, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 25, "name": "Jesse", "rating": 1928, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 26, "name": "Hasel", "rating": 1683, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 27, "name": "Godbless", "rating": 1803, "wins": 0, "losses": 0, "draws": 0, "points": 0 },
+        { "id": 28, "name": "ClarkeTJ", "rating": 1623, "wins": 0, "losses": 0, "draws": 0, "points": 0 }
       ],
       "rounds": []
     }

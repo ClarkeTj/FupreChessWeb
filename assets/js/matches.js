@@ -505,6 +505,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
 // =============================
 // Chess GIF Gallery (Dynamic + Filterable + Animated Transitions)
 // =============================
@@ -519,23 +520,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const grid = document.getElementById("gifGrid");
     const filterBtns = document.querySelectorAll(".filter-btn");
 
-    // Create collapsible arrow
-    const gifToggle = document.createElement("button");
-    gifToggle.className = "show-toggle";
-    gifToggle.innerHTML = `
-      <svg class="arrow-icon" viewBox="0 0 24 24" width="32" height="32">
-        <defs>
-          <linearGradient id="glowArrow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#00e6ff"/>
-            <stop offset="100%" stop-color="#4a00e0"/>
-          </linearGradient>
-        </defs>
-        <path d="M6 9l6 6 6-6"
-              stroke="url(#glowArrow)" stroke-width="3" fill="none"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    `;
-    grid.insertAdjacentElement("afterend", gifToggle);
+    // Global expand tracker
+    let expanded = false;
+    let gifToggle = null;
 
     function renderGames(filter = "all") {
       grid.classList.add("fade-out");
@@ -547,7 +534,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           filter === "all"
             ? games
             : games.filter(
-                (g) => g.timeControl.toLowerCase() === filter.toLowerCase()
+                (g) => (g.timeControl || "").toLowerCase() === filter.toLowerCase()
               );
 
         filtered.forEach((g, idx) => {
@@ -563,6 +550,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `;
           grid.appendChild(card);
+
+          // Lightbox trigger
           card.addEventListener("click", () =>
             openLightbox(
               g.gif,
@@ -577,68 +566,92 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         grid.classList.remove("fade-out");
 
-        // Apply collapsible behavior
-        applyGifCollapsible();
+        // Ensure collapsible logic runs only after cards exist
+        setTimeout(() => ensureGifCollapsible(), 300);
       }, 200);
     }
 
-function applyGifCollapsible() {
-  const cards = document.querySelectorAll(".gif-card");
-
-  //  Wait until cards actually exist
-  if (!cards.length) {
-    setTimeout(applyGifCollapsible, 150); // retry shortly
-    return;
-  }
-
-  const maxVisible = window.innerWidth <= 480 ? 3 : 3;
-
-  // Reset state
-  cards.forEach(c => c.style.display = "block");
-  cards.forEach((c, i) => {
-    if (i >= maxVisible) c.style.display = "none";
-  });
-
-  let expanded = false;
-
-  //  Ensure the toggle always shows once we have cards
-  gifToggle.style.display = cards.length > maxVisible ? "flex" : "none";
-
-  //  Watch for layout changes (e.g. filters switching, slow render)
-  const observer = new MutationObserver(() => {
-    const newCards = document.querySelectorAll(".gif-card");
-    gifToggle.style.display = newCards.length > maxVisible ? "flex" : "none";
-  });
-  observer.observe(grid, { childList: true });
-
-  //  Handle expand/collapse
-  gifToggle.onclick = () => {
-    expanded = !expanded;
-    gifToggle.classList.toggle("active", expanded);
-
-    cards.forEach((c, i) => {
-      if (expanded) {
-        c.style.display = "block";
-        c.classList.add("fade-in");
-        setTimeout(() => c.classList.remove("fade-in"), 400);
-      } else if (i >= maxVisible) {
-        c.style.display = "none";
+    function ensureGifCollapsible() {
+      const cards = document.querySelectorAll(".gif-card");
+      if (!cards.length) {
+        setTimeout(ensureGifCollapsible, 150);
+        return;
       }
-    });
-  };
-}
 
+      const maxVisible = window.innerWidth <= 480 ? 3 : 4;
+
+      // ✅ Create the arrow if not already there
+      if (!gifToggle) {
+        gifToggle = document.createElement("button");
+        gifToggle.className = "show-toggle";
+        gifToggle.innerHTML = `
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="32" height="32">
+            <defs>
+              <linearGradient id="glowArrow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00e6ff"/>
+                <stop offset="100%" stop-color="#4a00e0"/>
+              </linearGradient>
+            </defs>
+            <path d="M6 9l6 6 6-6"
+                  stroke="url(#glowArrow)" stroke-width="3" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`;
+        grid.insertAdjacentElement("afterend", gifToggle);
+
+        gifToggle.addEventListener("click", () => {
+          expanded = !expanded;
+          gifToggle.classList.toggle("active", expanded);
+          updateGifVisibility();
+        });
+      }
+
+      // ✅ Show toggle if more cards than visible
+      gifToggle.style.display = cards.length > maxVisible ? "flex" : "none";
+
+      // Initial setup
+      updateGifVisibility();
+    }
+
+    function updateGifVisibility() {
+      const cards = document.querySelectorAll(".gif-card");
+      const maxVisible = window.innerWidth <= 480 ? 3 : 4;
+
+      // Defensive: if no cards yet, retry shortly
+      if (!cards.length) {
+        setTimeout(updateGifVisibility, 200);
+        return;
+      }
+
+      cards.forEach((c, i) => {
+        if (expanded || i < maxVisible) {
+          c.style.display = "block";
+          if (expanded) {
+            c.classList.add("fade-in");
+            setTimeout(() => c.classList.remove("fade-in"), 400);
+          }
+        } else {
+          c.style.display = "none";
+        }
+      });
+
+      // Make sure arrow visibility is always correct
+      if (gifToggle) {
+        gifToggle.style.display = cards.length > maxVisible ? "flex" : "none";
+      }
+    }
 
     // Initial render
     renderGames();
-    window.addEventListener("resize", () => applyGifCollapsible());
 
+    // Reapply when resizing
+    window.addEventListener("resize", updateGifVisibility);
 
     // Filter button logic
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         filterBtns.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
+        expanded = false; // collapse on filter change
         renderGames(btn.dataset.filter);
       });
     });
@@ -659,6 +672,9 @@ function applyGifCollapsible() {
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) lightbox.classList.remove("active");
     });
+
+    //  Ensure the arrow appears after everything (especially first load)
+    window.addEventListener("load", ensureGifCollapsible);
   } catch (err) {
     console.error("Error loading GIF games:", err);
   }

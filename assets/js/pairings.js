@@ -72,10 +72,12 @@ function generateRoundRobinSchedule(playerIds) {
   return rounds;
 }
 
-/* ---------- Swiss Pairing (simple, practical) ---------- */
+/* ---------- Enhanced Swiss Pairing (no rematch + colour balance) ---------- */
 function swissSuggestNextRound(tournament, rules) {
   const players = playersWithComputedPoints(tournament.players);
   const oppMap = buildOpponentMap(tournament);
+
+  // --- Build BYE history
   const hadByeIds = new Set();
   (tournament.rounds || []).forEach(r => {
     (r.pairings || []).forEach(pr => {
@@ -85,21 +87,28 @@ function swissSuggestNextRound(tournament, rules) {
     });
   });
 
+  // --- Sort players (by points → rating → name)
   players.sort((a, b) => {
     if (b.points !== a.points) return b.points - a.points;
     if (b.rating !== a.rating) return b.rating - a.rating;
     return String(a.name).localeCompare(String(b.name));
   });
 
-  let top = [], bottom = [];
-  if (rules?.pairHighVsLow) {
-    const half = Math.ceil(players.length / 2);
-    top = players.slice(0, half);
-    bottom = players.slice(half);
-  } else {
-    top = players.slice();
-  }
+  // --- Colour history tracker
+  const colorHist = new Map(); // id -> {W: count, B: count, last: 'W' | 'B' | null}
+  (tournament.rounds || []).forEach(r => {
+    (r.pairings || []).forEach(pr => {
+      if (!pr.white || !pr.black) return;
+      const w = colorHist.get(pr.white) || { W: 0, B: 0, last: null };
+      const b = colorHist.get(pr.black) || { W: 0, B: 0, last: null };
+      w.W++; w.last = 'W';
+      b.B++; b.last = 'B';
+      colorHist.set(pr.white, w);
+      colorHist.set(pr.black, b);
+    });
+  });
 
+  // --- Pick BYE if odd number of players
   const resultPairs = [];
   const used = new Set();
 
@@ -107,65 +116,75 @@ function swissSuggestNextRound(tournament, rules) {
     const byeCandidate = pickByeCandidate(players, hadByeIds);
     used.add(byeCandidate.id);
     resultPairs.push({ white: byeCandidate.id, black: null, note: "BYE (1 point)" });
+
+     // OPTIONAL automatic scoring:
+  const playerRef = tournament.players.find(p => p.id === byeCandidate.id);
+  if (playerRef) playerRef.wins += 1;  // adds 1 point automatically
   }
 
-  if (rules?.pairHighVsLow) {
-    top.forEach(tp => {
-      if (used.has(tp.id)) return;
-      let opponent = null;
-      for (let i = 0; i < bottom.length; i++) {
-        const bp = bottom[i];
-        if (!bp || used.has(bp.id)) continue;
-        if (!oppMap.get(tp.id)?.has(bp.id)) { opponent = bp; break; }
-      }
-      if (!opponent) {
-        for (let i = 0; i < bottom.length; i++) {
-          const bp = bottom[i];
-          if (bp && !used.has(bp.id)) { opponent = bp; break; }
-        }
-      }
-      if (opponent) {
-        used.add(tp.id); used.add(opponent.id);
-        const white = (tp.rating > opponent.rating) ? opponent.id : tp.id;
-        const black = (white === tp.id) ? opponent.id : tp.id;
-        resultPairs.push({ white, black });
-      }
-    });
+  // --- Function to check if two players can face each other
+  function canPlay(a, b) {
+    if (!rules?.avoidRematches) return true;
+    return !oppMap.get(a.id)?.has(b.id);
+  }
 
-    const remaining = players.filter(p => !used.has(p.id));
-    for (let i = 0; i < remaining.length; i += 2) {
-      const a = remaining[i], b = remaining[i + 1];
-      if (!a) break;
-      if (!b) { resultPairs.push({ white: a.id, black: null, note: "BYE (1 point)" }); break; }
-      const white = (a.rating > b.rating) ? b.id : a.id;
+  // --- Simple colour bias scoring
+  function colorBias(id, desired) {
+    const c = colorHist.get(id) || { W: 0, B: 0, last: null };
+    const bias = (desired === 'W')
+      ? c.W - c.B + (c.last === 'W' ? 0.5 : 0)
+      : c.B - c.W + (c.last === 'B' ? 0.5 : 0);
+    return bias; // lower = better for desired colour
+  }
+
+  // --- Recursive pairing search (tiny backtracking)
+  function pairPlayers(queue, acc = []) {
+    if (queue.length === 0) return acc;
+
+    const [a, ...rest] = queue;
+    if (used.has(a.id)) return pairPlayers(rest, acc);
+
+    for (let i = 0; i < rest.length; i++) {
+      const b = rest[i];
+      if (used.has(b.id)) continue;
+      if (!canPlay(a, b)) continue;
+
+      // --- Choose colour based on history
+      const aWhiteBias = colorBias(a.id, 'W');
+      const bWhiteBias = colorBias(b.id, 'W');
+      const white = (aWhiteBias <= bWhiteBias) ? a.id : b.id;
       const black = (white === a.id) ? b.id : a.id;
-      resultPairs.push({ white, black });
-    }
-  } else {
-    const queue = players.filter(p => !used.has(p.id));
-    while (queue.length) {
-      const a = queue.shift();
-      if (!a) break;
-      if (used.has(a.id)) continue;
 
-      let idx = queue.findIndex(b => !used.has(b.id) && !oppMap.get(a.id)?.has(b.id));
-      if (idx === -1) idx = queue.findIndex(b => !used.has(b.id));
-      if (idx === -1) {
-        used.add(a.id);
-        resultPairs.push({ white: a.id, black: null, note: "BYE (1 point)" });
-        break;
-      }
-      const b = queue.splice(idx, 1)[0];
+      // --- Mark used & push
       used.add(a.id); used.add(b.id);
+      const newPair = { white, black };
+      const newAcc = acc.concat(newPair);
 
-      const white = (a.rating > b.rating) ? b.id : a.id;
-      const black = (white === a.id) ? b.id : a.id;
-      resultPairs.push({ white, black });
+      const remaining = rest.filter(p => !used.has(p.id));
+      const result = pairPlayers(remaining, newAcc);
+      if (result) return result; // success!
+
+      // --- Backtrack
+      used.delete(a.id); used.delete(b.id);
     }
+
+    // --- Could not find valid pair → give bye if absolutely necessary
+    if (!used.has(a.id)) {
+      used.add(a.id);
+      acc.push({ white: a.id, black: null, note: "BYE (1 point)" });
+      return pairPlayers(rest.filter(p => !used.has(p.id)), acc);
+    }
+
+    return acc;
   }
+
+  const queue = players.filter(p => !used.has(p.id));
+  const finalPairs = pairPlayers(queue);
+  resultPairs.push(...finalPairs);
 
   return resultPairs;
 }
+
 
 /* ---------- DOM helpers ---------- */
 function el(tag, cls, text) {
@@ -305,6 +324,15 @@ function renderSuggestedNextRound(tournament, systemRules, cardBody) {
     const ids = tournament.players.map(p => p.id);
     const schedule = generateRoundRobinSchedule(ids);
     const nextIdx = (tournament.rounds?.length || 0);
+
+    const isDoubleRR = systemRules?.rules?.doubleRound === true;
+if (isDoubleRR) {
+  const secondHalf = schedule.map(round =>
+    round.map(({ white, black }) => ({ white: black, black: white }))
+  );
+  schedule.push(...secondHalf);
+}
+
     if (nextIdx >= schedule.length) {
       cardBody.appendChild(el('div', 'notice', 'Round Robin schedule complete.'));
       return;
