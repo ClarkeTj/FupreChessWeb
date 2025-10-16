@@ -108,7 +108,13 @@
     <section class="hero">
       <h1>Welcome to <span>Fupre Chess Club</span></h1>
       <p style="color: white;">Sharpen your mind, compete with the best, and be part of our growing chess community.</p>
-      <a href="#events" class="btn bounce">See Upcoming Events</a>
+      <a href="#events" class="btn bounce">See Upcoming Events
+      </a>
+      <button id="install-btn">
+  <span class="icon">📲</span> Install App
+</button>
+      <div id="toast"></div>
+
     </section>
 
     <!-- About -->
@@ -334,13 +340,6 @@
     <div class="footer-bottom">
       <p class="footer-note">&copy; Chess quote sound courtesy of Chess.com</p>
       <p>&copy; 2025 Fupre Chess Club. All rights reserved.</p>
-
-      <button id="install-btn">📲 Install App</button>
-
-      <div id="toast"></div>
-
-
-
     </div>
   </footer>
 
@@ -354,7 +353,6 @@
       .catch(err => console.error("SW registration failed:", err));
   }
 </script>
-
 
 </body>
 </html>

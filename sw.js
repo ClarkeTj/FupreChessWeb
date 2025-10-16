@@ -1,9 +1,6 @@
-// sw.js — Fupre Chess Club 
+// sw.js — Smart version detection
+const CACHE_NAME = "fcc-cache-v1.2";
 
-// Increment this version whenever you update assets
-const CACHE_NAME = "fcc-cache-v3";
-
-// Core files to pre-cache
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
@@ -21,24 +18,24 @@ const ASSETS_TO_CACHE = [
   "/assets/icons/fupreChessClub-icon-512.png"
 ];
 
-// === INSTALL: cache essential assets ===
-self.addEventListener("install", event => {
+// INSTALL
+self.addEventListener("install", (event) => {
   console.log("[SW] Installing new version:", CACHE_NAME);
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(ASSETS_TO_CACHE))
+      .then((cache) => cache.addAll(ASSETS_TO_CACHE))
       .then(() => self.skipWaiting())
-      .catch(err => console.warn("[SW] Install failed:", err))
+      .catch((err) => console.warn("[SW] Install failed:", err))
   );
 });
 
-// === ACTIVATE: clean old caches ===
-self.addEventListener("activate", event => {
+// ACTIVATE
+self.addEventListener("activate", (event) => {
   console.log("[SW] Activated:", CACHE_NAME);
   event.waitUntil(
-    caches.keys().then(keys =>
+    caches.keys().then((keys) =>
       Promise.all(
-        keys.map(key => {
+        keys.map((key) => {
           if (key !== CACHE_NAME) {
             console.log("[SW] Removing old cache:", key);
             return caches.delete(key);
@@ -47,25 +44,35 @@ self.addEventListener("activate", event => {
       )
     ).then(() => self.clients.claim())
   );
+
+  // Notify clients ONLY if replacing an existing worker
+  if (self.registration.active) {
+    self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
+      clients.forEach((client) => client.postMessage("updateAvailable"));
+    });
+  }
 });
 
-// === FETCH: network-first for fresh content, fallback to cache ===
-self.addEventListener("fetch", event => {
-  // Only handle GET requests (ignore POST, PUT, etc.)
+// Allow immediate activation on command
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.action === "skipWaiting") {
+    self.skipWaiting();
+  }
+});
+
+// FETCH: network-first, cache fallback
+self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   event.respondWith(
     fetch(event.request)
-      .then(response => {
-        // Clone and update cache with new version
+      .then((response) => {
         const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         return response;
       })
-      .catch(() => {
-        // Offline fallback
-        return caches.match(event.request)
-          .then(cached => cached || caches.match("/404.html"));
-      })
+      .catch(() =>
+        caches.match(event.request).then((cached) => cached || caches.match("/404.html"))
+      )
   );
 });
