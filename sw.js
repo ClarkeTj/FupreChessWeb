@@ -1,5 +1,5 @@
 // sw.js — Smart version detection
-const CACHE_NAME = "fcc-cache-v1.2";
+const CACHE_NAME = "fcc-cache-v1.3";
 
 const ASSETS_TO_CACHE = [
   "/",
