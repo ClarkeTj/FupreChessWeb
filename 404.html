@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | Fupre Chess Club</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --text: #e6edf3;
+      --accent1: #35c759;
+      --accent2: #2da8ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Main content box */
+    .error-box {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 500px;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      background: rgba(17,22,29,0.85);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      animation: fadeIn 1s ease;
+    }
+
+    .logo {
+      width: 120px;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0.95;
+    }
+
+    .code {
+      font-size: 5.5rem;
+      font-weight: 800;
+      color: var(--accent1);
+      margin: 0.5rem 0;
+      letter-spacing: -2px;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+
+    .text {
+      color: #94a3b8;
+      margin-top: 0.5rem;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .retry-btn {
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 2rem;
+      padding: 0.8rem 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .retry-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 22px rgba(45,168,255,0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      min-width: 240px;
+      max-width: 320px;
+      padding: 0.9rem 1.2rem;
+      border-radius: 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    #toast.online {
+      background: linear-gradient(135deg, #28a745, #35c759);
+    }
+
+    #toast.offline {
+      background: linear-gradient(135deg, #ff9f43, #e74c3c);
+    }
+
+    .toast-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toast-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="error-box">
+    <img src="assets/icons/fupreChessClub-icon-192.png" alt="Fupre Chess Logo" class="logo">
+    <h1 class="code">404</h1>
+    <h2 class="title">Checkmate! Page Not Found</h2>
+    <p class="text">
+      Looks like your connection made the wrong move.<br>
+      If you’re offline, check your internet connection and try again.
+    </p>
+    <button class="retry-btn" onclick="window.location.reload()">♻️ Retry Connection</button>
+  </div>
+
+  <div id="toast"></div>
+  <audio id="move-sound" src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3" preload="auto"></audio>
+
+  <script>
+    const toast = document.getElementById("toast");
+    const moveSound = document.getElementById("move-sound");
+
+    function playMoveSound() {
+      // Attempt playback (some browsers block until user interacts once)
+      moveSound.currentTime = 0;
+      moveSound.play().catch(() => {});
+    }
+
+    function showToast(msg, type = "online", withButton = false) {
+      toast.textContent = "";
+      toast.className = "";
+      toast.classList.add("show", type);
+
+      const text = document.createElement("span");
+      text.textContent = msg;
+
+      if (withButton) {
+        const btn = document.createElement("button");
+        btn.textContent = "Retry";
+        btn.classList.add("toast-btn");
+        btn.onclick = () => window.location.reload();
+        toast.append(text, btn);
+      } else {
+        toast.append(text);
+      }
+
+      playMoveSound();
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    // Connection detection
+    window.addEventListener("online", () => {
+      showToast("✅ You're back online!", "online");
+      setTimeout(() => location.reload(), 2000);
+    });
+
+    window.addEventListener("offline", () => {
+      showToast("⚠️ You're offline. Check your connection.", "offline", true);
+    });
+  </script>
+
+</body>
+</html>

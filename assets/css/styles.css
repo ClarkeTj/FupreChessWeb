@@ -3281,3 +3281,75 @@ body.dark .tournaments-info .note { color: #aaa; }
   display: flex;
   justify-content: right;
 }
+
+
+#install-btn {
+  display: none;
+  position: fixed;
+  bottom: 1rem;
+  left: 1.5rem;
+  background: linear-gradient(135deg, #35c759, #2da8ff);
+  color: white;
+  font-weight: 600;
+  font-family: "Poppins";
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+@media (max-width:768px){
+
+#install-btn {
+  bottom: 0.75rem;
+  left: 1.5rem;
+  font-weight: 100;
+  padding: 0.7rem 1rem;
+}
+
+}
+
+#install-btn.visible { display: inline-flex; align-items: center; gap: 0.5rem; }
+#install-btn:hover { transform: scale(1.05); }
+
+#install-btn .spinner {
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* ===== TOAST NOTIFICATIONS ===== */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, bottom 0.4s ease;
+  font-size: 0.95rem;
+  z-index: 9998;
+}
+#toast.show {
+  opacity: 1;
+  bottom: 3.5rem;
+}
+
+/* Toast color variants */
+#toast.success { background: rgba(40,167,69,0.9); }
+#toast.error { background: rgba(220,53,69,0.9); }
+#toast.warn { background: rgba(255,193,7,0.9); color: #111; }
