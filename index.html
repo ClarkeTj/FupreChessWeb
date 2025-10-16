@@ -51,6 +51,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0f14">
+
+
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script defer src="assets/js/script.js"></script>
 
@@ -330,7 +334,22 @@
     <div class="footer-bottom">
       <p class="footer-note">&copy; Chess quote sound courtesy of Chess.com</p>
       <p>&copy; 2025 Fupre Chess Club. All rights reserved.</p>
+      <button id="install-btn" style="display:none;">📲 Install App</button>
+
     </div>
   </footer>
+
+
+
+  <script src="/assets/js/install.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("Service Worker registered!"))
+      .catch(err => console.error("SW registration failed:", err));
+  }
+</script>
+
+
 </body>
 </html>
