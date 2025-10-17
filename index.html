@@ -34,6 +34,14 @@
         message: "You’ll now receive updates on ratings and tournaments.",
       }
     });
+
+    // Confirm registration is ready
+    OneSignal.on('subscriptionChange', function (isSubscribed) {
+      console.log("Subscription state:", isSubscribed);
+      if (isSubscribed) {
+        OneSignal.getUserId().then(id => console.log("✅ Your OneSignal ID:", id));
+      }
+    });
   });
 </script>
 
@@ -398,6 +406,8 @@
       <p>&copy; 2025 Fupre Chess Club. All rights reserved.</p>
     </div>
   </footer>
+
+  
 
 <script>
   window.addEventListener("load", () => {
