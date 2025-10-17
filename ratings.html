@@ -19,14 +19,12 @@
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
-      notifyButton: {
-        enable: true, // shows the floating bell icon
-      },
-      serviceWorkerPath: "/",
-      serviceWorkerWorkerPath: "/OneSignalSDKWorker.js",
-      serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+      notifyButton: { enable: true },
+      serviceWorkerPath: "/sw.js", // 
+      serviceWorkerWorkerPath: "/sw.js",
+      serviceWorkerUpdaterPath: "/sw.js",
     });
-    console.log("✅ OneSignal initialized for PWA");
+    console.log("✅ OneSignal initialized (Unified SW)");
   });
 </script>
 

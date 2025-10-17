@@ -11,21 +11,18 @@
     gtag('js', new Date());
     gtag('config', 'G-NMZJ892DJS');
   </script>
-
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
-      notifyButton: {
-        enable: true, // shows the floating bell icon
-      },
-      serviceWorkerPath: "/",
-      serviceWorkerWorkerPath: "/OneSignalSDKWorker.js",
-      serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+      notifyButton: { enable: true },
+      serviceWorkerPath: "/sw.js", // 
+      serviceWorkerWorkerPath: "/sw.js",
+      serviceWorkerUpdaterPath: "/sw.js",
     });
-    console.log("✅ OneSignal initialized for PWA");
+    console.log("✅ OneSignal initialized (Unified SW)");
   });
 </script>
 
@@ -413,15 +410,16 @@
 </script>
 
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.ready.then(() => {
-    // Register OneSignal's worker paths manually
-    navigator.serviceWorker.register('/OneSignalSDKWorker.js', { scope: '/' })
-      .then(() => console.log('✅ OneSignal Worker Registered'))
-      .catch(err => console.warn('⚠️ OneSignal worker registration failed:', err));
-  });
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then(() => console.log("✅ Unified Service Worker registered!"))
+    .catch((err) => console.error("❌ SW registration failed:", err));
 }
+
 </script>
+
+
 
 
 </body>

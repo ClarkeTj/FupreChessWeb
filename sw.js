@@ -1,5 +1,7 @@
-// sw.js — Smart version detection
-const CACHE_NAME = "fcc-cache-v1.8";
+
+importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js'); //  Add OneSignal push handler
+
+const CACHE_NAME = "fcc-cache-v1.9";
 
 const ASSETS_TO_CACHE = [
   "/",
@@ -19,7 +21,7 @@ const ASSETS_TO_CACHE = [
   "/assets/icons/fupreChessClub-icon-512.png"
 ];
 
-// INSTALL
+// ========== INSTALL ==========
 self.addEventListener("install", (event) => {
   console.log("[SW] Installing new version:", CACHE_NAME);
   event.waitUntil(
@@ -30,7 +32,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// ACTIVATE
+// ========== ACTIVATE ==========
 self.addEventListener("activate", (event) => {
   console.log("[SW] Activated:", CACHE_NAME);
   event.waitUntil(
@@ -46,7 +48,7 @@ self.addEventListener("activate", (event) => {
     ).then(() => self.clients.claim())
   );
 
-  // Notify clients (only when replacing)
+  // Notify open clients only when a new worker replaces an older one
   if (self.registration.active) {
     self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
       clients.forEach((client) => client.postMessage("updateAvailable"));
@@ -54,14 +56,15 @@ self.addEventListener("activate", (event) => {
   }
 });
 
-// Allow immediate activation on command
+// ========== MESSAGE HANDLER ==========
 self.addEventListener("message", (event) => {
   if (event.data && event.data.action === "skipWaiting") {
+    console.log("[SW] Skip waiting triggered");
     self.skipWaiting();
   }
 });
 
-// FETCH: network-first, cache fallback
+// ========== FETCH (Network First, Cache Fallback) ==========
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
@@ -77,3 +80,6 @@ self.addEventListener("fetch", (event) => {
       )
   );
 });
+
+// ========== LOG OneSignal STATUS ==========
+console.log("[SW] OneSignal push handler active (merged with PWA)");
