@@ -3456,3 +3456,19 @@ body.dark .tournaments-info .note { color: #aaa; }
                 0 0 20px rgba(53, 199, 89, 0.3);
   }
 }
+
+
+.social-icon {
+  color: #fff; /* change to #000 if light background */
+  font-size: 1.8rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Optional: give each icon its brand color */
+.fa-whatsapp:hover { color: #25D366; }
+.fa-youtube:hover { color: #FF0000; }
+
