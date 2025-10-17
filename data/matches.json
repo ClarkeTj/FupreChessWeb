@@ -6095,6 +6095,22 @@
       "event": "Rated Match",
       "timeControl": "Blitz"
     },
+    {
+      "playerA": "Martins",
+      "playerB": "Hasel",
+      "result": "1 - 0",
+      "date": "2025-10-17",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
+    {
+      "playerA": "Martins",
+      "playerB": "Hasel",
+      "result": "0 - 1",
+      "date": "2025-10-17",
+      "event": "Rated Match",
+      "timeControl": "Blitz"
+    },
 
         {
       "playerA": "Martins",

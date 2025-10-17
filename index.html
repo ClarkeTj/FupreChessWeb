@@ -412,5 +412,17 @@
   }
 </script>
 
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.ready.then(() => {
+    // Register OneSignal's worker paths manually
+    navigator.serviceWorker.register('/OneSignalSDKWorker.js', { scope: '/' })
+      .then(() => console.log('✅ OneSignal Worker Registered'))
+      .catch(err => console.warn('⚠️ OneSignal worker registration failed:', err));
+  });
+}
+</script>
+
+
 </body>
 </html>
