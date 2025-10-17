@@ -14,28 +14,23 @@
   </script>
 
 
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async></script>
 <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
       appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
-
-      // Make sure OneSignal can locate both service workers at root
-      serviceWorkerPath: '/',
-      serviceWorkerParam: { scope: '/' },
-      serviceWorkerUpdaterPath: '/OneSignalSDKUpdaterWorker.js',
-      serviceWorkerWorkerPath: '/OneSignalSDKWorker.js',
-
-      notifyButton: { enable: true }, // shows the bell icon for testing
-
-      welcomeNotification: {
-        title: "♟️ Welcome to Fupre Chess Club!",
-        message: "You’ll now receive updates on ratings and tournaments.",
-      }
+      notifyButton: {
+        enable: true, // shows the floating bell icon
+      },
+      serviceWorkerPath: "/",
+      serviceWorkerWorkerPath: "/OneSignalSDKWorker.js",
+      serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
     });
+    console.log("✅ OneSignal initialized for PWA");
   });
 </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   

@@ -13,6 +13,7 @@ const ASSETS_TO_CACHE = [
   "/assets/css/styles.css",
   "/assets/js/ratings.js",
   "/assets/js/matches.js",
+  "/assets/js/script.js",
   "/manifest.json",
   "/assets/icons/fupreChessClub-icon-192.png",
   "/assets/icons/fupreChessClub-icon-512.png"
