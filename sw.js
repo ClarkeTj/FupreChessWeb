@@ -1,5 +1,5 @@
 // sw.js — Smart version detection
-const CACHE_NAME = "fcc-cache-v1.3";
+const CACHE_NAME = "fcc-cache-v1.2";
 
 const ASSETS_TO_CACHE = [
   "/",
@@ -45,7 +45,7 @@ self.addEventListener("activate", (event) => {
     ).then(() => self.clients.claim())
   );
 
-  // Notify clients ONLY if replacing an existing worker
+  // Notify clients (only when replacing)
   if (self.registration.active) {
     self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
       clients.forEach((client) => client.postMessage("updateAvailable"));

@@ -1,9 +1,13 @@
-// install.js — unified install + update progress animation
+// install.js — unified install + update with working appended progress bar
 let deferredPrompt = null;
 
 const installBtn = document.getElementById("install-btn");
 const toast = document.getElementById("toast");
 const hero = document.querySelector(".pc-hero") || document.querySelector(".hero");
+
+// Create one reusable progress bar element
+const progressBar = document.createElement("div");
+progressBar.classList.add("install-progress");
 
 // ---------- Helpers ----------
 function showToast(msg, type = "info") {
@@ -43,6 +47,14 @@ function hideInstallButton() {
 document.addEventListener("DOMContentLoaded", () => {
   moveButtonForMobile();
   if (isStandalone()) hideInstallButton();
+
+  // Show update success toast AFTER reload
+  if (sessionStorage.getItem("showUpdateSuccess") === "true") {
+    setTimeout(() => {
+      showToast("✅ App updated successfully! You're now on the latest version.", "success");
+      sessionStorage.removeItem("showUpdateSuccess");
+    }, 800);
+  }
 });
 
 // ---------- INSTALL FLOW ----------
@@ -55,8 +67,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 installBtn.addEventListener("click", async () => {
   if (!deferredPrompt) return;
 
-  // Waiting for Chrome prompt
-  installBtn.innerHTML = "📲 Waiting for confirmation…";
+  installBtn.textContent = "📲 Waiting for confirmation…";
   installBtn.disabled = true;
   installBtn.classList.add("waiting");
   showToast("🕓 Waiting for install confirmation…");
@@ -66,21 +77,19 @@ installBtn.addEventListener("click", async () => {
     const { outcome } = await deferredPrompt.userChoice;
 
     if (outcome === "accepted") {
-      // Transition to installing view
       installBtn.classList.remove("waiting");
       installBtn.disabled = true;
       installBtn.classList.add("loading");
-      installBtn.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;">
-          <span>📲 Installing…</span>
-          <div class="install-progress"></div>
-        </div>
-      `;
+      installBtn.textContent = "📲 Installing…";
 
-      const bar = installBtn.querySelector(".install-progress");
+      // ✅ Append and animate progress bar (instead of replacing innerHTML)
+      installBtn.appendChild(progressBar);
+      progressBar.style.opacity = "1";
+      progressBar.style.width = "0%";
+
       requestAnimationFrame(() => {
-        bar.style.opacity = "1";
-        bar.style.width = "100%";
+        progressBar.style.transition = "width 1.8s ease";
+        progressBar.style.width = "100%";
       });
 
       showToast("📲 Installing app…");
@@ -121,17 +130,16 @@ function showUpdatePrompt() {
 
     installBtn.classList.remove("update-glow");
     installBtn.classList.add("loading");
-    installBtn.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;">
-        <span>🚀 Updating…</span>
-        <div class="install-progress"></div>
-      </div>
-    `;
+    installBtn.textContent = "🚀 Updating…";
 
-    const bar = installBtn.querySelector(".install-progress");
+    // ✅ Append progress bar below text (same as earlier working logic)
+    installBtn.appendChild(progressBar);
+    progressBar.style.opacity = "1";
+    progressBar.style.width = "0%";
+
     requestAnimationFrame(() => {
-      bar.style.opacity = "1";
-      bar.style.width = "100%";
+      progressBar.style.transition = "width 1.8s ease";
+      progressBar.style.width = "100%";
     });
 
     showToast("Updating app…");
@@ -161,22 +169,16 @@ if ("serviceWorker" in navigator) {
   });
 
   navigator.serviceWorker.addEventListener("message", (event) => {
-    if (event.data === "updateAvailable") {
-      showUpdatePrompt();
-    }
+    if (event.data === "updateAvailable") showUpdatePrompt();
   });
 
   navigator.serviceWorker.addEventListener("controllerchange", () => {
     const manuallyTriggered = sessionStorage.getItem("manualUpdate") === "true";
     if (manuallyTriggered) {
-      // Delay slightly for SW to finish takeover
-      setTimeout(() => {
-        showToast("✅ App updated successfully! You're now on the latest version.", "success");
-        installBtn.classList.remove("loading");
-        installBtn.textContent = "Updated ✓";
-        sessionStorage.removeItem("manualUpdate");
-        setTimeout(hideInstallButton, 1200);
-      }, 1000);
+      // Mark to show toast after reload
+      sessionStorage.setItem("showUpdateSuccess", "true");
+      sessionStorage.removeItem("manualUpdate");
+      window.location.reload();
     }
   });
 }
