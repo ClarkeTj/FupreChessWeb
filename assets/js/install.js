@@ -37,7 +37,7 @@ function showInstallButtonWithDelay() {
     installBtn.style.display = "inline-flex";
     installBtn.classList.add("visible", "show-slide");
     installBtn.textContent = "📲 Install App";
-  }, 5000);
+  }, 11000);
 }
 
 function hideInstallButton() {
