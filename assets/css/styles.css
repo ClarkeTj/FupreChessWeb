@@ -3472,3 +3472,90 @@ body.dark .tournaments-info .note { color: #aaa; }
 .fa-whatsapp:hover { color: #25D366; }
 .fa-youtube:hover { color: #FF0000; }
 
+
+
+
+/* ===============================
+   Animated Glowing Splash 
+=============================== */
+
+#custom-splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2da8ff, #35c759);
+  background-size: 200% 200%;
+  animation: gradientFlow 3.5s ease-in-out infinite;
+  z-index: 9999;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.splash-logo {
+  width: 160px;
+  height: 160px;
+  filter: drop-shadow(0 0 18px rgba(45,168,255,0.9))
+          drop-shadow(0 0 30px rgba(53,199,89,0.6));
+  animation: pulseLogo 2.2s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .splash-logo {
+    width: 230px;
+    height: 230px;
+  }
+}
+
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.07); opacity: 0.9; }
+}
+
+/* --- Looping Progress Bar --- */
+.splash-progress {
+  width: 180px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-progress::after {
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #35c759, #2da8ff);
+  background-size: 200% 100%;
+  animation: progressFlow 2s ease-in-out infinite;
+}
+
+@keyframes progressFlow {
+  0% { left: -40%; width: 40%; opacity: 0.6; }
+  50% { left: 30%; width: 50%; opacity: 1; }
+  100% { left: 100%; width: 40%; opacity: 0.6; }
+}
+
+#custom-splash.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  pointer-events: none;
+}

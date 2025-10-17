@@ -1,4 +1,3 @@
-// install.js — unified install + update with working appended progress bar
 let deferredPrompt = null;
 
 const installBtn = document.getElementById("install-btn");
@@ -18,7 +17,10 @@ function showToast(msg, type = "info") {
 }
 
 function isStandalone() {
-  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true
+  );
 }
 
 function moveButtonForMobile() {
@@ -40,7 +42,12 @@ function showInstallButtonWithDelay() {
 
 function hideInstallButton() {
   installBtn.style.display = "none";
-  installBtn.classList.remove("visible", "show-slide", "update-glow", "loading");
+  installBtn.classList.remove(
+    "visible",
+    "show-slide",
+    "update-glow",
+    "loading"
+  );
 }
 
 // ---------- Initial Setup ----------
@@ -48,10 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
   moveButtonForMobile();
   if (isStandalone()) hideInstallButton();
 
-  // Show update success toast AFTER reload
+  //  Show update success toast AFTER reload
   if (sessionStorage.getItem("showUpdateSuccess") === "true") {
     setTimeout(() => {
-      showToast("✅ App updated successfully! You're now on the latest version.", "success");
+      showToast(
+        "✅ App updated successfully! You're now on the latest version.",
+        "success"
+      );
       sessionStorage.removeItem("showUpdateSuccess");
     }, 800);
   }
@@ -82,7 +92,6 @@ installBtn.addEventListener("click", async () => {
       installBtn.classList.add("loading");
       installBtn.textContent = "📲 Installing…";
 
-      // ✅ Append and animate progress bar (instead of replacing innerHTML)
       installBtn.appendChild(progressBar);
       progressBar.style.opacity = "1";
       progressBar.style.width = "0%";
@@ -132,7 +141,6 @@ function showUpdatePrompt() {
     installBtn.classList.add("loading");
     installBtn.textContent = "🚀 Updating…";
 
-    // ✅ Append progress bar below text (same as earlier working logic)
     installBtn.appendChild(progressBar);
     progressBar.style.opacity = "1";
     progressBar.style.width = "0%";
@@ -146,7 +154,17 @@ function showUpdatePrompt() {
 
     // Ask SW to activate new version
     navigator.serviceWorker.getRegistration().then((reg) => {
-      if (reg && reg.waiting) reg.waiting.postMessage({ action: "skipWaiting" });
+      if (reg && reg.waiting) {
+        reg.waiting.postMessage({ action: "skipWaiting" });
+
+        //  Wait a bit for progress animation, then reload automatically
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        // If no waiting worker, just force a refresh to pull updates
+        setTimeout(() => window.location.reload(), 1500);
+      }
     });
   };
 }
@@ -161,7 +179,10 @@ if ("serviceWorker" in navigator) {
       const newWorker = reg.installing;
       if (!newWorker) return;
       newWorker.addEventListener("statechange", () => {
-        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+        if (
+          newWorker.state === "installed" &&
+          navigator.serviceWorker.controller
+        ) {
           showUpdatePrompt();
         }
       });
@@ -175,10 +196,9 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("controllerchange", () => {
     const manuallyTriggered = sessionStorage.getItem("manualUpdate") === "true";
     if (manuallyTriggered) {
-      // Mark to show toast after reload
+      //  Show toast AFTER reload completes
       sessionStorage.setItem("showUpdateSuccess", "true");
       sessionStorage.removeItem("manualUpdate");
-      window.location.reload();
     }
   });
 }

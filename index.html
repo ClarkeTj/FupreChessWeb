@@ -12,6 +12,16 @@
     gtag('config', 'G-NMZJ892DJS');
   </script>
 
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
+    });
+  });
+</script>
+
   <meta name="google-site-verification" content="55AZ8KXOTv3Uglrl0Q4SAnywHfbcs8tfrrTMOa3XYwE" />
 
   <meta charset="UTF-8" />
@@ -79,6 +89,17 @@
 </head>
 
 <body>
+
+
+<!-- Custom Splash Screen -->
+<div id="custom-splash">
+  <div class="splash-content">
+    <img src="/assets/icons/fupreChessClub-icon-512.png" alt="FCC Logo" class="splash-logo">
+    <div class="splash-progress"></div>
+  </div>
+</div>
+
+
   <!-- Sticky Navbar -->
   <header class="navbar">
     <div class="logo-container">
@@ -362,7 +383,15 @@
     </div>
   </footer>
 
+<script>
+  window.addEventListener("load", () => {
+    const splash = document.getElementById("custom-splash");
 
+    // Let it loop for a bit, then fade out
+    setTimeout(() => splash.classList.add("fade-out"), 2200);
+    setTimeout(() => splash.remove(), 3000);
+  });
+</script>
 
   <script src="/assets/js/install.js"></script>
 <script>
