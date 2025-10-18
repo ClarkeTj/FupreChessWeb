@@ -57,7 +57,10 @@
       "color": "#009688",
       "items": [
         "Ratings are updated after every approved match.",
-        "New players will receive their official FCC rating after participating in three Fupre Chess rated tournaments. Their initial rating will be determined by calculating the average of their performance across those three tournaments."
+        "New players will receive their official FCC rating after participating in three Fupre Chess rated tournaments. Their initial rating will be determined by calculating the average of their performance across those three tournaments. Each performance rating is based on how well the player scores against the average strength of their opponents in a tournament, using the formula: Performance Rating = Average Opponent Rating + 800 × ((Score / Games Played) − 0.5). After all three tournaments, the average of these performance ratings becomes the player’s starting FCC rating.",
+        "Player ratings in the Fupre Chess Club are calculated using the standard Fupre Chess Analytics system, which follows the Elo rating model. After each rated match, a player’s rating increases or decreases based on their performance relative to their opponent’s rating and the expected outcome. The rating change is determined using the formula: New Rating = Current Rating + K × (Actual Score − Expected Score), where Expected Score = 1 ÷ (1 + 10^((Opponent Rating − Current Rating) ÷ 400)) and K is a development coefficient that controls rating volatility. Higher-rated players gain fewer points for beating lower-rated opponents, while lower-rated players gain more points for upsets. Over time, this ensures accurate and fair reflection of each player’s skill level. All player ratings are calculated and updated automatically through the Fupre Chess Analytics web app."
+
+
       ]
     },
     {
