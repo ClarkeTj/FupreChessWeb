@@ -1,5 +1,13 @@
-// FUPRE Chess Club – App Service Worker
-// NOTE: This SW is for the app. OneSignal uses its own SW files separately.
+// ==========================================================
+// FUPRE Chess Club – App Service Worker (Update UI removed)
+// ----------------------------------------------------------
+// • Pre-cache core assets for offline
+// • Network-first fetch with cache fallback
+// • Auto-update: skipWaiting() + clients.claim()
+//   → New SW takes control immediately and page reloads via
+//     controllerchange listener in install.js
+// ==========================================================
+
 const CACHE_NAME = "fcc-cache-v2.0"; // bump to invalidate old caches
 
 const ASSETS = [
@@ -13,38 +21,35 @@ const ASSETS = [
   "/assets/icons/fupreChessClub-icon-512.png"
 ];
 
-// Install – pre-cache without auto-activating.
-// (Do NOT call skipWaiting() here; we want a clean “waiting” phase for updates.)
+// Install – pre-cache, then immediately activate the new SW.
 self.addEventListener("install", (event) => {
   console.log("[SW] install", CACHE_NAME);
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.addAll(ASSETS);
+      // Auto-update behavior: immediately move to the "activating" phase.
+      await self.skipWaiting();
+    })()
   );
 });
 
-// Activate – cleanup old caches and take control.
+// Activate – remove old caches and take control of all clients.
 self.addEventListener("activate", (event) => {
   console.log("[SW] activate", CACHE_NAME);
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      await Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : Promise.resolve())));
+      await Promise.all(
+        keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : Promise.resolve()))
+      );
+      // Take control immediately (no manual refresh button in UI).
       await self.clients.claim();
     })()
   );
 });
 
-// Message channel – allow page to trigger SKIP_WAITING for updates.
-self.addEventListener("message", (event) => {
-  const data = event.data;
-  if (!data) return;
-  if (data.type === "SKIP_WAITING") {
-    console.log("[SW] SKIP_WAITING received");
-    self.skipWaiting();
-  }
-});
-
-// Fetch – network-first with cache fallback.
+// Fetch – network-first with cache fallback for offline support.
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
@@ -56,6 +61,8 @@ self.addEventListener("fetch", (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
         return res;
       })
-      .catch(() => caches.match(req).then((c) => c || caches.match("/404.html")))
+      .catch(() =>
+        caches.match(req).then((cached) => cached || caches.match("/404.html"))
+      )
   );
 });

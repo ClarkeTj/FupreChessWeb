@@ -1,24 +1,28 @@
 /* ==========================================================
-   FUPRE Chess Club – Install / Update Controller 
+   FUPRE Chess Club – Install Controller (Responsive Final)
    ----------------------------------------------------------
-   • Restores splash logic integrity
-   • Adds slide-in animation for Install/Update CTA
-   • Adds glow + pulse effects for CTA visibility
-   • Full compatibility with PWA standalone replay logic
+   • Shows Install CTA 7s after splash completes
+   • No “Update App” logic (removed)
+   • Auto-resizes CTA smoothly when text changes
+   • Auto-refreshes when new SW activates
    ========================================================== */
 
 (() => {
+  // ---------- Elements ----------
   const cta = document.getElementById("install-btn");
   const ctaLabel = cta?.querySelector(".label");
   const toast = document.getElementById("toast");
 
+  // ---------- Config ----------
   const SHOW_DELAY_AFTER_SPLASH_MS = 7000;
   const LS_PWA_FLAG = "fcc_pwa_installed_v1";
-  const ACTION = { idle: "idle", installing: "installing", updating: "updating" };
+  const ACTION = { idle: "idle", installing: "installing" };
   let state = ACTION.idle;
-  let deferredPrompt = null;
-  let swRegistration = null;
 
+  let deferredPrompt = null;
+  let splashDoneAt = null;
+
+  // ---------- Utilities ----------
   const isStandalone = () =>
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
@@ -28,14 +32,18 @@
     cta.classList.remove("is-hidden");
     cta.classList.add("show-slide", "pulse-loop");
   };
-  const hide = () => cta && cta.classList.add("is-hidden");
 
-  function setCTA(mode) {
+  const hide = () => {
     if (!cta) return;
-    cta.dataset.mode = mode;
-    cta.classList.remove("is-install", "is-update");
-    cta.classList.add(mode === "install" ? "is-install" : "is-update");
-    ctaLabel.textContent = mode === "install" ? "Install App" : "Update App";
+    cta.classList.add("is-hidden");
+  };
+
+  function setCTAInstall() {
+    if (!cta) return;
+    cta.dataset.mode = "install";
+    cta.classList.remove("is-update");
+    cta.classList.add("is-install");
+    if (ctaLabel) ctaLabel.textContent = "Install App";
   }
 
   function showToast(msg, type = "info") {
@@ -51,55 +59,26 @@
       localStorage.removeItem(LS_PWA_FLAG);
       if ("caches" in window) {
         const keys = await caches.keys();
-        await Promise.all(keys.filter(k => k.startsWith("fcc-")).map(k => caches.delete(k)));
+        await Promise.all(
+          keys
+            .filter((k) => k.startsWith("fcc-") || k.startsWith("fcc"))
+            .map((k) => caches.delete(k))
+        );
       }
     }
   }
 
-  async function setupServiceWorker() {
-    if (!("serviceWorker" in navigator)) return;
-    swRegistration = await navigator.serviceWorker.getRegistration();
-    if (!swRegistration) return;
-
-    if (swRegistration.waiting) scheduleCTA("update");
-
-    swRegistration.addEventListener("updatefound", () => {
-      const newWorker = swRegistration.installing;
-      if (!newWorker) return;
-      newWorker.addEventListener("statechange", () => {
-        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-          scheduleCTA("update");
-        }
-      });
-    });
-
-    navigator.serviceWorker.addEventListener("message", (evt) => {
-      if (evt?.data === "UPDATE_AVAILABLE") scheduleCTA("update");
-    });
-
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (state === ACTION.updating) {
-        sessionStorage.setItem("showUpdateSuccess", "true");
-        location.reload();
-      }
-    });
-
-    if (sessionStorage.getItem("showUpdateSuccess") === "true") {
-      sessionStorage.removeItem("showUpdateSuccess");
-      setTimeout(() => showToast("✅ App updated successfully!", "success"), 600);
-    }
-  }
-
-  let splashDoneAt = null;
+  // ---------- Splash timing ----------
   document.addEventListener("fcc:splash-done", () => {
     splashDoneAt = Date.now();
     hide();
-    if (cta.dataset.mode) scheduleCTA(cta.dataset.mode);
+    if (cta?.dataset.mode === "install") scheduleInstallCTA();
   });
 
-  function scheduleCTA(mode) {
+  function scheduleInstallCTA() {
     if (!cta) return;
-    setCTA(mode);
+    setCTAInstall();
+
     const ready = () => {
       if (state !== ACTION.idle) return;
       show();
@@ -118,22 +97,28 @@
     }
   }
 
+  // ---------- Install flow ----------
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    if (!isStandalone()) scheduleCTA("install");
+
+    if (!isStandalone()) {
+      setCTAInstall();
+      scheduleInstallCTA();
+    }
   });
 
   window.addEventListener("appinstalled", () => {
     localStorage.setItem(LS_PWA_FLAG, "true");
     showToast("✅ Installation successful!", "success");
+    if (ctaLabel) ctaLabel.textContent = "Installation successful!";
     state = ACTION.idle;
-    hide();
+    setTimeout(() => hide(), 1500);
   });
 
   async function doInstall() {
     if (!deferredPrompt) {
-      showToast("Install not available yet. Try browser menu → Install App", "warn");
+      showToast("Install not available yet. Try browser menu → ‘Install App’", "warn");
       return;
     }
     if (state !== ACTION.idle) return;
@@ -141,63 +126,59 @@
 
     try {
       cta.disabled = true;
-      cta.classList.add("is-busy");
-      ctaLabel.textContent = "Waiting for confirmation…";
+      cta.classList.add("is-busy", "adjust-width");
+      if (ctaLabel) ctaLabel.textContent = "Waiting for confirmation…";
+
       await deferredPrompt.prompt();
       const outcome = await deferredPrompt.userChoice;
       deferredPrompt = null;
 
       if (outcome?.outcome === "accepted") {
-        ctaLabel.textContent = "Installing…";
+        if (ctaLabel) ctaLabel.textContent = "Installing…";
       } else {
         cta.disabled = false;
         cta.classList.remove("is-busy");
-        ctaLabel.textContent = "Install App";
+        if (ctaLabel) ctaLabel.textContent = "Install App";
         state = ACTION.idle;
       }
     } catch (err) {
+      console.error(err);
       showToast("Install failed. Please try again.", "error");
       cta.disabled = false;
       cta.classList.remove("is-busy");
-      ctaLabel.textContent = "Install App";
+      if (ctaLabel) ctaLabel.textContent = "Install App";
       state = ACTION.idle;
+    } finally {
+      // Smooth width transition for text changes
+      cta.style.transition = "width 0.25s ease, padding 0.25s ease";
     }
   }
 
-  async function doUpdate() {
-    if (state !== ACTION.idle) return;
-    if (!swRegistration)
-      swRegistration = await navigator.serviceWorker.getRegistration();
-    const waiting = swRegistration?.waiting;
-    if (!waiting) return;
-
-    state = ACTION.updating;
-    cta.disabled = true;
-    cta.classList.add("is-busy");
-    ctaLabel.textContent = "Updating…";
-    waiting.postMessage({ type: "SKIP_WAITING" });
-  }
-
+  // ---------- Click handler ----------
   if (cta) {
     cta.addEventListener("click", () => {
       const mode = cta.dataset.mode;
       if (mode === "install") return doInstall();
-      if (mode === "update") return doUpdate();
     });
   }
 
+  // ---------- SW auto-update ----------
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      window.location.reload();
+    });
+  }
+
+  // ---------- Boot ----------
   (async function boot() {
     hide();
     await clearStaleCachesIfNeeded();
-    await setupServiceWorker();
 
-    if (isStandalone()) {
-      hide();
+    if (!isStandalone()) {
+      setCTAInstall();
+      scheduleInstallCTA();
     } else {
-      scheduleCTA("install");
-      if (deferredPrompt) scheduleCTA("install");
+      hide();
     }
-
-    if (swRegistration?.waiting) scheduleCTA("update");
   })();
 })();
