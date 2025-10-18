@@ -1,19 +1,17 @@
 /* ==========================================================
-   FUPRE Chess Club – Install Controller (Responsive Final)
+   FUPRE Chess Club – Install Controller (Stable Auto-Update)
    ----------------------------------------------------------
-   • Shows Install CTA 7s after splash completes
-   • No “Update App” logic (removed)
-   • Auto-resizes CTA smoothly when text changes
-   • Auto-refreshes when new SW activates
+   • No infinite reload loops
+   • Shows user prompt when new version is available
+   • Controlled one-time refresh after confirmation
+   • Keeps Install App flow fully functional
    ========================================================== */
 
 (() => {
-  // ---------- Elements ----------
   const cta = document.getElementById("install-btn");
   const ctaLabel = cta?.querySelector(".label");
   const toast = document.getElementById("toast");
 
-  // ---------- Config ----------
   const SHOW_DELAY_AFTER_SPLASH_MS = 7000;
   const LS_PWA_FLAG = "fcc_pwa_installed_v1";
   const ACTION = { idle: "idle", installing: "installing" };
@@ -21,8 +19,8 @@
 
   let deferredPrompt = null;
   let splashDoneAt = null;
+  let updatePromptShown = false;
 
-  // ---------- Utilities ----------
   const isStandalone = () =>
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
@@ -41,7 +39,6 @@
   function setCTAInstall() {
     if (!cta) return;
     cta.dataset.mode = "install";
-    cta.classList.remove("is-update");
     cta.classList.add("is-install");
     if (ctaLabel) ctaLabel.textContent = "Install App";
   }
@@ -101,7 +98,6 @@
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-
     if (!isStandalone()) {
       setCTAInstall();
       scheduleInstallCTA();
@@ -126,7 +122,7 @@
 
     try {
       cta.disabled = true;
-      cta.classList.add("is-busy", "adjust-width");
+      cta.classList.add("is-busy");
       if (ctaLabel) ctaLabel.textContent = "Waiting for confirmation…";
 
       await deferredPrompt.prompt();
@@ -149,7 +145,6 @@
       if (ctaLabel) ctaLabel.textContent = "Install App";
       state = ACTION.idle;
     } finally {
-      // Smooth width transition for text changes
       cta.style.transition = "width 0.25s ease, padding 0.25s ease";
     }
   }
@@ -162,10 +157,29 @@
     });
   }
 
-  // ---------- SW auto-update ----------
+  // ---------- SW update handling ----------
   if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("message", (event) => {
+      if (event.data && event.data.type === "NEW_VERSION_AVAILABLE" && !updatePromptShown) {
+        updatePromptShown = true;
+        const confirmReload = confirm(
+          "A new update or improvement is available. Click OK to refresh and apply the latest version."
+        );
+        if (confirmReload) {
+          navigator.serviceWorker.getRegistration().then((reg) => {
+            if (reg && reg.waiting) {
+              reg.waiting.postMessage({ type: "SKIP_WAITING" });
+            }
+          });
+        }
+      }
+    });
+
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      window.location.reload();
+      if (updatePromptShown) {
+        updatePromptShown = false;
+        window.location.reload();
+      }
     });
   }
 

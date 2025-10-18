@@ -1,15 +1,12 @@
 // ==========================================================
-// FUPRE Chess Club – App Service Worker (Update UI removed)
+// FUPRE Chess Club – App Service Worker (Stable Auto-Update)
 // ----------------------------------------------------------
-// • Pre-cache core assets for offline
-// • Network-first fetch with cache fallback
-// • Auto-update: skipWaiting() + clients.claim()
-//   → New SW takes control immediately and page reloads via
-//     controllerchange listener in install.js
+// • Detects new version and notifies clients
+// • User decides when to refresh (no auto-reload loop)
+// • Keeps full offline caching support
 // ==========================================================
 
-const CACHE_NAME = "fcc-cache-v2.0"; // bump to invalidate old caches
-
+const CACHE_NAME = "fcc-cache-v2.2"; // bump version
 const ASSETS = [
   "/", "/index.html",
   "/ratings.html", "/matches.html", "/404.html",
@@ -21,35 +18,79 @@ const ASSETS = [
   "/assets/icons/fupreChessClub-icon-512.png"
 ];
 
-// Install – pre-cache, then immediately activate the new SW.
+// ---------- Install ----------
 self.addEventListener("install", (event) => {
-  console.log("[SW] install", CACHE_NAME);
+  console.log("[SW] Installing", CACHE_NAME);
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
       await cache.addAll(ASSETS);
-      // Auto-update behavior: immediately move to the "activating" phase.
-      await self.skipWaiting();
+      // Wait for user confirmation before activating
+      // (no skipWaiting to avoid auto reload)
     })()
   );
 });
 
-// Activate – remove old caches and take control of all clients.
+// ---------- Activate ----------
 self.addEventListener("activate", (event) => {
-  console.log("[SW] activate", CACHE_NAME);
+  console.log("[SW] Activating", CACHE_NAME);
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      await Promise.all(
-        keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : Promise.resolve()))
-      );
-      // Take control immediately (no manual refresh button in UI).
+      await Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : Promise.resolve())));
       await self.clients.claim();
     })()
   );
 });
 
-// Fetch – network-first with cache fallback for offline support.
+// ---------- Update detection ----------
+self.addEventListener("statechange", (e) => {
+  console.log("[SW] State changed:", e.target.state);
+});
+
+self.addEventListener("updatefound", () => {
+  console.log("[SW] Update found");
+});
+
+// When a new worker reaches waiting, notify clients
+self.addEventListener("installing", () => {
+  console.log("[SW] Installing new worker");
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    console.log("[SW] Skip waiting requested by client");
+    self.skipWaiting();
+  }
+});
+
+// Inform client pages that a new version is available
+self.addEventListener("controllerchange", () => {
+  console.log("[SW] Controller changed");
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim());
+});
+
+// Custom logic to inform clients of update availability
+self.addEventListener("updatefound", function (event) {
+  const newWorker = self.registration.installing;
+  if (newWorker) {
+    newWorker.addEventListener("statechange", function () {
+      if (newWorker.state === "installed" && self.registration.waiting) {
+        // Notify all clients
+        self.clients.matchAll({ type: "window" }).then((clients) => {
+          clients.forEach((client) => {
+            client.postMessage({ type: "NEW_VERSION_AVAILABLE" });
+          });
+        });
+      }
+    });
+  }
+});
+
+// ---------- Fetch ----------
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
@@ -61,8 +102,6 @@ self.addEventListener("fetch", (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
         return res;
       })
-      .catch(() =>
-        caches.match(req).then((cached) => cached || caches.match("/404.html"))
-      )
+      .catch(() => caches.match(req).then((cached) => cached || caches.match("/404.html")))
   );
 });
