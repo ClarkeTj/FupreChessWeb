@@ -14,17 +14,17 @@
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async></script>
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
-      notifyButton: { enable: true },
-      serviceWorkerPath: "/sw.js", // 
-      serviceWorkerWorkerPath: "/sw.js",
-      serviceWorkerUpdaterPath: "/sw.js",
-    });
-    console.log("✅ OneSignal initialized (Unified SW)");
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({
+    appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
+    notifyButton: { enable: true },
+    serviceWorkerPath: "/", // path where your worker files are
+    serviceWorkerWorkerPath: "/OneSignalSDKWorker.js",
+    serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
   });
+  console.log("✅ OneSignal initialized correctly (separate SW)");
+});
 </script>
 
 

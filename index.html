@@ -1,114 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-
-  <!-- Google tag (gtag.js) -->
-
+  <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMZJ892DJS"></script>
-  <script>window.dataLayer = window.dataLayer || [];
+  <script>
+    window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-NMZJ892DJS');
   </script>
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
-      notifyButton: { enable: true },
-      serviceWorkerPath: "/sw.js", // 
-      serviceWorkerWorkerPath: "/sw.js",
-      serviceWorkerUpdaterPath: "/sw.js",
+
+  <!-- OneSignal -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "179cf95a-a819-4fda-8eaa-77fcf5a06d94",
+        notifyButton: { enable: true },
+        serviceWorkerPath: "/",
+        serviceWorkerWorkerPath: "/OneSignalSDKWorker.js",
+        serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+      });
+      console.log("✅ OneSignal initialized (separate SW)");
     });
-    console.log("✅ OneSignal initialized (Unified SW)");
-  });
-</script>
+  </script>
 
 
   <meta name="google-site-verification" content="55AZ8KXOTv3Uglrl0Q4SAnywHfbcs8tfrrTMOa3XYwE" />
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  
   <title>Fupre Chess Club</title>
 
+  <!-- SEO / Social -->
   <meta name="description" content="Welcome to the FUPRE Chess Club - the official platform for showcasing tournaments, events, player ratings, and match data at the Federal University of Petroleum Resources, Effurun." />
   <meta name="keywords" content="FUPRE Chess Club, chess tournaments, chess events, player ratings, FUPRE chess, university chess club, chess Delta, Nigeria chess" />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fuprechessclub.github.io/">
+  <meta property="og:title" content="Fupre Chess Club | Official Website for Chess in FUPRE">
+  <meta property="og:description" content="Explore tournaments, events, and match data for the Fupre Chess Club community.">
+  <meta property="og:image" content="https://i.imgur.com/W1ii2gF.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="fb:app_id" content="1234567890">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://fuprechessclub.github.io/">
+  <meta name="twitter:title" content="Fupre Chess Club | Official Website for Chess in FUPRE">
+  <meta name="twitter:description" content="Explore tournaments, events, and match data for the Fupre Chess Club community.">
+  <meta name="twitter:image" content="https://fuprechessclub.github.io/fccbanner.png">
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://fuprechessclub.github.io/">
-<meta property="og:title" content="Fupre Chess Club | Official Website for Chess in FUPRE">
-<meta property="og:description" content="Explore tournaments, events, and match data for the Fupre Chess Club community.">
-<meta property="og:image" content="https://i.imgur.com/W1ii2gF.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="fb:app_id" content="1234567890">
-
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://fuprechessclub.github.io/">
-<meta name="twitter:title" content="Fupre Chess Club | Official Website for Chess in FUPRE">
-<meta name="twitter:description" content="Explore tournaments, events, and match data for the Fupre Chess Club community.">
-<meta name="twitter:image" content="https://fuprechessclub.github.io/fccbanner.png">
-
-
-  <!-- ICO for classic support -->
+  <!-- App -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b0f14">
   <link rel="icon" type="image/x-icon" href="fupreChess_favicon.ico">
-  <!-- PNG for modern browsers -->
   <link rel="icon" type="image/png" sizes="32x32" href="fupreChess_favicon.png">
 
-  
-        <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <!-- Fonts / Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b0f14">
-
-
+  <!-- Site CSS & scripts -->
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script defer src="assets/js/script.js"></script>
 
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Fupre Chess Club",
-  "url": "https://fuprechessclub.github.io/",
-  "logo": "https://fuprechessclub.github.io/assets/imgs/fupreChesslogo.png",
-  "image": "https://fuprechessclub.github.io/fccbanner.png",
-  "description": "Explore tournaments, events, and match data for the Fupre Chess Club community."
-}
-</script>
-
-
 </head>
 
-<body>
-
-
-<!-- Custom Splash Screen -->
-<div id="custom-splash">
-  <div class="splash-content">
-    <img src="/assets/icons/fupreChessClub-icon-512.png" alt="FCC Logo" class="splash-logo">
-    <div class="splash-progress"></div>
+<body class="preload">
+  <!-- Splash (full-screen gradient loader) -->
+  <div id="custom-splash">
+    <div class="splash-content">
+      <img src="/assets/icons/fupreChessClub-icon-512.png" alt="FCC Logo" class="splash-logo">
+      <div class="splash-progress"></div>
+    </div>
   </div>
-</div>
 
-
-  <!-- Sticky Navbar -->
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo-container">
-      <img src="assets/imgs/fupreChesslogo.png" alt="Fupre Chess League Logo" class="logo" />
+      <img src="assets/imgs/fupreChesslogo.png" alt="Fupre Chess Club Logo" class="logo">
       <div class="site-title">
         <span class="logo-main">Fupre</span>
         <span class="logo-glow">Chess Club</span>
@@ -116,7 +87,7 @@
     </div>
 
     <nav class="nav-links" id="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="highlights.html">Highlights</a>
       <a href="fcc.html">FCC</a>
       <a href="ratings.html">Ratings</a>
@@ -134,52 +105,46 @@
   </header>
 
   <main class="main-content">
-    <!-- Hero -->
     <section class="hero">
       <h1>Welcome to <span>Fupre Chess Club</span></h1>
-      <p style="color: white;">Sharpen your mind, compete with the best, and be part of our growing chess community.</p>
-      <a href="#events" class="btn bounce">See Upcoming Events
-      </a>
-      <button id="install-btn">
-  <span class="icon">📲</span> Install App
-</button>
-      <div id="toast"></div>
+      <p style="color:white;">Sharpen your mind, compete with the best, and be part of our growing chess community.</p>
+      <a href="#events" class="btn bounce">See Upcoming Events</a>
 
+      <!-- Install / Update CTA -->
+      <button id="install-btn" class="is-hidden" aria-live="polite">
+        <span class="icon">📲</span>
+        <span class="label">Install App</span>
+      </button>
+
+      <div id="toast" aria-live="polite" aria-atomic="true"></div>
     </section>
 
-    <!-- About -->
     <section class="about">
       <h2>About Us</h2>
-      <p>
-        The Fupre Chess Club is a community of passionate players, learners, and competitors.
-        We host regular tournaments, training sessions, and social games to promote the love of chess.
-      </p>
+      <p>The Fupre Chess Club is a community of passionate players, learners, and competitors.
+      We host regular tournaments, training sessions, and social games to promote the love of chess.</p>
     </section>
 
+
+
+    
     <!-- Events -->
     <section class="events" id="events">
       <h2>Upcoming Events</h2>
       <div class="cards">
         <div class="card">
           <h3>Lightning Blitz</h3>
-          <p>Date: Janurary 16, 2026</p>
-          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" 
-          target="_blank"
-           class="btn" 
-          onclick="gtag('event', 'register_click', {
-      event_category: 'engagement',
-      event_label: 'Lightning Blitz Registration',
-      value: 1
-   });">Register</a>
+          <p>Date: January 16, 2026</p>
+          <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Register</a>
         </div>
         <div class="card">
           <h3>Training Session</h3>
-          <p>Date: Janurary 15, 2026</p>
+          <p>Date: January 15, 2026</p>
           <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Sign Up</a>
         </div>
         <div class="card">
           <h3>Grand Rapid</h3>
-          <p>Date: Janurary 17, 2026</p>
+          <p>Date: January 17, 2026</p>
           <a href="https://forms.gle/c1AgCXnTmdA9GX6M6" target="_blank" class="btn">Sign Up</a>
         </div>
       </div>
@@ -189,14 +154,12 @@
     <section class="countdown-section">
       <h2>⏳ Countdown to Next Tournament</h2>
       <h3 id="event-title"></h3>
-
       <div class="countdown-container">
         <div class="flip-box"><span id="days">00</span><label>Days</label></div>
         <div class="flip-box"><span id="hours">00</span><label>Hours</label></div>
         <div class="flip-box"><span id="minutes">00</span><label>Minutes</label></div>
         <div class="flip-box"><span id="seconds">00</span><label>Seconds</label></div>
       </div>
-
       <p id="local-time"></p>
 
       <!-- Tournament Live Banner -->
@@ -216,14 +179,13 @@
       </div>
     </section>
 
-    <!-- Chess Quote -->
+    <!-- Quote -->
     <section class="quote-section">
       <h2>♟️ Chess Quote of the Day</h2>
       <blockquote id="quote-box" class="quote-box">
         <span id="quote-text">“When you see a good move, look for a better one.”</span><br>
         <span id="quote-author" class="quote-author">– Emanuel Lasker</span>
       </blockquote>
-
       <button id="next-quote" class="quote-btn" type="button">New Quote</button>
       <audio id="move-sound" src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3" preload="auto"></audio>
     </section>
@@ -235,13 +197,13 @@
     <div class="gallery-grid">
       <div class="gallery-item"><img src="assets/imgs/fcl-events/fcl-ceremony1.jpg" alt="FCL Ceremony" loading="lazy"></div>
       <div class="gallery-item"><img src="assets/imgs/fcl-events/fcl-ceremony4.jpg" alt="FCL Ceremony" loading="lazy"></div>
-      <div class="gallery-item"><img src="assets/imgs/event_imgs/ecobank.jpg" alt="FCC-NSE" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/imgs/event_imgs/ecobank.jpg" alt="Ecobank Tourney" loading="lazy"></div>
       <div class="gallery-item"><img src="assets/imgs/event_imgs/fcc-nse7.jpg" alt="FCC-NSE" loading="lazy"></div>
       <div class="gallery-item"><img src="assets/imgs/event_imgs/fcc-nse5.jpg" alt="FCC-NSE" loading="lazy"></div>
-      <!-- <div class="gallery-item"><img src="assets/imgs/fcl-events/fcl-opening.jpg" alt="Winners Ceremony" loading="lazy"></div> -->
     </div>
   </section>
 
+  
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
     <span class="close-btn">&times;</span>
@@ -388,39 +350,49 @@
     </div>
   </footer>
 
-  
 
-<script>
-  window.addEventListener("load", () => {
-    const splash = document.getElementById("custom-splash");
+  <!-- Splash controller -->
+  <script>
+    (function() {
+      const splash = document.getElementById("custom-splash");
+      const body = document.body;
+      const sessionKey = "fcc_splash_played_session_v1";
+      const everKey = "fcc_has_seen_loading_v1";
+      const isStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+      const playedThisSession = sessionStorage.getItem(sessionKey) === "true";
 
-    // Let it loop for a bit, then fade out
-    setTimeout(() => splash.classList.add("fade-out"), 2200);
-    setTimeout(() => splash.remove(), 3000);
-  });
-</script>
+      if (!playedThisSession) {
+        splash.classList.remove("hidden");
+        body.classList.add("splash-active");
+        setTimeout(() => splash.classList.add("fade-out"), 2200);
+        setTimeout(() => {
+          splash.remove();
+          body.classList.remove("splash-active");
+          sessionStorage.setItem(sessionKey, "true");
+          if (!localStorage.getItem(everKey)) localStorage.setItem(everKey, "true");
+          document.dispatchEvent(new CustomEvent("fcc:splash-done"));
+        }, 3000);
+      } else {
+        splash.remove();
+        body.classList.remove("splash-active");
+        document.dispatchEvent(new CustomEvent("fcc:splash-done"));
+      }
+    })();
+  </script>
 
+  <!-- Install / Update Controller -->
   <script src="/assets/js/install.js"></script>
-<script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js")
-      .then(() => console.log("Service Worker registered!"))
-      .catch(err => console.error("SW registration failed:", err));
-  }
-</script>
 
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/sw.js")
-    .then(() => console.log("✅ Unified Service Worker registered!"))
-    .catch((err) => console.error("❌ SW registration failed:", err));
-}
-
-</script>
-
-
-
-
+  <!-- SW registration -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((r) => console.log("✅ Service Worker registered", r))
+        .catch((e) => console.error("❌ SW registration failed", e));
+    }
+  </script>
 </body>
 </html>

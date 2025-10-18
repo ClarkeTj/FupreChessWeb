@@ -1,204 +1,203 @@
-let deferredPrompt = null;
+/* ==========================================================
+   FUPRE Chess Club – Install / Update Controller 
+   ----------------------------------------------------------
+   • Restores splash logic integrity
+   • Adds slide-in animation for Install/Update CTA
+   • Adds glow + pulse effects for CTA visibility
+   • Full compatibility with PWA standalone replay logic
+   ========================================================== */
 
-const installBtn = document.getElementById("install-btn");
-const toast = document.getElementById("toast");
-const hero = document.querySelector(".pc-hero") || document.querySelector(".hero");
+(() => {
+  const cta = document.getElementById("install-btn");
+  const ctaLabel = cta?.querySelector(".label");
+  const toast = document.getElementById("toast");
 
-// Create one reusable progress bar element
-const progressBar = document.createElement("div");
-progressBar.classList.add("install-progress");
+  const SHOW_DELAY_AFTER_SPLASH_MS = 7000;
+  const LS_PWA_FLAG = "fcc_pwa_installed_v1";
+  const ACTION = { idle: "idle", installing: "installing", updating: "updating" };
+  let state = ACTION.idle;
+  let deferredPrompt = null;
+  let swRegistration = null;
 
-// ---------- Helpers ----------
-function showToast(msg, type = "info") {
-  if (!toast) return;
-  toast.textContent = msg;
-  toast.className = `show ${type}`;
-  setTimeout(() => toast.classList.remove("show"), 3000);
-}
-
-function isStandalone() {
-  return (
+  const isStandalone = () =>
     window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true
-  );
-}
+    window.navigator.standalone === true;
 
-function moveButtonForMobile() {
-  if (window.innerWidth <= 768 && hero && installBtn) {
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("hero-install-wrapper");
-    hero.insertAdjacentElement("afterend", wrapper);
-    wrapper.appendChild(installBtn);
-  }
-}
-
-function showInstallButtonWithDelay() {
-  setTimeout(() => {
-    installBtn.style.display = "inline-flex";
-    installBtn.classList.add("visible", "show-slide");
-    installBtn.textContent = "📲 Install App";
-  }, 11000);
-}
-
-function hideInstallButton() {
-  installBtn.style.display = "none";
-  installBtn.classList.remove(
-    "visible",
-    "show-slide",
-    "update-glow",
-    "loading"
-  );
-}
-
-// ---------- Initial Setup ----------
-document.addEventListener("DOMContentLoaded", () => {
-  moveButtonForMobile();
-  if (isStandalone()) hideInstallButton();
-
-  //  Show update success toast AFTER reload
-  if (sessionStorage.getItem("showUpdateSuccess") === "true") {
-    setTimeout(() => {
-      showToast(
-        "✅ App updated successfully! You're now on the latest version.",
-        "success"
-      );
-      sessionStorage.removeItem("showUpdateSuccess");
-    }, 800);
-  }
-});
-
-// ---------- INSTALL FLOW ----------
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (!isStandalone()) showInstallButtonWithDelay();
-});
-
-installBtn.addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-
-  installBtn.textContent = "📲 Waiting for confirmation…";
-  installBtn.disabled = true;
-  installBtn.classList.add("waiting");
-  showToast("🕓 Waiting for install confirmation…");
-
-  try {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-
-    if (outcome === "accepted") {
-      installBtn.classList.remove("waiting");
-      installBtn.disabled = true;
-      installBtn.classList.add("loading");
-      installBtn.textContent = "📲 Installing…";
-
-      installBtn.appendChild(progressBar);
-      progressBar.style.opacity = "1";
-      progressBar.style.width = "0%";
-
-      requestAnimationFrame(() => {
-        progressBar.style.transition = "width 1.8s ease";
-        progressBar.style.width = "100%";
-      });
-
-      showToast("📲 Installing app…");
-
-      setTimeout(() => {
-        showToast("✅ App installed successfully!", "success");
-        installBtn.textContent = "Installed ✓";
-        setTimeout(hideInstallButton, 1200);
-      }, 1800);
-    } else {
-      installBtn.classList.remove("waiting");
-      installBtn.textContent = "📲 Install App";
-      installBtn.disabled = false;
-      showToast("❌ Installation canceled.", "warn");
-    }
-  } catch (err) {
-    console.error("[PWA] Install failed:", err);
-    installBtn.classList.remove("waiting");
-    installBtn.textContent = "📲 Install App";
-    installBtn.disabled = false;
-    showToast("⚠️ Installation failed. Please try again.", "error");
-  } finally {
-    deferredPrompt = null;
-  }
-});
-
-window.addEventListener("appinstalled", hideInstallButton);
-
-// ---------- UPDATE FLOW ----------
-function showUpdatePrompt() {
-  installBtn.style.display = "inline-flex";
-  installBtn.classList.add("show-slide", "update-glow");
-  installBtn.disabled = false;
-  installBtn.textContent = "🚀 Update App";
-
-  installBtn.onclick = () => {
-    sessionStorage.setItem("manualUpdate", "true");
-
-    installBtn.classList.remove("update-glow");
-    installBtn.classList.add("loading");
-    installBtn.textContent = "🚀 Updating…";
-
-    installBtn.appendChild(progressBar);
-    progressBar.style.opacity = "1";
-    progressBar.style.width = "0%";
-
-    requestAnimationFrame(() => {
-      progressBar.style.transition = "width 1.8s ease";
-      progressBar.style.width = "100%";
-    });
-
-    showToast("Updating app…");
-
-    // Ask SW to activate new version
-    navigator.serviceWorker.getRegistration().then((reg) => {
-      if (reg && reg.waiting) {
-        reg.waiting.postMessage({ action: "skipWaiting" });
-
-        //  Wait a bit for progress animation, then reload automatically
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      } else {
-        // If no waiting worker, just force a refresh to pull updates
-        setTimeout(() => window.location.reload(), 1500);
-      }
-    });
+  const show = () => {
+    if (!cta) return;
+    cta.classList.remove("is-hidden");
+    cta.classList.add("show-slide", "pulse-loop");
   };
-}
+  const hide = () => cta && cta.classList.add("is-hidden");
 
-// ---------- SERVICE WORKER UPDATE DETECTION ----------
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistration().then((reg) => {
-    if (!reg) return;
-    if (reg.waiting) showUpdatePrompt();
+  function setCTA(mode) {
+    if (!cta) return;
+    cta.dataset.mode = mode;
+    cta.classList.remove("is-install", "is-update");
+    cta.classList.add(mode === "install" ? "is-install" : "is-update");
+    ctaLabel.textContent = mode === "install" ? "Install App" : "Update App";
+  }
 
-    reg.addEventListener("updatefound", () => {
-      const newWorker = reg.installing;
+  function showToast(msg, type = "info") {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.className = `show ${type}`;
+    setTimeout(() => toast.classList.remove("show"), 2500);
+  }
+
+  async function clearStaleCachesIfNeeded() {
+    const flag = localStorage.getItem(LS_PWA_FLAG) === "true";
+    if (flag && !isStandalone()) {
+      localStorage.removeItem(LS_PWA_FLAG);
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.filter(k => k.startsWith("fcc-")).map(k => caches.delete(k)));
+      }
+    }
+  }
+
+  async function setupServiceWorker() {
+    if (!("serviceWorker" in navigator)) return;
+    swRegistration = await navigator.serviceWorker.getRegistration();
+    if (!swRegistration) return;
+
+    if (swRegistration.waiting) scheduleCTA("update");
+
+    swRegistration.addEventListener("updatefound", () => {
+      const newWorker = swRegistration.installing;
       if (!newWorker) return;
       newWorker.addEventListener("statechange", () => {
-        if (
-          newWorker.state === "installed" &&
-          navigator.serviceWorker.controller
-        ) {
-          showUpdatePrompt();
+        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+          scheduleCTA("update");
         }
       });
     });
-  });
 
-  navigator.serviceWorker.addEventListener("message", (event) => {
-    if (event.data === "updateAvailable") showUpdatePrompt();
-  });
+    navigator.serviceWorker.addEventListener("message", (evt) => {
+      if (evt?.data === "UPDATE_AVAILABLE") scheduleCTA("update");
+    });
 
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
-    const manuallyTriggered = sessionStorage.getItem("manualUpdate") === "true";
-    if (manuallyTriggered) {
-      //  Show toast AFTER reload completes
-      sessionStorage.setItem("showUpdateSuccess", "true");
-      sessionStorage.removeItem("manualUpdate");
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (state === ACTION.updating) {
+        sessionStorage.setItem("showUpdateSuccess", "true");
+        location.reload();
+      }
+    });
+
+    if (sessionStorage.getItem("showUpdateSuccess") === "true") {
+      sessionStorage.removeItem("showUpdateSuccess");
+      setTimeout(() => showToast("✅ App updated successfully!", "success"), 600);
     }
+  }
+
+  let splashDoneAt = null;
+  document.addEventListener("fcc:splash-done", () => {
+    splashDoneAt = Date.now();
+    hide();
+    if (cta.dataset.mode) scheduleCTA(cta.dataset.mode);
   });
-}
+
+  function scheduleCTA(mode) {
+    if (!cta) return;
+    setCTA(mode);
+    const ready = () => {
+      if (state !== ACTION.idle) return;
+      show();
+    };
+
+    if (!splashDoneAt) {
+      document.addEventListener(
+        "fcc:splash-done",
+        () => setTimeout(ready, SHOW_DELAY_AFTER_SPLASH_MS),
+        { once: true }
+      );
+    } else {
+      const elapsed = Date.now() - splashDoneAt;
+      const wait = Math.max(0, SHOW_DELAY_AFTER_SPLASH_MS - elapsed);
+      setTimeout(ready, wait);
+    }
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!isStandalone()) scheduleCTA("install");
+  });
+
+  window.addEventListener("appinstalled", () => {
+    localStorage.setItem(LS_PWA_FLAG, "true");
+    showToast("✅ Installation successful!", "success");
+    state = ACTION.idle;
+    hide();
+  });
+
+  async function doInstall() {
+    if (!deferredPrompt) {
+      showToast("Install not available yet. Try browser menu → Install App", "warn");
+      return;
+    }
+    if (state !== ACTION.idle) return;
+    state = ACTION.installing;
+
+    try {
+      cta.disabled = true;
+      cta.classList.add("is-busy");
+      ctaLabel.textContent = "Waiting for confirmation…";
+      await deferredPrompt.prompt();
+      const outcome = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+
+      if (outcome?.outcome === "accepted") {
+        ctaLabel.textContent = "Installing…";
+      } else {
+        cta.disabled = false;
+        cta.classList.remove("is-busy");
+        ctaLabel.textContent = "Install App";
+        state = ACTION.idle;
+      }
+    } catch (err) {
+      showToast("Install failed. Please try again.", "error");
+      cta.disabled = false;
+      cta.classList.remove("is-busy");
+      ctaLabel.textContent = "Install App";
+      state = ACTION.idle;
+    }
+  }
+
+  async function doUpdate() {
+    if (state !== ACTION.idle) return;
+    if (!swRegistration)
+      swRegistration = await navigator.serviceWorker.getRegistration();
+    const waiting = swRegistration?.waiting;
+    if (!waiting) return;
+
+    state = ACTION.updating;
+    cta.disabled = true;
+    cta.classList.add("is-busy");
+    ctaLabel.textContent = "Updating…";
+    waiting.postMessage({ type: "SKIP_WAITING" });
+  }
+
+  if (cta) {
+    cta.addEventListener("click", () => {
+      const mode = cta.dataset.mode;
+      if (mode === "install") return doInstall();
+      if (mode === "update") return doUpdate();
+    });
+  }
+
+  (async function boot() {
+    hide();
+    await clearStaleCachesIfNeeded();
+    await setupServiceWorker();
+
+    if (isStandalone()) {
+      hide();
+    } else {
+      scheduleCTA("install");
+      if (deferredPrompt) scheduleCTA("install");
+    }
+
+    if (swRegistration?.waiting) scheduleCTA("update");
+  })();
+})();
