@@ -3506,3 +3506,49 @@ body.dark .tournaments-info .note { color: #aaa; }
     }
   }
 }
+
+
+
+/* ==========================================================
+   Update Banner (Smart Toast)
+   ========================================================== */
+#update-banner {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  padding: 0.9rem 1.5rem;
+  z-index: 99999;
+  transition: bottom 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+#update-banner.show {
+  bottom: 1.5rem;
+  opacity: 1;
+}
+.update-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+}
+#refresh-btn {
+  background: linear-gradient(135deg, #2da8ff, #35c759);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+#refresh-btn:hover {
+  transform: scale(1.05);
+}
+

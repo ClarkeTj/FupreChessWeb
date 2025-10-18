@@ -1,9 +1,9 @@
 /* ==========================================================
-   FUPRE Chess Club – Install Controller (Stable Prompt Update)
+   FUPRE Chess Club – Install Controller (Smart Update Banner)
    ----------------------------------------------------------
-   • Install App works normally (Chrome prompt restored)
-   • Detects new SW → prompts user to reload
-   • One-time reload after confirmation (no loop)
+   • Modern “Update available — Refresh” banner (no confirm())
+   • Install App flow unchanged
+   • One-time reload after user clicks “Refresh”
    ========================================================== */
 
 (() => {
@@ -102,12 +102,47 @@
     }
   }
 
-  // ✅ FIX: Restore Install Button Click Handler
+  // ✅ Install Button Click Handler
   if (cta) {
     cta.addEventListener("click", () => {
       const mode = cta.dataset.mode;
       if (mode === "install") doInstall();
     });
+  }
+
+  // ---------- Create update banner ----------
+  function createUpdateBanner() {
+    if (document.getElementById("update-banner")) return null;
+
+    const banner = document.createElement("div");
+    banner.id = "update-banner";
+    banner.innerHTML = `
+      <div class="update-banner-content">
+        <span>🔄 New version available</span>
+        <button id="refresh-btn">Refresh</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    const refreshBtn = banner.querySelector("#refresh-btn");
+    refreshBtn.addEventListener("click", () => {
+      navigator.serviceWorker.getRegistration().then((reg) => {
+        if (reg && reg.waiting) {
+          reg.waiting.postMessage({ type: "SKIP_WAITING" });
+        }
+      });
+      banner.classList.remove("show");
+      setTimeout(() => banner.remove(), 400);
+    });
+
+    // Auto-hide after 10s (user can ignore)
+    setTimeout(() => {
+      banner.classList.remove("show");
+      setTimeout(() => banner.remove(), 400);
+    }, 10000);
+
+    setTimeout(() => banner.classList.add("show"), 50);
+    return banner;
   }
 
   // ---------- SW update handling ----------
@@ -119,16 +154,7 @@
         !updatePromptShown
       ) {
         updatePromptShown = true;
-        const confirmReload = confirm(
-          "A new update is available! Click OK to refresh and apply the latest version."
-        );
-        if (confirmReload) {
-          navigator.serviceWorker.getRegistration().then((reg) => {
-            if (reg && reg.waiting) {
-              reg.waiting.postMessage({ type: "SKIP_WAITING" });
-            }
-          });
-        }
+        createUpdateBanner();
       }
     });
 
