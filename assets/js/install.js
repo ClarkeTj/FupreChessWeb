@@ -114,7 +114,7 @@
 
   async function doInstall() {
     if (!deferredPrompt) {
-      showToast("Install not available yet. Try browser menu → ‘Install App’", "warn");
+      showToast("You may already have the latest version installed. Check your browser menu and select ‘Open in App’ or ‘Install App’ if available.", "warn");
       return;
     }
     if (state !== ACTION.idle) return;
@@ -163,7 +163,7 @@
       if (event.data && event.data.type === "NEW_VERSION_AVAILABLE" && !updatePromptShown) {
         updatePromptShown = true;
         const confirmReload = confirm(
-          "A new update or improvement is available. Click OK to refresh and apply the latest version."
+          "A new update is available. Click OK to refresh and apply the latest version."
         );
         if (confirmReload) {
           navigator.serviceWorker.getRegistration().then((reg) => {

@@ -6,7 +6,7 @@
 // • Keeps full offline caching support
 // ==========================================================
 
-const CACHE_NAME = "fcc-cache-v2.2"; // bump version
+const CACHE_NAME = "fcc-cache-v2.3"; // bump version
 const ASSETS = [
   "/", "/index.html",
   "/ratings.html", "/matches.html", "/404.html",
