@@ -1,12 +1,12 @@
 // ==========================================================
-// FUPRE Chess Club – App Service Worker (Stable Auto-Update)
+// FUPRE Chess Club – App Service Worker (Stable Prompt Update)
 // ----------------------------------------------------------
 // • Detects new version and notifies clients
-// • User decides when to refresh (no auto-reload loop)
-// • Keeps full offline caching support
+// • Prompts user to reload manually (no infinite loop)
+// • Full offline caching retained
 // ==========================================================
 
-const CACHE_NAME = "fcc-cache-v2.4"; // bump version
+const CACHE_NAME = "fcc-cache-v2.5"; // bump version to trigger new SW
 const ASSETS = [
   "/", "/index.html",
   "/ratings.html", "/matches.html", "/404.html",
@@ -20,43 +20,31 @@ const ASSETS = [
 
 // ---------- Install ----------
 self.addEventListener("install", (event) => {
-  console.log("[SW] Installing", CACHE_NAME);
+  console.log("[SW] Installing:", CACHE_NAME);
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
       await cache.addAll(ASSETS);
-      // Wait for user confirmation before activating
-      // (no skipWaiting to avoid auto reload)
     })()
   );
 });
 
 // ---------- Activate ----------
 self.addEventListener("activate", (event) => {
-  console.log("[SW] Activating", CACHE_NAME);
+  console.log("[SW] Activating:", CACHE_NAME);
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      await Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : Promise.resolve())));
+      await Promise.all(
+        keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : Promise.resolve()))
+      );
       await self.clients.claim();
+      console.log("[SW] Active and controlling clients.");
     })()
   );
 });
 
-// ---------- Update detection ----------
-self.addEventListener("statechange", (e) => {
-  console.log("[SW] State changed:", e.target.state);
-});
-
-self.addEventListener("updatefound", () => {
-  console.log("[SW] Update found");
-});
-
-// When a new worker reaches waiting, notify clients
-self.addEventListener("installing", () => {
-  console.log("[SW] Installing new worker");
-});
-
+// ---------- Listen for SKIP_WAITING ----------
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     console.log("[SW] Skip waiting requested by client");
@@ -64,26 +52,39 @@ self.addEventListener("message", (event) => {
   }
 });
 
-// Inform client pages that a new version is available
-self.addEventListener("controllerchange", () => {
-  console.log("[SW] Controller changed");
+// ---------- Detect new SW and notify clients ----------
+self.addEventListener("install", () => {
+  console.log("[SW] Install event fired.");
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
+self.addEventListener("activate", () => {
+  console.log("[SW] Activated:", CACHE_NAME);
 });
 
-// Custom logic to inform clients of update availability
-self.addEventListener("updatefound", function (event) {
-  const newWorker = self.registration.installing;
-  if (newWorker) {
-    newWorker.addEventListener("statechange", function () {
-      if (newWorker.state === "installed" && self.registration.waiting) {
-        // Notify all clients
+// When a new version is waiting (after install completes)
+self.addEventListener("updatefound", () => {
+  console.log("[SW] updatefound fired (from registration).");
+});
+
+// Track state changes for new workers
+self.addEventListener("statechange", (e) => {
+  console.log("[SW] State changed:", e.target.state);
+});
+
+// Core logic to notify open pages when new version ready
+self.addEventListener("install", (event) => {
+  const installingWorker = self.registration.installing;
+  if (installingWorker) {
+    installingWorker.addEventListener("statechange", () => {
+      if (
+        installingWorker.state === "installed" &&
+        self.registration.waiting
+      ) {
+        console.log("[SW] New version ready → notifying clients.");
         self.clients.matchAll({ type: "window" }).then((clients) => {
-          clients.forEach((client) => {
+          for (const client of clients) {
             client.postMessage({ type: "NEW_VERSION_AVAILABLE" });
-          });
+          }
         });
       }
     });
@@ -102,6 +103,8 @@ self.addEventListener("fetch", (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
         return res;
       })
-      .catch(() => caches.match(req).then((cached) => cached || caches.match("/404.html")))
+      .catch(() =>
+        caches.match(req).then((cached) => cached || caches.match("/404.html"))
+      )
   );
 });

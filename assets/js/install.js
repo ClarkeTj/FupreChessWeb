@@ -1,10 +1,9 @@
 /* ==========================================================
-   FUPRE Chess Club – Install Controller (Stable Auto-Update)
+   FUPRE Chess Club – Install Controller (Stable Prompt Update)
    ----------------------------------------------------------
-   • No infinite reload loops
-   • Shows user prompt when new version is available
-   • Controlled one-time refresh after confirmation
-   • Keeps Install App flow fully functional
+   • Install App works normally (Chrome prompt restored)
+   • Detects new SW → prompts user to reload
+   • One-time reload after confirmation (no loop)
    ========================================================== */
 
 (() => {
@@ -16,7 +15,6 @@
   const LS_PWA_FLAG = "fcc_pwa_installed_v1";
   const ACTION = { idle: "idle", installing: "installing" };
   let state = ACTION.idle;
-
   let deferredPrompt = null;
   let splashDoneAt = null;
   let updatePromptShown = false;
@@ -47,51 +45,7 @@
     if (!toast) return;
     toast.textContent = msg;
     toast.className = `show ${type}`;
-    setTimeout(() => toast.classList.remove("show"), 2500);
-  }
-
-  async function clearStaleCachesIfNeeded() {
-    const flag = localStorage.getItem(LS_PWA_FLAG) === "true";
-    if (flag && !isStandalone()) {
-      localStorage.removeItem(LS_PWA_FLAG);
-      if ("caches" in window) {
-        const keys = await caches.keys();
-        await Promise.all(
-          keys
-            .filter((k) => k.startsWith("fcc-") || k.startsWith("fcc"))
-            .map((k) => caches.delete(k))
-        );
-      }
-    }
-  }
-
-  // ---------- Splash timing ----------
-  document.addEventListener("fcc:splash-done", () => {
-    splashDoneAt = Date.now();
-    hide();
-    if (cta?.dataset.mode === "install") scheduleInstallCTA();
-  });
-
-  function scheduleInstallCTA() {
-    if (!cta) return;
-    setCTAInstall();
-
-    const ready = () => {
-      if (state !== ACTION.idle) return;
-      show();
-    };
-
-    if (!splashDoneAt) {
-      document.addEventListener(
-        "fcc:splash-done",
-        () => setTimeout(ready, SHOW_DELAY_AFTER_SPLASH_MS),
-        { once: true }
-      );
-    } else {
-      const elapsed = Date.now() - splashDoneAt;
-      const wait = Math.max(0, SHOW_DELAY_AFTER_SPLASH_MS - elapsed);
-      setTimeout(ready, wait);
-    }
+    setTimeout(() => toast.classList.remove("show"), 3000);
   }
 
   // ---------- Install flow ----------
@@ -114,7 +68,10 @@
 
   async function doInstall() {
     if (!deferredPrompt) {
-      showToast("You may already have the latest version installed. Check your browser menu and select ‘Open in App’ or ‘Install App’ if available.", "warn");
+      showToast(
+        "You may already have the latest version installed. Check your browser menu and select ‘Open in App’ or ‘Install App’ if available.",
+        "warn"
+      );
       return;
     }
     if (state !== ACTION.idle) return;
@@ -124,11 +81,9 @@
       cta.disabled = true;
       cta.classList.add("is-busy");
       if (ctaLabel) ctaLabel.textContent = "Waiting for confirmation…";
-
       await deferredPrompt.prompt();
       const outcome = await deferredPrompt.userChoice;
       deferredPrompt = null;
-
       if (outcome?.outcome === "accepted") {
         if (ctaLabel) ctaLabel.textContent = "Installing…";
       } else {
@@ -144,26 +99,28 @@
       cta.classList.remove("is-busy");
       if (ctaLabel) ctaLabel.textContent = "Install App";
       state = ACTION.idle;
-    } finally {
-      cta.style.transition = "width 0.25s ease, padding 0.25s ease";
     }
   }
 
-  // ---------- Click handler ----------
+  // ✅ FIX: Restore Install Button Click Handler
   if (cta) {
     cta.addEventListener("click", () => {
       const mode = cta.dataset.mode;
-      if (mode === "install") return doInstall();
+      if (mode === "install") doInstall();
     });
   }
 
   // ---------- SW update handling ----------
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.addEventListener("message", (event) => {
-      if (event.data && event.data.type === "NEW_VERSION_AVAILABLE" && !updatePromptShown) {
+      if (
+        event.data &&
+        event.data.type === "NEW_VERSION_AVAILABLE" &&
+        !updatePromptShown
+      ) {
         updatePromptShown = true;
         const confirmReload = confirm(
-          "A new update is available. Click OK to refresh and apply the latest version."
+          "A new update is available! Click OK to refresh and apply the latest version."
         );
         if (confirmReload) {
           navigator.serviceWorker.getRegistration().then((reg) => {
@@ -183,11 +140,33 @@
     });
   }
 
+  // ---------- Splash + Install CTA ----------
+  document.addEventListener("fcc:splash-done", () => {
+    splashDoneAt = Date.now();
+    hide();
+    if (cta?.dataset.mode === "install") scheduleInstallCTA();
+  });
+
+  function scheduleInstallCTA() {
+    const ready = () => {
+      if (state === ACTION.idle) show();
+    };
+    if (!splashDoneAt) {
+      document.addEventListener(
+        "fcc:splash-done",
+        () => setTimeout(ready, SHOW_DELAY_AFTER_SPLASH_MS),
+        { once: true }
+      );
+    } else {
+      const elapsed = Date.now() - splashDoneAt;
+      const wait = Math.max(0, SHOW_DELAY_AFTER_SPLASH_MS - elapsed);
+      setTimeout(ready, wait);
+    }
+  }
+
   // ---------- Boot ----------
   (async function boot() {
     hide();
-    await clearStaleCachesIfNeeded();
-
     if (!isStandalone()) {
       setCTAInstall();
       scheduleInstallCTA();
