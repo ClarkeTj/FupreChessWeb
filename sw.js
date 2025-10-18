@@ -6,7 +6,7 @@
 // • Full offline caching retained
 // ==========================================================
 
-const CACHE_NAME = "fcc-cache-v2.7"; // bump version to trigger new SW
+const CACHE_NAME = "fcc-cache-v2.8"; // bump version to trigger new SW
 const ASSETS = [
   "/", "/index.html",
   "/ratings.html", "/matches.html", "/404.html",
